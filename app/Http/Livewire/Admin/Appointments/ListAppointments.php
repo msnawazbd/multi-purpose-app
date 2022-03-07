@@ -34,6 +34,7 @@ class ListAppointments extends Component
             ->paginate(5);
         return view('livewire.admin.appointments.list-appointments', [
             'appointments' => $appointments
-        ]);
+            ]
+        );
     }
 }

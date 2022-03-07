@@ -26,7 +26,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <a class="btn btn-primary btn-sm" href="{{ route('admin.appointments.create') }}"><i class="fas fa-plus"></i>
+                                <a class="btn btn-primary btn-sm" href="{{ route('admin.appointments.create') }}"><i
+                                        class="fas fa-plus"></i>
                                     &nbsp; Add Appointment
                                 </a>
                             </div>
@@ -52,12 +53,16 @@
                                         <td>{{ $appointment->date->toFormattedDate() }}</td>
                                         <td>{{ $appointment->time->toFormattedTime() }}</td>
                                         <td>
-                                            <span class="badge badge-{{ $appointment->status_badge }}">{{ $appointment->status }}</span>
+                                            <span
+                                                class="badge badge-{{ $appointment->status_badge }}">{{ $appointment->status }}</span>
                                         </td>
                                         <td class="text-right">
-                                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
-                                            <button type="button" wire:click.prevent="edit({{ $appointment }})" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
-                                            <button type="button" wire:click.prevent="destroy({{ $appointment->id }})" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>
+                                            </button>
+                                            <button type="button" wire:click.prevent="edit({{ $appointment }})"
+                                                    class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                            <button type="button" wire:click.prevent="destroy({{ $appointment->id }})"
+                                                    class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
