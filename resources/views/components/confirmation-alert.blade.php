@@ -1,6 +1,4 @@
 @push('js')
-    <!-- Sweet Alert -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         window.addEventListener('show-delete-confirmation', event => {
             Swal.fire({

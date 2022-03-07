@@ -28,7 +28,7 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between mb-2">
                                     <div>
-                                        <a href="#" class="btn btn-primary btn-sm"><i
+                                        <a href="{{ route('admin.appointments.create') }}" class="btn btn-primary btn-sm"><i
                                                 class="fas fa-plus"></i>
                                             &nbsp; Add Appointment
                                         </a>
