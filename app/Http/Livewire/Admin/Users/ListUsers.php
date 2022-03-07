@@ -12,7 +12,7 @@ class ListUsers extends AdminComponent
     public $user;
     public $userId;
     public $showEditModal = false;
-    public $searchKeywords = false;
+    public $searchKeywords = null;
 
     protected $listeners = [
         'confirmDestroy' => 'confirmDestroy'

@@ -29,7 +29,9 @@
     @include('layouts.partials.aside')
 
     <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
     {{ $slot }}
+    </div>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
