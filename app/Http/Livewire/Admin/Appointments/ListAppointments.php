@@ -2,24 +2,39 @@
 
 namespace App\Http\Livewire\Admin\Appointments;
 
-use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\Appointment;
+use Livewire\Component;
 
-class ListAppointments extends AdminComponent
+class ListAppointments extends Component
 {
-    public $status = null;
+    public $appointmentId;
 
+    protected $listeners = [
+        'confirmDestroy' => 'confirmDestroy'
+    ];
+
+    public function destroy($appointmentId)
+    {
+        $this->appointmentId = $appointmentId;
+        $this->dispatchBrowserEvent('show-delete-confirmation');
+    }
+
+    public function confirmDestroy()
+    {
+        $data = Appointment::query()->findOrFail($this->appointmentId);
+        $data->delete();
+
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Appointment deleted successfully.']);
+    }
     public function render()
     {
-        $appointments = Appointment::with([
-            'clientInfo'
-        ])
-            ->when($this->status, function ($query, $status) {
-                return $query->where('status', $status);
-            })
+        $appointments = Appointment::query()
+            ->with(['clientInfo'])
+            ->latest()
             ->paginate(5);
         return view('livewire.admin.appointments.list-appointments', [
-            'appointments' => $appointments,
-        ]);
+            'appointments' => $appointments
+            ]
+        );
     }
 }

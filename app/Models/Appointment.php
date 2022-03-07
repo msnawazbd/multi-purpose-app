@@ -11,8 +11,23 @@ class Appointment extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'date' => 'datetime',
+        'time' => 'datetime',
+    ];
+
+    public function getStatusBadgeAttribute()
+    {
+        $badges = [
+            'SCHEDULED' => 'primary',
+            'CLOSED' => 'success',
+        ];
+
+        return $badges[$this->status];
+    }
+
     public function clientInfo()
     {
-        return $this->belongsTo(Client::class, 'client_id');
+        return $this->belongsTo(Client::class, 'client_id', 'id');
     }
 }
