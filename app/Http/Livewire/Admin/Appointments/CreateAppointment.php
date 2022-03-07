@@ -13,7 +13,7 @@ class CreateAppointment extends Component
 
     public function create()
     {
-        $validate_data = Validator::make($this->state, [
+        $validateData = Validator::make($this->state, [
             'client_id' => 'required|numeric',
             'members' => 'required',
             'color' => 'required',
@@ -29,7 +29,7 @@ class CreateAppointment extends Component
         /*$this->state['status'] = 'CLOSED';
        Appointment::create($this->state);*/
 
-        $query = Appointment::create([
+        $query = Appointment::query()->create([
             'client_id' => $this->state['client_id'],
             'date' => $this->state['date'],
             'time' => $this->state['time'],
@@ -46,7 +46,7 @@ class CreateAppointment extends Component
 
     public function render()
     {
-        $clients = Client::query()->orderBy('name')->get();
+        $clients = Client::all();
         return view('livewire.admin.appointments.create-appointment', [
             'clients' => $clients
         ]);

@@ -1,10 +1,11 @@
 <div>
+    <x-loading-indicator/>
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Users</h1>
+                    <h1 class="m-0">Appointments</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,10 +26,53 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <a class="btn btn-primary btn-sm" href="{{ route('admin.appointments.create') }}"><i
-                                        class="fas fa-plus"></i>
-                                    &nbsp; Add Appointment
-                                </a>
+                                <div>
+                                    <a class="btn btn-primary btn-sm" href="{{ route('admin.appointments.create') }}"><i
+                                            class="fas fa-plus"></i>
+                                        &nbsp; Add Appointment
+                                    </a>
+                                    @if($selectedRows)
+                                        <div class="btn-group ml-2">
+                                            <button type="button" class="btn btn-default">Action</button>
+                                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon"
+                                                    data-toggle="dropdown" aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu" style="">
+                                                <a wire:click.prevent="deleteSelectedRows" class="dropdown-item"
+                                                   href="#">Delete Selected</a>
+                                                <a wire:click.prevent="markAllAsScheduled" class="dropdown-item"
+                                                   href="#">Mark as Scheduled</a>
+                                                <a wire:click.prevent="markAllAsClosed" class="dropdown-item"
+                                                   href="#">Mark
+                                                    as Closed</a>
+                                                <a wire:click.prevent="export" class="dropdown-item"
+                                                   href="#">Export</a>
+                                            </div>
+                                        </div>
+                                        <span
+                                            class="ml-2">Selected {{ count($selectedRows) }} {{ Str::plural('appointment', count($selectedRows)) }}</span>
+                                    @endif
+                                </div>
+                                <div class="btn-group">
+                                    <button wire:click="filterByStatus" type="button"
+                                            class="btn {{ is_null($status) ? 'btn-secondary' : 'btn-default' }}">
+                                        <span class="mr-1">All</span>
+                                        <span class="badge badge-pill badge-info">{{ $appointmentsCount }}</span>
+                                    </button>
+
+                                    <button wire:click="filterByStatus('scheduled')" type="button"
+                                            class="btn {{ ($status === 'scheduled') ? 'btn-secondary' : 'btn-default' }}">
+                                        <span class="mr-1">Scheduled</span>
+                                        <span class="badge badge-pill badge-primary">{{ $scheduledAppointmentsCount }}</span>
+                                    </button>
+
+                                    <button wire:click="filterByStatus('closed')" type="button"
+                                            class="btn {{ ($status === 'closed') ? 'btn-secondary' : 'btn-default' }}">
+                                        <span class="mr-1">Closed</span>
+                                        <span class="badge badge-pill badge-success">{{ $closedAppointmentsCount }}</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -36,10 +80,18 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                 <tr>
+                                    <th>
+                                        <div class="icheck-primary d-inline ml-2">
+                                            <input wire:model="selectPageRows" type="checkbox" value="" name="todo2"
+                                                   id="todoCheck2" checked="">
+                                            <label for="todoCheck2"></label>
+                                        </div>
+                                    </th>
                                     <th>#</th>
                                     <th>Client Name</th>
                                     <th>Date</th>
                                     <th>Time</th>
+                                    <th>Color</th>
                                     <th>Status</th>
                                     <th class="text-right">Action</th>
                                 </tr>
@@ -47,21 +99,34 @@
                                 <tbody wire:loading.class="text-muted">
                                 @foreach($appointments as $key => $appointment)
                                     <tr>
+                                        <td>
+                                            <div class="icheck-primary d-inline ml-2">
+                                                <input wire:model="selectedRows" type="checkbox"
+                                                       value="{{ $appointment->id }}" name="todo2"
+                                                       id="{{ $appointment->id }}">
+                                                <label for="{{ $appointment->id }}"></label>
+                                            </div>
+                                        </td>
                                         <td>{{ $appointments->firstItem() + $key }}</td>
                                         <td>{{ $appointment->clientInfo->name }}</td>
-                                        <td>{{ $appointment->date->toFormattedDate() }}</td>
-                                        <td>{{ $appointment->time->toFormattedTime() }}</td>
+                                        <td>{{ $appointment->date }}</td>
+                                        <td>{{ $appointment->time }}</td>
                                         <td>
-                                            <span
-                                                class="badge badge-{{ $appointment->status_badge }}">{{ $appointment->status }}</span>
+                                            <span class="px-2" style="background-color: {{ $appointment->color }}"></span>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-{{ $appointment->status_badge }}">
+                                                {{ $appointment->status }}
+                                            </span>
                                         </td>
                                         <td class="text-right">
-                                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>
+                                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
+                                            <a href="{{ route('admin.appointments.edit', $appointment) }}" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button type="button" wire:click.prevent="destroy({{ $appointment->id }})" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i>
                                             </button>
-                                            <button type="button" wire:click.prevent="edit({{ $appointment }})"
-                                                    class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
-                                            <button type="button" wire:click.prevent="destroy({{ $appointment->id }})"
-                                                    class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -80,6 +145,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-    <!-- confirmation-alert components -->
-    <x-confirmation-alert/>
 </div>
+
+<!-- confirmation-alert components -->
+<x-confirmation-alert/>

@@ -47,7 +47,7 @@
                                 </tr>
                                 </thead>
                                 <tbody wire:loading.class="text-muted">
-                                @foreach($users as $key => $user)
+                                @forelse($users as $key => $user)
                                     <tr>
                                         <td>{{ $users->firstItem() + $key }}</td>
                                         <td>{{ $user->name }}</td>
@@ -63,7 +63,13 @@
                                                     class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">
+                                            No result found !
+                                        </td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                         </div>
