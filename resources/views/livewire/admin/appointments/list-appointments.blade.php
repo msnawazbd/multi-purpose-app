@@ -80,6 +80,7 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th>
                                         <div class="icheck-primary d-inline ml-2">
                                             <input wire:model="selectPageRows" type="checkbox" value="" name="todo2"
@@ -96,9 +97,10 @@
                                     <th class="text-right">Action</th>
                                 </tr>
                                 </thead>
-                                <tbody wire:loading.class="text-muted">
+                                <tbody wire:sortable="updateAppointmentOrder">
                                 @foreach($appointments as $key => $appointment)
-                                    <tr>
+                                    <tr wire:sortable.item="{{ $appointment->id }}" wire:key="appointment-{{ $appointment->id }}">
+                                        <td wire:sortable.handle style="width: 10px; cursor: move"><i class="fa fa-arrows-alt text-muted"></i></td>
                                         <td>
                                             <div class="icheck-primary d-inline ml-2">
                                                 <input wire:model="selectedRows" type="checkbox"

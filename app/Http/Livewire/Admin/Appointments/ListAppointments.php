@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Appointments;
 
+use App\Exports\AppointmentsExport;
 use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\Appointment;
 
@@ -52,6 +53,20 @@ class ListAppointments extends AdminComponent
 
         $this->dispatchBrowserEvent('updated', ['message' => 'Appointments marked as closed']);
         $this->reset(['selectedRows', 'selectPageRows']);
+    }
+
+    public function export()
+    {
+        return (new AppointmentsExport($this->selectedRows))->download('appointments.xlsx');
+    }
+
+    public function updateAppointmentOrder($items)
+    {
+        foreach ($items as $key => $item) {
+            Appointment::query()->find($item['value'])->update(['order_position' => $item['order']]);
+        }
+
+        $this->dispatchBrowserEvent('updated', ['message' => 'Appointments marked as closed']);
     }
 
     public function destroy($appointmentId)

@@ -13,10 +13,19 @@ class ListUsers extends AdminComponent
     public $userId;
     public $showEditModal = false;
     public $searchKeywords = null;
+    public $sortColumnName = 'created_at';
+    public $sortDirection = 'desc';
+
+    protected $queryString = ['searchKeywords' => ['except' => '']];
 
     protected $listeners = [
         'confirmDestroy' => 'confirmDestroy'
     ];
+
+    public function updatedSearchKeywords()
+    {
+        $this->resetPage();
+    }
 
     public function create()
     {
@@ -75,6 +84,22 @@ class ListUsers extends AdminComponent
         return redirect()->back();
     }
 
+    public function sortBy($columnName)
+    {
+        if ($this->sortColumnName === $columnName) {
+            $this->sortDirection = $this->swapSortDirection();
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortColumnName = $columnName;
+    }
+
+    public function swapSortDirection()
+    {
+        return $this->sortDirection === 'asc' ? 'desc' : 'asc';
+    }
+
     public function destroy($userId)
     {
         $this->userId = $userId;
@@ -92,9 +117,11 @@ class ListUsers extends AdminComponent
     public function render()
     {
         $users = User::query()
-            ->where('name', 'like', '%' . $this->searchKeywords . '%')
-            ->orWhere('email', 'like', '%' . $this->searchKeywords . '%')
-            ->latest()
+            ->where(function ($query) {
+                $query->where('name', 'like', '%' . $this->searchKeywords . '%')
+                    ->orWhere('email', 'like', '%' . $this->searchKeywords . '%');
+            })
+            ->orderBy($this->sortColumnName, $this->sortDirection)
             ->paginate(5);
 
         return view('livewire.admin.users.list-users', [

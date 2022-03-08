@@ -39,8 +39,20 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Full Name</th>
-                                    <th>Email</th>
+                                    <th>
+                                        Name
+                                        <span wire:click="sortBy('name')" class="float-right text-sm" style="cursor: pointer;">
+                                            <i class="fa fa-arrow-up {{ $sortColumnName === 'name' && $sortDirection === 'asc' ? '' : 'text-muted' }}"></i>
+                                            <i class="fa fa-arrow-down {{ $sortColumnName === 'name' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
+                                        </span>
+                                    </th>
+                                    <th>
+                                        Email
+                                        <span wire:click="sortBy('email')" class="float-right text-sm" style="cursor: pointer;">
+                                            <i class="fa fa-arrow-up {{ $sortColumnName === 'email' && $sortDirection === 'asc' ? '' : 'text-muted' }}"></i>
+                                            <i class="fa fa-arrow-down {{ $sortColumnName === 'email' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
+                                        </span>
+                                    </th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th class="text-right">Action</th>
@@ -85,83 +97,85 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-</div>
 
-<!-- User Modal -->
-<div class="modal fade" id="myForm" tabindex="-1" aria-labelledby="cu-form-label" aria-hidden="true"
-     wire:ignore.self>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    @if($showEditModal)
-                        <span>Edit User</span>
-                    @else
-                        <span>Add User</span>
-                    @endif
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <form autocomplete="off" wire:submit.prevent="{{ $showEditModal ? 'update' : 'store' }}">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" wire:model.defer="state.name"
-                               class="form-control @error('name') is-invalid @enderror" id="name"
-                               placeholder="Full name">
-                        @error('name')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" wire:model.defer="state.email"
-                               class="form-control @error('email') is-invalid @enderror" id="email"
-                               placeholder="Enter email">
-                        @error('email')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" wire:model.defer="state.password"
-                               class="form-control @error('password') is-invalid @enderror" id="password"
-                               placeholder="Password">
-                        @error('password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Confirm Password</label>
-                        <input type="password" wire:model.defer="state.password_confirmation" class="form-control"
-                               id="passwordConfirmation" placeholder="Confirm Password">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
-                            class="fas fa-times"></i> Close
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i>
+    <!-- User Modal -->
+    <div class="modal fade" id="myForm" tabindex="-1" aria-labelledby="cu-form-label" aria-hidden="true"
+         wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
                         @if($showEditModal)
-                            <span> Update</span>
+                            <span>Edit User</span>
                         @else
-                            <span> Save</span>
+                            <span>Add User</span>
                         @endif
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            </form>
+
+                <form autocomplete="off" wire:submit.prevent="{{ $showEditModal ? 'update' : 'store' }}">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" wire:model.defer="state.name"
+                                   class="form-control @error('name') is-invalid @enderror" id="name"
+                                   placeholder="Full name">
+                            @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" wire:model.defer="state.email"
+                                   class="form-control @error('email') is-invalid @enderror" id="email"
+                                   placeholder="Enter email">
+                            @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" wire:model.defer="state.password"
+                                   class="form-control @error('password') is-invalid @enderror" id="password"
+                                   placeholder="Password">
+                            @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Confirm Password</label>
+                            <input type="password" wire:model.defer="state.password_confirmation" class="form-control"
+                                   id="passwordConfirmation" placeholder="Confirm Password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                class="fas fa-times"></i> Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            @if($showEditModal)
+                                <span> Update</span>
+                            @else
+                                <span> Save</span>
+                            @endif
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+
     <!-- confirmation-alert components -->
     <x-confirmation-alert/>
+
 </div>
