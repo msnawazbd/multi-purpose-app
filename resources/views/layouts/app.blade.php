@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Starter</title>
+    <title>{{ setting('site_name') }} | {{ setting('site_title') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -21,7 +21,7 @@
     <!-- Livewire Style -->
     @livewireStyles
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini {{ setting('sidebar_collapse') ? 'sidebar-collapse' : '' }}">
 <div class="wrapper">
 
     <!-- Navbar -->

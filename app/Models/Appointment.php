@@ -33,7 +33,6 @@ class Appointment extends Model
         return $this->belongsTo(Client::class, 'client_id', 'id');
     }
 
-
     public function getDateAttribute($value)
     {
         return Carbon::parse($value)->toFormattedDate();

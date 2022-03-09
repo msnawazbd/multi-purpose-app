@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Users;
 
 use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 class ListUsers extends AdminComponent
@@ -80,6 +81,22 @@ class ListUsers extends AdminComponent
         $this->user->update($validateData);
 
         $this->dispatchBrowserEvent('hide-form', ['message' => 'User updated successfully!']);
+
+        return redirect()->back();
+    }
+
+    public function changeRole(User $user, $role)
+    {
+        Validator::make(['role' => $role], [
+            // 'role' => 'required|in:admin,user'
+            'role' => [
+                'required',
+                Rule::in(User::ROLE_ADMIN, User::ROLE_USER)
+            ]
+        ])->validate();
+
+        $user->update(['role' => $role]);
+        $this->dispatchBrowserEvent('updated', ['message' => "User role change to {$role} successfully!"]);
 
         return redirect()->back();
     }

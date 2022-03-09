@@ -53,7 +53,8 @@
                                             <i class="fa fa-arrow-down {{ $sortColumnName === 'email' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
                                         </span>
                                     </th>
-                                    <th>Created At</th>
+                                    <th>Role</th>
+                                    <th>Registered At</th>
                                     <th>Updated At</th>
                                     <th class="text-right">Action</th>
                                 </tr>
@@ -64,7 +65,17 @@
                                         <td>{{ $users->firstItem() + $key }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->created_at->toFormattedDate() }}</td>
+                                        <td>
+                                            <div>
+                                                <select class="form-control" wire:change="changeRole({{ $user }}, $event.target.value)">
+                                                    <option value="admin" {{ ($user->role === 'admin') ? 'selected' : '' }}>Admin</option>
+                                                    <option value="user" {{ ($user->role === 'user') ? 'selected' : '' }}>User</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{ $user->created_at?->toFormattedDate() ?? 'N/A' }}
+                                        </td>
                                         <td>{{ $user->updated_at->toFormattedDate() }}</td>
                                         <td class="text-right">
                                             <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>

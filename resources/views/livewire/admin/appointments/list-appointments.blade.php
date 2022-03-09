@@ -122,7 +122,7 @@
                                             </span>
                                         </td>
                                         <td class="text-right">
-                                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
+                                            <button type="button" wire:click.prevent="changeStatus({{ $appointment->id }})" class="btn btn-{{ $appointment->status_badge }} btn-sm"><i class="fas fa-eye{{ $appointment->status == 'CLOSED' ? '-slash' : '' }}"></i></button>
                                             <a href="{{ route('admin.appointments.edit', $appointment) }}" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>

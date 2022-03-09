@@ -89,6 +89,14 @@ class ListAppointments extends AdminComponent
         $this->status = $status;
     }
 
+    public function changeStatus($appointment_id)
+    {
+        $appointment = Appointment::query()->findOrFail($appointment_id);
+        $appointment->status = $appointment->status == 'SCHEDULED' ? 'CLOSED' : 'SCHEDULED';
+        $appointment->save();
+        $this->dispatchBrowserEvent('updated', ['message' => 'Appointments status changed.']);
+    }
+
     public function getAppointmentsProperty()
     {
         return Appointment::query()
