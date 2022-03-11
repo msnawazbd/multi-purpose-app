@@ -135,6 +135,24 @@
                 <i class="fas fa-th-large"></i>
             </a>
         </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{{ auth()->user()->avatar_url }}" id="profileNavImage" class="img-circle elevation-1" alt="User Image" style="height: 25px; width: 25px;">
+                <span class="ml-1" x-ref="username">{{ auth()->user()->name }}</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('admin.profile') }}" x-ref="profileLink">Profile</a>
+                <a class="dropdown-item" href="{{ route('admin.profile') }}" x-ref="changePasswordLink">Change Password</a>
+                <a class="dropdown-item" href="{{ route('admin.settings') }}">Settings</a>
+                <div class="dropdown-divider"></div>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();"
+                       class="dropdown-item">Logout
+                    </a>
+                </form>
+            </div>
+        </li>
     </ul>
 </nav>
 <!-- /.navbar -->

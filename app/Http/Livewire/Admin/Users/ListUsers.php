@@ -4,11 +4,15 @@ namespace App\Http\Livewire\Admin\Users;
 
 use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use Livewire\WithFileUploads;
 
 class ListUsers extends AdminComponent
 {
+    use WithFileUploads;
+
     public $state = [];
     public $user;
     public $userId;
@@ -16,6 +20,7 @@ class ListUsers extends AdminComponent
     public $searchKeywords = null;
     public $sortColumnName = 'created_at';
     public $sortDirection = 'desc';
+    public $photo;
 
     protected $queryString = ['searchKeywords' => ['except' => '']];
 
@@ -30,8 +35,8 @@ class ListUsers extends AdminComponent
 
     public function create()
     {
+        $this->reset();
         $this->showEditModal = false;
-        $this->state = [];
         $this->dispatchBrowserEvent('show-form');
     }
 
@@ -46,11 +51,18 @@ class ListUsers extends AdminComponent
         /*$validateData['password'] = bcrypt($validateData['password']);
         $user = User::create($validateData);*/
 
+        if ($this->photo) {
+            $validateData['avatar'] = $this->photo->store('/', 'avatars');
+        } else {
+            $validateData['avatar'] = '';
+        }
+
         $user = User::query()
             ->create([
                 'name' => $this->state['name'],
                 'email' => $this->state['email'],
                 'password' => bcrypt($this->state['password']),
+                'avatar' => $validateData['avatar']
             ]);
 
         $this->dispatchBrowserEvent('hide-form', ['message' => 'User created successfully!']);
@@ -60,6 +72,7 @@ class ListUsers extends AdminComponent
 
     public function edit(User $user)
     {
+        $this->reset();
         $this->showEditModal = true;
         $this->user = $user;
         $this->state = $user->toArray();
@@ -76,6 +89,13 @@ class ListUsers extends AdminComponent
 
         if (!empty($this->state['password'])) {
             $validateData['password'] = bcrypt($this->state['password']);
+        }
+
+        if ($this->photo) {
+            Storage::disk('avatars')->delete($this->user->avatar);
+            $validateData['avatar'] = $this->photo->store('/', 'avatars');
+        } else {
+            $validateData['avatar'] = '';
         }
 
         $this->user->update($validateData);

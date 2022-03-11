@@ -88,6 +88,14 @@
     window.addEventListener('updated', event => {
         toastr.success(event.detail.message, 'Success!')
     })
+
+    $('[x-ref="profileLink"]').on('click', function(){
+        localStorage.setItem('_x_currentTab', '"profile"')
+    });
+    $('[x-ref="changePasswordLink"]').on('click', function(){
+        localStorage.setItem('_x_currentTab', '"changePassword"')
+    });
+
 </script>
 <!-- Individual Page Script -->
 @stack('js')
@@ -95,5 +103,8 @@
 @livewireScripts
 <!-- Livewire Sortable -->
 <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js"></script>
+<!-- Alpine.js -->
+@stack('apline-plugins')
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
