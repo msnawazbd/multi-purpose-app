@@ -66,7 +66,7 @@
                                         <div class="form-group row">
                                             <label for="name" class="col-sm-2 col-form-label">Name</label>
                                             <div class="col-sm-10">
-                                                <input type="text" wire:model.defer="state.name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name">
+                                                <input type="text" wire:model.defer="state.name" class="form-control @error('name') is-invalid @enderror" id="name" autocomplete="on" placeholder="Name">
                                                 @error('name')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -77,7 +77,7 @@
                                         <div class="form-group row">
                                             <label for="email" class="col-sm-2 col-form-label">Email</label>
                                             <div class="col-sm-10">
-                                                <input type="email" wire:model.defer="state.email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email">
+                                                <input type="email" wire:model.defer="state.email" class="form-control @error('email') is-invalid @enderror" id="email" autocomplete="on" placeholder="Email">
                                                 @error('email')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -98,7 +98,7 @@
                                         <div class="form-group row">
                                             <label for="current_password" class="col-sm-2 col-form-label">Current Password</label>
                                             <div class="col-sm-10">
-                                                <input type="password" wire:model.defer="state.current_password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" placeholder="xxxxxxxx">
+                                                <input type="password" wire:model.defer="state.current_password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" autocomplete="on" placeholder="xxxxxxxx">
                                                 @error('current_password')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -109,7 +109,7 @@
                                         <div class="form-group row">
                                             <label for="password" class="col-sm-2 col-form-label">New Password</label>
                                             <div class="col-sm-10">
-                                                <input type="password" wire:model.defer="state.password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="xxxxxxxx">
+                                                <input type="password" wire:model.defer="state.password" class="form-control @error('password') is-invalid @enderror" id="password" autocomplete="on" placeholder="xxxxxxxx">
                                                 @error('password')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -120,7 +120,7 @@
                                         <div class="form-group row">
                                             <label for="password_confirmation" class="col-sm-2 col-form-label">Confirm Password</label>
                                             <div class="col-sm-10">
-                                                <input type="password" wire:model.defer="state.password_confirmation" class="form-control" id="password_confirmation" placeholder="xxxxxxxx">
+                                                <input type="password" wire:model.defer="state.password_confirmation" class="form-control" id="password_confirmation" autocomplete="on" placeholder="xxxxxxxx">
                                             </div>
                                         </div>
                                         <div class="form-group row">

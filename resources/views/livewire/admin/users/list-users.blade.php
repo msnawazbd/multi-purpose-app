@@ -160,7 +160,7 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" wire:model.defer="state.password"
-                                   class="form-control @error('password') is-invalid @enderror" id="password"
+                                   class="form-control @error('password') is-invalid @enderror" id="password" autocomplete="on"
                                    placeholder="Password">
                             @error('password')
                             <div class="invalid-feedback">
@@ -170,7 +170,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Confirm Password</label>
-                            <input type="password" wire:model.defer="state.password_confirmation" class="form-control"
+                            <input type="password" wire:model.defer="state.password_confirmation" class="form-control" autocomplete="on"
                                    id="passwordConfirmation" placeholder="Confirm Password">
                         </div>
                         <div class="form-group">

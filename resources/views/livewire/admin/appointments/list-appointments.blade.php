@@ -151,3 +151,19 @@
 
 <!-- confirmation-alert components -->
 <x-confirmation-alert/>
+
+@push('styles')
+    <style>
+        .draggable-mirror {
+            background-color: #ffffff;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+@endpush
+
+@push('after-livewire-scripts')
+    <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js"></script>
+@endpush

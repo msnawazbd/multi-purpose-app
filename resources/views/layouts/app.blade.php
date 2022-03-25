@@ -4,18 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ setting('site_name') }} | {{ setting('site_title') }}</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{{ asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <!-- REQUIRED CSS -->
+    <link rel="stylesheet" href="/css/app.css">
     <!-- Individual Page CSS -->
     @stack('styles')
     <!-- Livewire Style -->
@@ -51,58 +41,19 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
+<script src="/js/app.js"></script>
 
-<!-- jQuery -->
-<script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
-<!-- Toaster -->
-<script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
 <!-- Custom Script -->
+<script src="/js/backend.js"></script>
 
-<script>
-    $(document).ready(function () {
-        toastr.options = {
-            "progressBar": true,
-            "positionClass": "toast-bottom-right",
-        }
-
-        window.addEventListener('hide-form', event => {
-            $('#myForm').modal('hide');
-            toastr.success(event.detail.message, 'Success!')
-        })
-    });
-</script>
-
-<script>
-    window.addEventListener('show-form', event => {
-        $('#myForm').modal('show');
-    })
-
-    window.addEventListener('alert', event => {
-        toastr.success(event.detail.message, 'Success!')
-    })
-
-    window.addEventListener('updated', event => {
-        toastr.success(event.detail.message, 'Success!')
-    })
-
-    $('[x-ref="profileLink"]').on('click', function(){
-        localStorage.setItem('_x_currentTab', '"profile"')
-    });
-    $('[x-ref="changePasswordLink"]').on('click', function(){
-        localStorage.setItem('_x_currentTab', '"changePassword"')
-    });
-
-</script>
 <!-- Individual Page Script -->
 @stack('js')
+
 <!-- Livewire Script -->
 @livewireScripts
-<!-- Livewire Sortable -->
-<script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js"></script>
+
+@stack('after-livewire-scripts')
+
 <!-- Alpine.js -->
 @stack('apline-plugins')
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
