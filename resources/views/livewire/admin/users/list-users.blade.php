@@ -38,7 +38,7 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>SN</th>
                                     <th>
                                         Name
                                         <span wire:click="sortBy('name')" class="float-right text-sm" style="cursor: pointer;">

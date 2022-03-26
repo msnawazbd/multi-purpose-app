@@ -46,7 +46,7 @@ class CreateAppointment extends Component
 
     public function render()
     {
-        $clients = Client::all();
+        $clients = Client::query()->orderBy('first_name')->get();
         return view('livewire.admin.appointments.create-appointment', [
             'clients' => $clients
         ]);

@@ -110,7 +110,7 @@
                                             </div>
                                         </td>
                                         <td>{{ $appointments->firstItem() + $key }}</td>
-                                        <td>{{ $appointment->clientInfo->name }}</td>
+                                        <td>{{ $appointment->clientInfo->full_name }}</td>
                                         <td>{{ $appointment->date }}</td>
                                         <td>{{ $appointment->time }}</td>
                                         <td>

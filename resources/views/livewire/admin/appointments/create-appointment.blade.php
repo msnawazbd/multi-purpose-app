@@ -44,7 +44,7 @@
                                                     wire:model.defer="state.client_id" id="client_id">
                                                 <option value="">Select One</option>
                                                 @foreach($clients as $client)
-                                                    <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                                    <option value="{{ $client->id }}">{{ $client->full_name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('client_id')

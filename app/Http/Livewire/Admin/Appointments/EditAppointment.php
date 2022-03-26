@@ -43,7 +43,7 @@ class EditAppointment extends Component
 
     public function render()
     {
-        $clients = Client::query()->orderBy('name')->get();
+        $clients = Client::query()->orderBy('first_name')->get();
         return view('livewire.admin.appointments.edit-appointment', [
             'clients' => $clients
         ]);
