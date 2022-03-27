@@ -20,6 +20,7 @@ class ClientTableSeeder extends Seeder
             'last_name' => 'Wick',
             'reference_name' => 'jhon Doe',
             'reference_mobile' => '01761913331',
+            'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aut beatae cum explicabo facere illum itaque rem reprehenderit rerum vel.',
             'status' => 1,
             'created_by' => 1,
             'created_at' => now(),

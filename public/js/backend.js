@@ -17,6 +17,15 @@ window.addEventListener('show-form', function (event) {
   $('#myForm').modal('show');
 });
 window.addEventListener('alert', function (event) {
+  toastr.warning(event.detail.message, 'Warning!');
+});
+window.addEventListener('info', function (event) {
+  toastr.info(event.detail.message, 'Info!');
+});
+window.addEventListener('error', function (event) {
+  toastr.error(event.detail.message, 'Error!');
+});
+window.addEventListener('success', function (event) {
   toastr.success(event.detail.message, 'Success!');
 });
 window.addEventListener('updated', function (event) {

@@ -20,6 +20,7 @@ class CreateClientsTable extends Migration
             $table->string('last_name', 50);
             $table->string('reference_name', 100)->nullable()->default(null);
             $table->string('reference_mobile', 20)->nullable()->default(null);
+            $table->text('details')->nullable()->default(null);
             $table->tinyInteger('status')->default(1)->comment("1 FOR PUBLISHED & 0 FOR UNPUBLISHED");
             $table->foreignId('created_by')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('updated_by')->nullable()->default(null)->constrained('users')->onUpdate('cascade')->onDelete('cascade');

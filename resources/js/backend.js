@@ -15,6 +15,18 @@ window.addEventListener('show-form', event => {
 })
 
 window.addEventListener('alert', event => {
+    toastr.warning(event.detail.message, 'Warning!')
+})
+
+window.addEventListener('info', event => {
+    toastr.info(event.detail.message, 'Info!')
+})
+
+window.addEventListener('error', event => {
+    toastr.error(event.detail.message, 'Error!')
+})
+
+window.addEventListener('success', event => {
     toastr.success(event.detail.message, 'Success!')
 })
 
