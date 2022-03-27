@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Client;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ClientTableSeeder extends Seeder
 {
@@ -14,6 +14,16 @@ class ClientTableSeeder extends Seeder
      */
     public function run()
     {
-        Client::factory()->count(25)->create();
+        DB::table('clients')->insert([
+            'user_id' => 2,
+            'first_name' => 'Jhon',
+            'last_name' => 'Wick',
+            'reference_name' => 'jhon Doe',
+            'reference_mobile' => '01761913331',
+            'status' => 1,
+            'created_by' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

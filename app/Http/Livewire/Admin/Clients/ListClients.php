@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Clients;
 
 use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\Client;
+use App\Models\User;
 
 class ListClients extends AdminComponent
 {
@@ -36,15 +37,16 @@ class ListClients extends AdminComponent
 
     public function render()
     {
-        $clients = Client::query()
+        $clients = User::query()
+            ->with([
+                'clientInfo'
+            ])
             ->where(function ($query) {
-                $query->where('first_name', 'like', '%' . $this->searchKeywords . '%')
-                    ->orWhere('last_name', 'like', '%' . $this->searchKeywords . '%')
+                $query->where('name', 'like', '%' . $this->searchKeywords . '%')
                     ->orWhere('mobile', 'like', '%' . $this->searchKeywords . '%')
-                    ->orWhere('reference_name', 'like', '%' . $this->searchKeywords . '%')
-                    ->orWhere('reference_mobile', 'like', '%' . $this->searchKeywords . '%')
                     ->orWhere('email', 'like', '%' . $this->searchKeywords . '%');
             })
+            ->where('role', 'client')
             ->orderBy($this->sortColumnName, $this->sortDirection)
             ->paginate(10);
         return view('livewire.admin.clients.list-clients', [

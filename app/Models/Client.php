@@ -11,13 +11,13 @@ class Client extends Model
 
     protected $guarded = [];
 
-    public function countryInfo()
-    {
-        return $this->belongsTo(Country::class. 'country_id');
-    }
-
     public function getfullNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function userInfo()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -73,6 +73,7 @@
                                             <div>
                                                 <select class="form-control" wire:change="changeRole({{ $user }}, $event.target.value)">
                                                     <option value="admin" {{ ($user->role === 'admin') ? 'selected' : '' }}>Admin</option>
+                                                    <option value="client" {{ ($user->role === 'client') ? 'selected' : '' }}>Client</option>
                                                     <option value="user" {{ ($user->role === 'user') ? 'selected' : '' }}>User</option>
                                                 </select>
                                             </div>

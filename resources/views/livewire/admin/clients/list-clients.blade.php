@@ -26,10 +26,10 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary btn-sm" wire:click="create"><i
+                                <a href="{{ route('admin.clients.create') }}" class="btn btn-primary btn-sm"><i
                                         class="fas fa-plus"></i>
                                     &nbsp; Add New Client
-                                </button>
+                                </a>
                                 <x-search-input wire:model="searchKeywords"/>
                             </div>
                         </div>
@@ -68,9 +68,7 @@
                                 @forelse($clients as $key => $client)
                                     <tr>
                                         <td>{{ $clients->firstItem() + $key }}</td>
-                                        <td>
-                                            {{ $client->full_name }}
-                                        </td>
+                                        <td>{{ $client->name }}</td>
                                         <td>{{ $client->email }}</td>
                                         <td>{{ $client->mobile }}</td>
                                         <td>

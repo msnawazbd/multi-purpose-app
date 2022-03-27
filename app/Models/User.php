@@ -14,6 +14,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     const ROLE_ADMIN = 'admin';
+    const ROLE_CLIENT = 'client';
     const ROLE_USER = 'user';
 
     /**
@@ -24,9 +25,20 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'mobile',
+        'alternate_no',
+        'address',
+        'gender',
+        'country_id',
+        'state',
+        'city',
+        'zip_code',
         'password',
         'role',
-        'avatar'
+        'avatar',
+        'activation_status',
+        'created_by',
+        'updated_by',
     ];
 
     /**
@@ -71,5 +83,15 @@ class User extends Authenticatable
             return false;
         }
         return true;
+    }
+
+    public function countryInfo()
+    {
+        return $this->belongsTo(Country::class. 'country_id');
+    }
+
+    public function clientInfo()
+    {
+        return $this->hasOne(Client::class, 'user_id');
     }
 }

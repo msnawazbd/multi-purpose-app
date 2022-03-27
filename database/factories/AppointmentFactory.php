@@ -14,7 +14,7 @@ class AppointmentFactory extends Factory
     public function definition()
     {
         return [
-            'client_id' => $this->faker->biasedNumberBetween(1,25),
+            'client_id' => 1,
             'date' => $this->faker->dateTimeBetween('-5 days', '+5 days'),
             'time' => $this->faker->time(),
             'status' => $this->faker->randomElement(['SCHEDULED', 'CLOSED']),
