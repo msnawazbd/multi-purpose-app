@@ -63,6 +63,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.tasks') }}" class="nav-link {{ request()->is('admin/tasks', 'admin/tasks/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tasks"></i>
+                        <p>
+                            Tasks
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.appointments') }}" class="nav-link {{ request()->is('admin/appointments', 'admin/appointments/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>

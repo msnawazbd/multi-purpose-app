@@ -104,4 +104,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function tasksInfo()
+    {
+        return $this->belongsToMany(User::class, 'task_user',  'user_id', 'task_id');
+    }
 }

@@ -75,12 +75,18 @@
                                             {{ $user->created_at ? $user->created_at->toFormattedDate() : 'N/A' }}
                                         </td>
                                         <td class="text-right">
-                                            <button type="button" wire:click.prevent="show({{ $user->id }})" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>
-                                            </button>
-                                            <a href="{{ route('admin.clients.edit', $user->id) }}"
-                                                    class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                            <button type="button" wire:click.prevent="destroy({{ $user->id }})"
-                                                    class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default btn-sm">Options</button>
+                                                <button type="button" class="btn btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu" style="">
+                                                    <button class="dropdown-item" wire:click.prevent="show({{ $user->id }})"><i class="fas fa-eye mr-2"></i> View</button>
+                                                    <a class="dropdown-item" href="{{ route('admin.clients.edit', $user->id) }}"><i class="fas fa-edit mr-2"></i> Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <button class="dropdown-item" wire:click.prevent="destroy({{ $user->id }})"><i class="fas fa-trash mr-2"></i> Delete</button>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @empty

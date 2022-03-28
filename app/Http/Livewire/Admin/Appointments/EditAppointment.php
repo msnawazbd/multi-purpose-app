@@ -21,7 +21,7 @@ class EditAppointment extends Component
 
     public function update()
     {
-        $validateData = Validator::make($this->state, [
+        Validator::make($this->state, [
             'client_id' => 'required|numeric',
             'date' => 'required|date',
             'time' => 'required',
@@ -34,11 +34,24 @@ class EditAppointment extends Component
         ])
             ->validate();
 
-        $this->appointment->update($this->state);
+        try {
+            Appointment::query()->create([
+                'client_id' => $this->state['client_id'],
+                'date' => $this->state['date'],
+                'time' => $this->state['time'],
+                'note' => $this->state['note'],
+                'status' => $this->state['status'],
+                'members' => $this->state['members'],
+                'color' => $this->state['color'],
+            ]);
 
-        $this->dispatchBrowserEvent('alert', ['message' => 'Appointment updated successfully']);
-
-        return redirect()->route('admin.appointments');
+            $this->appointment->update($this->state);
+            $this->dispatchBrowserEvent('success', ['message' => 'Appointment updated successfully.']);
+            return redirect()->route('admin.appointments');
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function render()

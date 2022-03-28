@@ -13,7 +13,7 @@ class CreateAppointment extends Component
 
     public function create()
     {
-        $validateData = Validator::make($this->state, [
+        Validator::make($this->state, [
             'client_id' => 'required|numeric',
             'members' => 'required',
             'color' => 'required',
@@ -29,19 +29,23 @@ class CreateAppointment extends Component
         /*$this->state['status'] = 'CLOSED';
        Appointment::create($this->state);*/
 
-        $query = Appointment::query()->create([
-            'client_id' => $this->state['client_id'],
-            'date' => $this->state['date'],
-            'time' => $this->state['time'],
-            'note' => $this->state['note'],
-            'status' => $this->state['status'],
-            'members' => $this->state['members'],
-            'color' => $this->state['color'],
-        ]);
+        try {
+            Appointment::query()->create([
+                'client_id' => $this->state['client_id'],
+                'date' => $this->state['date'],
+                'time' => $this->state['time'],
+                'note' => $this->state['note'],
+                'status' => $this->state['status'],
+                'members' => $this->state['members'],
+                'color' => $this->state['color'],
+            ]);
 
-        $this->dispatchBrowserEvent('alert', ['message' => 'Appointment created successfully']);
-
-        return redirect()->route('admin.appointments');
+            $this->dispatchBrowserEvent('success', ['message' => 'Appointment created successfully.']);
+            return redirect()->route('admin.appointments');
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function render()

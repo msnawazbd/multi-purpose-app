@@ -45,6 +45,7 @@ class ListUsers extends AdminComponent
         $validateData = Validator::make($this->state, [
             'name' => 'required',
             'email' => 'required|email|unique:users',
+            'mobile' => 'required|string|unique:users',
             'password' => 'required|confirmed',
         ])->validate();
 
@@ -57,17 +58,22 @@ class ListUsers extends AdminComponent
             $validateData['avatar'] = '';
         }
 
-        $user = User::query()
-            ->create([
-                'name' => $this->state['name'],
-                'email' => $this->state['email'],
-                'password' => bcrypt($this->state['password']),
-                'avatar' => $validateData['avatar']
-            ]);
+        try {
+            User::query()
+                ->create([
+                    'name' => $this->state['name'],
+                    'email' => $this->state['email'],
+                    'mobile' => $this->state['mobile'],
+                    'password' => bcrypt($this->state['password']),
+                    'avatar' => $validateData['avatar']
+                ]);
 
-        $this->dispatchBrowserEvent('hide-modal', ['message' => 'User created successfully!']);
-
-        return redirect()->back();
+            $this->dispatchBrowserEvent('hide-modal', ['message' => 'User created successfully!']);
+            return redirect()->back();
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function edit(User $user)
@@ -84,6 +90,7 @@ class ListUsers extends AdminComponent
         $validateData = Validator::make($this->state, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $this->user->id,
+            'mobile' => 'required|string|unique:users,mobile,' . $this->user->id,
             'password' => 'sometimes|confirmed',
         ])->validate();
 
@@ -98,11 +105,14 @@ class ListUsers extends AdminComponent
             $validateData['avatar'] = '';
         }
 
-        $this->user->update($validateData);
-
-        $this->dispatchBrowserEvent('hide-modal', ['message' => 'User updated successfully!']);
-
-        return redirect()->back();
+        try {
+            $this->user->update($validateData);
+            $this->dispatchBrowserEvent('hide-modal', ['message' => 'User updated successfully!']);
+            return redirect()->back();
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function changeRole(User $user, $role)
@@ -115,10 +125,14 @@ class ListUsers extends AdminComponent
             ]
         ])->validate();
 
-        $user->update(['role' => $role]);
-        $this->dispatchBrowserEvent('updated', ['message' => "User role change to {$role} successfully!"]);
-
-        return redirect()->back();
+        try {
+            $user->update(['role' => $role]);
+            $this->dispatchBrowserEvent('success', ['message' => "User role change to {$role} successfully!"]);
+            return redirect()->back();
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function sortBy($columnName)
@@ -145,10 +159,14 @@ class ListUsers extends AdminComponent
 
     public function confirmDestroy()
     {
-        $data = User::query()->findOrFail($this->userId);
-        $data->delete();
-
-        $this->dispatchBrowserEvent('deleted', ['message' => 'User deleted successfully.']);
+        try {
+            $data = User::query()->findOrFail($this->userId);
+            $data->delete();
+            $this->dispatchBrowserEvent('deleted', ['message' => 'User deleted successfully.']);
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function render()
@@ -156,7 +174,8 @@ class ListUsers extends AdminComponent
         $users = User::query()
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->searchKeywords . '%')
-                    ->orWhere('email', 'like', '%' . $this->searchKeywords . '%');
+                    ->orWhere('email', 'like', '%' . $this->searchKeywords . '%')
+                    ->orWhere('mobile', 'like', '%' . $this->searchKeywords . '%');
             })
             ->orderBy($this->sortColumnName, $this->sortDirection)
             ->paginate(5);

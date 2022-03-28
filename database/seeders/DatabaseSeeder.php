@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             ClientTableSeeder::class,
             AppointmentTableSeeder::class,
+            TaskTableSeeder::class,
+            TaskUserTableSeeder::class,
         ]);
     }
 }

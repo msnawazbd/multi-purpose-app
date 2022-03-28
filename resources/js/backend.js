@@ -14,7 +14,11 @@ window.addEventListener('show-modal', event => {
     $('#myModal').modal('show');
 })
 
-window.addEventListener('alert', event => {
+window.addEventListener('success', event => {
+    toastr.success(event.detail.message, 'Success!')
+})
+
+window.addEventListener('warning', event => {
     toastr.warning(event.detail.message, 'Warning!')
 })
 
@@ -24,14 +28,6 @@ window.addEventListener('info', event => {
 
 window.addEventListener('error', event => {
     toastr.error(event.detail.message, 'Error!')
-})
-
-window.addEventListener('success', event => {
-    toastr.success(event.detail.message, 'Success!')
-})
-
-window.addEventListener('updated', event => {
-    toastr.success(event.detail.message, 'Success!')
 })
 
 $('[x-ref="profileLink"]').on('click', function () {

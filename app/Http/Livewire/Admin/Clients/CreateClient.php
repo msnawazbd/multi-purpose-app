@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Admin\Clients;
 use App\Models\Client;
 use App\Models\Country;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
 class CreateClient extends Component

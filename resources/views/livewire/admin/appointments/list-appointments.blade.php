@@ -122,13 +122,18 @@
                                             </span>
                                         </td>
                                         <td class="text-right">
-                                            <button type="button" wire:click.prevent="changeStatus({{ $appointment->id }})" class="btn btn-{{ $appointment->status_badge }} btn-sm"><i class="fas fa-eye{{ $appointment->status == 'CLOSED' ? '-slash' : '' }}"></i></button>
-                                            <a href="{{ route('admin.appointments.edit', $appointment) }}" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <button type="button" wire:click.prevent="destroy({{ $appointment->id }})" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default btn-sm">Options</button>
+                                                <button type="button" class="btn btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu" style="">
+                                                    <button class="dropdown-item" wire:click.prevent="changeStatus({{ $appointment->id }})"><i class="fas fa-eye{{ $appointment->status == 'CLOSED' ? '-slash' : '' }} mr-2"></i> View</button>
+                                                    <a class="dropdown-item" href="{{ route('admin.appointments.edit', $appointment) }}"><i class="fas fa-edit mr-2"></i> Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <button class="dropdown-item" wire:click.prevent="destroy({{ $appointment->id }})"><i class="fas fa-trash mr-2"></i> Delete</button>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

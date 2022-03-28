@@ -16,7 +16,10 @@ $(document).ready(function () {
 window.addEventListener('show-modal', function (event) {
   $('#myModal').modal('show');
 });
-window.addEventListener('alert', function (event) {
+window.addEventListener('success', function (event) {
+  toastr.success(event.detail.message, 'Success!');
+});
+window.addEventListener('warning', function (event) {
   toastr.warning(event.detail.message, 'Warning!');
 });
 window.addEventListener('info', function (event) {
@@ -24,12 +27,6 @@ window.addEventListener('info', function (event) {
 });
 window.addEventListener('error', function (event) {
   toastr.error(event.detail.message, 'Error!');
-});
-window.addEventListener('success', function (event) {
-  toastr.success(event.detail.message, 'Success!');
-});
-window.addEventListener('updated', function (event) {
-  toastr.success(event.detail.message, 'Success!');
 });
 $('[x-ref="profileLink"]').on('click', function () {
   localStorage.setItem('_x_currentTab', '"profile"');

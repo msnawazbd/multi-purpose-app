@@ -53,6 +53,7 @@
                                             <i class="fa fa-arrow-down {{ $sortColumnName === 'email' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
                                         </span>
                                     </th>
+                                    <th>Mobile</th>
                                     <th>Role</th>
                                     <th>Registered At</th>
                                     <th>Updated At</th>
@@ -69,6 +70,7 @@
                                             {{ $user->name }}
                                         </td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->mobile }}</td>
                                         <td>
                                             <div>
                                                 <select class="form-control" wire:change="changeRole({{ $user }}, $event.target.value)">
@@ -153,6 +155,17 @@
                                    class="form-control @error('email') is-invalid @enderror" id="email"
                                    placeholder="Enter email">
                             @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">Mobile</label>
+                            <input type="text" wire:model.defer="state.mobile"
+                                   class="form-control @error('mobile') is-invalid @enderror" id="mobile"
+                                   placeholder="Enter mobile">
+                            @error('mobile')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

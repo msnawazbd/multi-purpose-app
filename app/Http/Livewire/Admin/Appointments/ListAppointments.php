@@ -32,27 +32,38 @@ class ListAppointments extends AdminComponent
 
     public function deleteSelectedRows()
     {
-        Appointment::query()->whereIn('id', $this->selectedRows)->delete();
-
-        $this->dispatchBrowserEvent('deleted', ['message' => 'All selected appointment got deleted.']);
-
-        $this->reset(['selectedRows', 'selectPageRows']);
+        try {
+            Appointment::query()->whereIn('id', $this->selectedRows)->delete();
+            $this->dispatchBrowserEvent('deleted', ['message' => 'All selected appointment got deleted.']);
+            $this->reset(['selectedRows', 'selectPageRows']);
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function markAllAsScheduled()
     {
-        Appointment::query()->whereIn('id', $this->selectedRows)->update(['status' => 'SCHEDULED']);
-
-        $this->dispatchBrowserEvent('updated', ['message' => 'Appointments marked as scheduled']);
-        $this->reset(['selectedRows', 'selectPageRows']);
+        try {
+            Appointment::query()->whereIn('id', $this->selectedRows)->update(['status' => 'SCHEDULED']);
+            $this->dispatchBrowserEvent('success', ['message' => 'Appointments marked as scheduled.']);
+            $this->reset(['selectedRows', 'selectPageRows']);
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function markAllAsClosed()
     {
-        Appointment::query()->whereIn('id', $this->selectedRows)->update(['status' => 'CLOSED']);
-
-        $this->dispatchBrowserEvent('updated', ['message' => 'Appointments marked as closed']);
-        $this->reset(['selectedRows', 'selectPageRows']);
+        try {
+            Appointment::query()->whereIn('id', $this->selectedRows)->update(['status' => 'CLOSED']);
+            $this->dispatchBrowserEvent('success', ['message' => 'Appointments marked as closed.']);
+            $this->reset(['selectedRows', 'selectPageRows']);
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function export()
@@ -66,7 +77,7 @@ class ListAppointments extends AdminComponent
             Appointment::query()->find($item['value'])->update(['order_position' => $item['order']]);
         }
 
-        $this->dispatchBrowserEvent('updated', ['message' => 'Appointments marked as closed']);
+        $this->dispatchBrowserEvent('success', ['message' => 'Appointments marked as closed.']);
     }
 
     public function destroy($appointmentId)
@@ -77,10 +88,14 @@ class ListAppointments extends AdminComponent
 
     public function confirmDestroy()
     {
-        $data = Appointment::query()->findOrFail($this->appointmentId);
-        $data->delete();
-
-        $this->dispatchBrowserEvent('deleted', ['message' => 'Appointment deleted successfully.']);
+        try {
+            $data = Appointment::query()->findOrFail($this->appointmentId);
+            $data->delete();
+            $this->dispatchBrowserEvent('deleted', ['message' => 'Appointment deleted successfully.']);
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function filterByStatus($status = null)
@@ -91,10 +106,15 @@ class ListAppointments extends AdminComponent
 
     public function changeStatus($appointment_id)
     {
-        $appointment = Appointment::query()->findOrFail($appointment_id);
-        $appointment->status = $appointment->status == 'SCHEDULED' ? 'CLOSED' : 'SCHEDULED';
-        $appointment->save();
-        $this->dispatchBrowserEvent('updated', ['message' => 'Appointments status changed.']);
+        try {
+            $appointment = Appointment::query()->findOrFail($appointment_id);
+            $appointment->status = $appointment->status == 'SCHEDULED' ? 'CLOSED' : 'SCHEDULED';
+            $appointment->save();
+            $this->dispatchBrowserEvent('success', ['message' => 'Appointments status changed.']);
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function getAppointmentsProperty()
