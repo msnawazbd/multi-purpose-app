@@ -37,7 +37,7 @@ class ListUsers extends AdminComponent
     {
         $this->reset();
         $this->showEditModal = false;
-        $this->dispatchBrowserEvent('show-form');
+        $this->dispatchBrowserEvent('show-modal');
     }
 
     public function store()
@@ -65,7 +65,7 @@ class ListUsers extends AdminComponent
                 'avatar' => $validateData['avatar']
             ]);
 
-        $this->dispatchBrowserEvent('hide-form', ['message' => 'User created successfully!']);
+        $this->dispatchBrowserEvent('hide-modal', ['message' => 'User created successfully!']);
 
         return redirect()->back();
     }
@@ -76,7 +76,7 @@ class ListUsers extends AdminComponent
         $this->showEditModal = true;
         $this->user = $user;
         $this->state = $user->toArray();
-        $this->dispatchBrowserEvent('show-form');
+        $this->dispatchBrowserEvent('show-modal');
     }
 
     public function update()
@@ -100,7 +100,7 @@ class ListUsers extends AdminComponent
 
         $this->user->update($validateData);
 
-        $this->dispatchBrowserEvent('hide-form', ['message' => 'User updated successfully!']);
+        $this->dispatchBrowserEvent('hide-modal', ['message' => 'User updated successfully!']);
 
         return redirect()->back();
     }

@@ -65,21 +65,21 @@
                                 </tr>
                                 </thead>
                                 <tbody wire:loading.class="text-muted">
-                                @forelse($clients as $key => $client)
+                                @forelse($users as $key => $user)
                                     <tr>
-                                        <td>{{ $clients->firstItem() + $key }}</td>
-                                        <td>{{ $client->name }}</td>
-                                        <td>{{ $client->email }}</td>
-                                        <td>{{ $client->mobile }}</td>
+                                        <td>{{ $users->firstItem() + $key }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->mobile }}</td>
                                         <td>
-                                            {{ $client->created_at ? $client->created_at->toFormattedDate() : 'N/A' }}
+                                            {{ $user->created_at ? $user->created_at->toFormattedDate() : 'N/A' }}
                                         </td>
                                         <td class="text-right">
-                                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>
+                                            <button type="button" wire:click.prevent="show({{ $user->id }})" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>
                                             </button>
-                                            <button type="button" wire:click.prevent="edit({{ $client }})"
-                                                    class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
-                                            <button type="button" wire:click.prevent="destroy({{ $client->id }})"
+                                            <a href="{{ route('admin.clients.edit', $user->id) }}"
+                                                    class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                            <button type="button" wire:click.prevent="destroy({{ $user->id }})"
                                                     class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -95,7 +95,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer d-flex justify-content-end">
-                            {{ $clients->links() }}
+                            {{ $users->links() }}
                         </div>
                     </div>
                 </div>
@@ -105,6 +105,122 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
+
+    <!-- User Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="cu-form-label" aria-hidden="true"
+         wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <div class="modal-body">
+                        <div class="card card-widget widget-user-2">
+                            <!-- Add the bg color to the header using any of the bg-* classes -->
+                            <div class="widget-user-header bg-gradient-lightblue">
+                                <div class="widget-user-image">
+                                    <img class="img-circle elevation-2" src="{{ $avatar_url }}" alt="User Avatar">
+                                </div>
+                                <!-- /.widget-user-image -->
+                                <h3 class="widget-user-username">{{ $name }}</h3>
+                                <h5 class="widget-user-desc">{{ $mobile }}</h5>
+                            </div>
+                            <div class="card-footer p-0">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                             Email<span class="float-right text-dark">{{ $email }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Alternate_no<span class="float-right text-dark">{{ $alternate_no }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Gender<span class="float-right text-dark">{{ $gender }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Address<span class="float-right text-dark">{{ $address }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Country<span class="float-right text-dark">{{ $country }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            City<span class="float-right text-dark">{{ $city }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            State<span class="float-right text-dark">{{ $state }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Zip Code<span class="float-right text-dark">{{ $zip_code }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Reference Name<span class="float-right text-dark">{{ $reference_name }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Reference Mobile<span class="float-right text-dark">{{ $reference_mobile }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Status<span class="float-right text-dark">{{ $status }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Created At<span class="float-right text-dark">{{ $created_at }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Created By<span class="float-right text-dark">{{ $created_by }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Last Updated<span class="float-right text-dark">{{ $updated_at }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Updated By<span class="float-right text-dark">{{ $updated_by }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            Details<span class="float-right text-dark">{!! $details !!}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+            </div>
+        </div>
+    </div>
 
     <!-- confirmation-alert components -->
     <x-confirmation-alert/>

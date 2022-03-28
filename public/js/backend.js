@@ -8,13 +8,13 @@ $(document).ready(function () {
     "progressBar": true,
     "positionClass": "toast-bottom-right"
   };
-  window.addEventListener('hide-form', function (event) {
-    $('#myForm').modal('hide');
+  window.addEventListener('hide-modal', function (event) {
+    $('#myModal').modal('hide');
     toastr.success(event.detail.message, 'Success!');
   });
 });
-window.addEventListener('show-form', function (event) {
-  $('#myForm').modal('show');
+window.addEventListener('show-modal', function (event) {
+  $('#myModal').modal('show');
 });
 window.addEventListener('alert', function (event) {
   toastr.warning(event.detail.message, 'Warning!');

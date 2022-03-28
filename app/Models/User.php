@@ -87,11 +87,21 @@ class User extends Authenticatable
 
     public function countryInfo()
     {
-        return $this->belongsTo(Country::class. 'country_id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 
     public function clientInfo()
     {
         return $this->hasOne(Client::class, 'user_id');
+    }
+
+    public function createdByInfo()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updatedByInfo()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

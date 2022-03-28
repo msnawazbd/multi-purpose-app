@@ -10,7 +10,7 @@
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('admin.clients') }}">Clients</a></li>
-                        <li class="breadcrumb-item active">Create</li>
+                        <li class="breadcrumb-item active">Edit</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <!-- /.card-header -->
-                        <form wire:submit.prevent="create" autocomplete="off">
+                        <form wire:submit.prevent="update" autocomplete="off">
                             <div class="card-body table-responsive">
                                 <div class="row">
                                     <div class="col-md-3">
@@ -239,7 +239,7 @@
                                         <div wire:ignore class="form-group">
                                             <label for="details">Details</label>
                                             <textarea id="details" data-details="@this" wire:model.defer="details"
-                                                      class="form-control @error('details') is-invalid @enderror"></textarea>
+                                                      class="form-control @error('details') is-invalid @enderror">{!! $details !!}</textarea>
                                             @error('details')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -251,7 +251,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <x-inputs.button id="create-client" class="text-white">Create Client</x-inputs.button>
+                                <x-inputs.button id="create-client" class="text-white">Update Client</x-inputs.button>
                             </div>
                         </form>
                     </div>

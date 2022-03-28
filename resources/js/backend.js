@@ -4,14 +4,14 @@ $(document).ready(function () {
         "positionClass": "toast-bottom-right",
     }
 
-    window.addEventListener('hide-form', event => {
-        $('#myForm').modal('hide');
+    window.addEventListener('hide-modal', event => {
+        $('#myModal').modal('hide');
         toastr.success(event.detail.message, 'Success!')
     })
 });
 
-window.addEventListener('show-form', event => {
-    $('#myForm').modal('show');
+window.addEventListener('show-modal', event => {
+    $('#myModal').modal('show');
 })
 
 window.addEventListener('alert', event => {

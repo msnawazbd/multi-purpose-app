@@ -20,4 +20,9 @@ class Client extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function appointmentsInfo()
+    {
+        return $this->hasMany(Appointment::class, 'client_id');
+    }
 }
