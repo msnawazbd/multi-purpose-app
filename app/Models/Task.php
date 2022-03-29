@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -53,5 +54,15 @@ class Task extends Model
     public function updatedByInfo()
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function getStartDateAttribute($value)
+    {
+        return Carbon::parse($value)->toFormattedDate();
+    }
+
+    public function getDeadlineAttribute($value)
+    {
+        return Carbon::parse($value)->toFormattedDate();
     }
 }

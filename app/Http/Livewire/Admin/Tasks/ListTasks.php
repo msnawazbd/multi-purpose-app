@@ -73,7 +73,7 @@ class ListTasks extends AdminComponent
                 $query->where('subject', 'like', '%' . $this->searchKeywords . '%')
                     ->orWhere('description', 'like', '%' . $this->searchKeywords . '%');
             })
-            ->orderBy('created_at')
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
         return view('livewire.admin.tasks.list-tasks', [
             'tasks' => $tasks

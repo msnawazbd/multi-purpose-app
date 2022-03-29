@@ -9,7 +9,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.appointments') }}">Tasks</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.tasks') }}">Tasks</a></li>
                         <li class="breadcrumb-item active">Create</li>
                     </ol>
                 </div><!-- /.col -->
@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-tools">
-                                <a href="{{ route('admin.appointments') }}" class="btn btn-primary btn-sm"><i
+                                <a href="{{ route('admin.tasks') }}" class="btn btn-primary btn-sm"><i
                                         class="fas fa-list"></i>
                                     &nbsp; Manage Task
                                 </a>
