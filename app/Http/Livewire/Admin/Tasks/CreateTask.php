@@ -38,9 +38,8 @@ class CreateTask extends Component
                 ]);
 
             $this->dispatchBrowserEvent('hide-modal', ['message' => 'Task created successfully!']);
-            return redirect()->back();
+            return redirect()->route('admin.tasks');
         } catch (\Exception $e) {
-            dd($e);
             $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
             return redirect()->back();
         }
