@@ -112,7 +112,7 @@
     </div>
     <!-- /.content -->
 
-    <!-- User Modal -->
+    <!--   Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="cu-form-label" aria-hidden="true"
          wire:ignore.self>
         <div class="modal-dialog">

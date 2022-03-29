@@ -73,7 +73,7 @@ class ListClients extends AdminComponent
             $this->created_at = $user->created_at ? $user->created_at->toFormattedDate() : 'N/A';
             $this->updated_at = $user->updated_at ? $user->updated_at->toFormattedDate() : 'N/A';
             $this->created_by = $user->createdByInfo ? $user->createdByInfo->name : 'N/A';
-            $this->updated_by = $user->createdByInfo ? $user->updatedByInfo->name : 'N/A';
+            $this->updated_by = $user->updatedByInfo ? $user->updatedByInfo->name : 'N/A';
             $this->status = $user->clientInfo->status == 1 ? 'Published' : 'Unpublished';
 
             $this->dispatchBrowserEvent('show-modal');

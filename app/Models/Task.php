@@ -44,4 +44,14 @@ class Task extends Model
     {
         return $this->belongsToMany(User::class, 'task_user', 'task_id', 'user_id');
     }
+
+    public function createdByInfo()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updatedByInfo()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }
