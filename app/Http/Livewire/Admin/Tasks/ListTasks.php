@@ -74,7 +74,7 @@ class ListTasks extends AdminComponent
                     ->orWhere('description', 'like', '%' . $this->searchKeywords . '%');
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(5);
         return view('livewire.admin.tasks.list-tasks', [
             'tasks' => $tasks
         ]);

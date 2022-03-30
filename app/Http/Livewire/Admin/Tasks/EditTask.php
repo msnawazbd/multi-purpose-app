@@ -8,15 +8,30 @@ use Livewire\Component;
 
 class EditTask extends Component
 {
-    public $state = [];
+    public $subject, $start_date, $deadline, $priority, $status, $members = [], $description;
 
-    public $task;
+    public $taskId;
 
-    public function mount(Task $task)
+    public function mount($id)
     {
-        dd($task);
-        $this->state = $task->toArray();
-        $this->task = $task;
+        $this->taskId = $id;
+
+        $task = Task::query()
+            ->with([
+                'usersInfo:id'
+            ])
+            ->where('id', $id)
+            ->first();
+
+        //dd($task);
+
+        $this->subject = $task->subject;
+        $this->start_date = $task->start_date;
+        $this->deadline = $task->deadline->toFormattedDate();
+        $this->priority = $task->priority;
+        $this->status = $task->status;
+        $this->description = $task->description;
+        $this->members = [1];
     }
 
     public function render()

@@ -13,8 +13,8 @@ class Task extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'start_date' => 'date',
-        'deadline' => 'date'
+        'start_date' => 'datetime',
+        'deadline' => 'datetime'
     ];
 
     public function getPriorityBadgeAttribute()
@@ -54,15 +54,5 @@ class Task extends Model
     public function updatedByInfo()
     {
         return $this->belongsTo(User::class, 'updated_by');
-    }
-
-    public function getStartDateAttribute($value)
-    {
-        return Carbon::parse($value)->toFormattedDate();
-    }
-
-    public function getDeadlineAttribute($value)
-    {
-        return Carbon::parse($value)->toFormattedDate();
     }
 }

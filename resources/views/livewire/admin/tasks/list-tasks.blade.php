@@ -53,8 +53,8 @@
                                     <tr>
                                         <td>{{ $tasks->firstItem() + $key }}</td>
                                         <td>{{ $task->subject }}</td>
-                                        <td>{{ $task->start_date->toFormattedDate() }}</td>
-                                        <td>{{ $task->deadline->toFormattedDate() }}</td>
+                                        <td>{{ $task->start_date }}</td>
+                                        <td>{{ $task->deadline }}</td>
                                         <td>
                                             @foreach($task->usersInfo as $index => $user)
                                                 <img src="{{ $user->avatar_url }}" class="img-circle mr-1" width="32"
@@ -85,7 +85,7 @@
                                                             class="fas fa-eye mr-2"></i> View
                                                     </button>
                                                     <a class="dropdown-item"
-                                                       href="{{ route('admin.tasks.edit', $task) }}"><i
+                                                       href="{{ route('admin.tasks.edit', $task->id) }}"><i
                                                             class="fas fa-edit mr-2"></i> Edit</a>
                                                     <div class="dropdown-divider"></div>
                                                     <button class="dropdown-item"
