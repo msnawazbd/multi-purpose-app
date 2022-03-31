@@ -28,7 +28,7 @@ class Appointment extends Model
         return $badges[$this->status];
     }
 
-    public function clientInfo()
+    public function client()
     {
         return $this->belongsTo(Client::class, 'client_id', 'id');
     }

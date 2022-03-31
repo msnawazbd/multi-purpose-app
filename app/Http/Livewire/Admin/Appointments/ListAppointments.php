@@ -121,7 +121,7 @@ class ListAppointments extends AdminComponent
     {
         return Appointment::query()
             ->with([
-                'clientInfo'
+                'client'
             ])
             ->when($this->status, function ($query, $status) {
                 return $query->where('status', $status);

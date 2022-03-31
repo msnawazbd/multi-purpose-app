@@ -16,12 +16,12 @@ class Client extends Model
         return $this->first_name . ' ' . $this->last_name;
     }
 
-    public function userInfo()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function appointmentsInfo()
+    public function appointments()
     {
         return $this->hasMany(Appointment::class, 'client_id');
     }

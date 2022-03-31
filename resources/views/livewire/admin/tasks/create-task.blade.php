@@ -61,7 +61,7 @@
                                                             class="fas fa-calendar"></i></span>
                                                 </div>
                                                 <x-datepicker wire:model.defer="state.start_date" id="start_date"
-                                                              :error="'start_date'"/>
+                                                              :error="'start_date'" :placeholder="''"/>
                                                 @error('start_date')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -81,7 +81,7 @@
                                                             class="fas fa-calendar"></i></span>
                                                 </div>
                                                 <x-datepicker wire:model.defer="state.deadline" id="deadline"
-                                                              :error="'deadline'"/>
+                                                              :error="'deadline'" :placeholder="''"/>
                                                 @error('deadline')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -179,6 +179,7 @@
 </div>
 
 @push('styles')
+    <!-- Bootstrap DateTime Picker -->
     <link rel="stylesheet" type="text/css"
           href="{{ asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <style>
@@ -190,14 +191,22 @@
 
 @push('js')
     <script type="text/javascript" src="https://unpkg.com/moment"></script>
+    <!-- Bootstrap DateTime Picker -->
     <script type="text/javascript" src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-
+    <!-- For Ckeditor  -->
     <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor.create(document.querySelector('#description'));
         $('form').submit(function() {
             @this.set('state.members', $('#members').val());
             @this.set('state.description', $('#description').val());
+        })
+    </script>
+    <script>
+        window.addEventListener('task-success', event => {
+            toastr.success(event.detail.message, 'Success!')
+            $("#members").empty();
+            $("#description").val("");
         })
     </script>
 @endpush

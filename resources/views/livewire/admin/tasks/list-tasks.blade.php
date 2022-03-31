@@ -35,76 +35,121 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive">
-                            <table class="table table-hover text-nowrap">
-                                <thead>
-                                <tr>
-                                    <th>SN</th>
-                                    <th>Task Name</th>
-                                    <th>Start Date</th>
-                                    <th>Deadline</th>
-                                    <th>Members</th>
-                                    <th>Status</th>
-                                    <th>Priority</th>
-                                    <th class="text-right">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody wire:loading.class="text-muted">
-                                @forelse($tasks as $key => $task)
-                                    <tr>
-                                        <td>{{ $tasks->firstItem() + $key }}</td>
-                                        <td>{{ $task->subject }}</td>
-                                        <td>{{ $task->start_date }}</td>
-                                        <td>{{ $task->deadline }}</td>
-                                        <td>
-                                            @foreach($task->usersInfo as $index => $user)
-                                                <img src="{{ $user->avatar_url }}" class="img-circle mr-1" width="32"
-                                                     alt="{{ $user->name }}" title="{{ $user->name }}">
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-{{ $task->status_badge }}">
-                                                {{ $task->status }}
-                                            </span>
-                                        </td>
-                                        <td>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form>
+                                        <div class="form-row align-items-center mb-3">
+                                            <div class="col-auto">
+                                                <label for="priority">Priority</label>
+                                                <select class="form-control"wire:model="searchPriority" id="priority">
+                                                    <option value="" selected>Select one</option>
+                                                    <option value="LOW">LOW</option>
+                                                    <option value="MEDIUM">MEDIUM</option>
+                                                    <option value="HIGH">HIGH</option>
+                                                    <option value="URGENT">URGENT</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="status">Status</label>
+                                                <select class="form-control"wire:model="searchStatus" id="status">
+                                                    <option value="" selected>Select one</option>
+                                                    <option value="NOT STARTED">NOT STARTED</option>
+                                                    <option value="IN PROGRESS">IN PROGRESS</option>
+                                                    <option value="COMPLETED">COMPLETED</option>
+                                                    <option value="DEFERRED">DEFERRED</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="status">Start Date</label>
+                                                <x-datepicker wire:model="searchStartDate" id="start_date"
+                                                               :error="'start_date'" :placeholder="'Select Date'"/>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="deadline">Deadline</label>
+                                                <x-datepicker wire:model="searchDeadline" id="deadline"
+                                                               :error="'deadline'" :placeholder="'Select Date'"/>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="submit-search">&nbsp;</label>
+                                                <button type="button" wire:click="resetFilter" class="form-control btn btn-primary" id="submit-search"><i
+                                                        class="fa fa-sync mr-1"></i> Reset Filter</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-12">
+                                    <table class="table table-hover text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>SN</th>
+                                            <th>Task Name</th>
+                                            <th>Start Date</th>
+                                            <th>Deadline</th>
+                                            <th>Members</th>
+                                            <th>Priority</th>
+                                            <th>Status</th>
+                                            <th class="text-right">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody wire:loading.class="text-muted">
+                                        @forelse($tasks as $key => $task)
+                                            <tr>
+                                                <td>{{ $tasks->firstItem() + $key }}</td>
+                                                <td>{{ $task->subject }}</td>
+                                                <td>{{ $task->start_date }}</td>
+                                                <td>{{ $task->deadline }}</td>
+                                                <td>
+                                                    @foreach($task->users as $index => $user)
+                                                        <img src="{{ $user->avatar_url }}" class="img-circle mr-1" width="32"
+                                                             alt="{{ $user->name }}" title="{{ $user->name }}">
+                                                    @endforeach
+                                                </td>
+                                                <td>
                                             <span class="badge badge-{{ $task->priority_badge }}">
                                                 {{ $task->priority }}
                                             </span>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default btn-sm">Options</button>
-                                                <button type="button"
-                                                        class="btn btn-default btn-sm dropdown-toggle dropdown-icon"
-                                                        data-toggle="dropdown" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <div class="dropdown-menu" role="menu" style="">
-                                                    <button class="dropdown-item"
-                                                            wire:click.prevent="show({{ $task->id }})"><i
-                                                            class="fas fa-eye mr-2"></i> View
-                                                    </button>
-                                                    <a class="dropdown-item"
-                                                       href="{{ route('admin.tasks.edit', $task) }}"><i
-                                                            class="fas fa-edit mr-2"></i> Edit</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <button class="dropdown-item"
-                                                            wire:click.prevent="destroy({{ $task->id }})"><i
-                                                            class="fas fa-trash mr-2"></i> Delete
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center">
-                                            No result found !
-                                        </td>
-                                    </tr>
-                                @endforelse
-                                </tbody>
-                            </table>
+                                                </td>
+                                                <td>
+                                            <span class="badge badge-{{ $task->status_badge }}">
+                                                {{ $task->status }}
+                                            </span>
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default btn-sm">Options</button>
+                                                        <button type="button"
+                                                                class="btn btn-default btn-sm dropdown-toggle dropdown-icon"
+                                                                data-toggle="dropdown" aria-expanded="false">
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <div class="dropdown-menu" role="menu" style="">
+                                                            <button class="dropdown-item"
+                                                                    wire:click.prevent="show({{ $task->id }})"><i
+                                                                    class="fas fa-eye mr-2"></i> View
+                                                            </button>
+                                                            <a class="dropdown-item"
+                                                               href="{{ route('admin.tasks.edit', $task) }}"><i
+                                                                    class="fas fa-edit mr-2"></i> Edit</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <button class="dropdown-item"
+                                                                    wire:click.prevent="destroy({{ $task->id }})"><i
+                                                                    class="fas fa-trash mr-2"></i> Delete
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="8" class="text-center">
+                                                    No result found !
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer d-flex justify-content-end">
@@ -206,4 +251,19 @@
             width: 150px
         }
     </style>
+
+    <!-- Bootstrap DateTime Picker -->
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 150px;
+        }
+    </style>
+@endpush
+
+@push('js')
+    <script type="text/javascript" src="https://unpkg.com/moment"></script>
+    <!-- Bootstrap DateTime Picker -->
+    <script type="text/javascript" src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 @endpush

@@ -47,10 +47,10 @@ class ListClients extends AdminComponent
         try {
             $user = User::query()
                 ->with([
-                    'clientInfo',
-                    'countryInfo:id,name',
-                    'createdByInfo:id,name',
-                    'updatedByInfo:id,name'
+                    'client',
+                    'country:id,name',
+                    'createdBy:id,name',
+                    'updatedBy:id,name'
                 ])
                 ->where('id', $id)
                 ->where('role', 'client')
@@ -62,19 +62,19 @@ class ListClients extends AdminComponent
             $this->alternate_no = $user->alternate_no;
             $this->gender = ucfirst($user->gender);
             $this->address = $user->address;
-            $this->country = $user->countryInfo->name;
+            $this->country = $user->country->name;
             $this->city = $user->city;
             $this->state = $user->state;
             $this->zip_code = $user->zip_code;
             $this->avatar_url = $user->avatar_url;
-            $this->reference_name = $user->clientInfo->reference_name;
-            $this->reference_mobile = $user->clientInfo->reference_mobile;
-            $this->details = $user->clientInfo->details;
+            $this->reference_name = $user->client->reference_name;
+            $this->reference_mobile = $user->client->reference_mobile;
+            $this->details = $user->client->details;
             $this->created_at = $user->created_at ? $user->created_at->toFormattedDate() : 'N/A';
             $this->updated_at = $user->updated_at ? $user->updated_at->toFormattedDate() : 'N/A';
-            $this->created_by = $user->createdByInfo ? $user->createdByInfo->name : 'N/A';
-            $this->updated_by = $user->updatedByInfo ? $user->updatedByInfo->name : 'N/A';
-            $this->status = $user->clientInfo->status == 1 ? 'Published' : 'Unpublished';
+            $this->created_by = $user->createdBy ? $user->createdBy->name : 'N/A';
+            $this->updated_by = $user->updatedBy ? $user->updatedBy->name : 'N/A';
+            $this->status = $user->client->status == 1 ? 'Published' : 'Unpublished';
 
             $this->dispatchBrowserEvent('show-modal');
         } catch (\Exception $e) {
@@ -104,7 +104,7 @@ class ListClients extends AdminComponent
     {
         $users = User::query()
             ->with([
-                'clientInfo'
+                'client'
             ])
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->searchKeywords . '%')

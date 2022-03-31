@@ -17,18 +17,18 @@ class EditTask extends Component
         $this->task = $task;
         $this->state = Task::query()
             ->with([
-                'usersInfo'
+                'users'
             ])
             ->where('id', $task->id)
             ->first()
             ->toArray();
 
-        $this->state['members'] = collect($this->state['users_info'])->pluck('id');
+        $this->state['members'] = collect($this->state['users'])->pluck('id');
     }
 
     public function update()
     {
-        $validateData = Validator::make($this->state, [
+        Validator::make($this->state, [
             'subject' => 'required|string|min:3|max:255',
             'start_date' => 'required|date',
             'deadline' => 'required|date',
@@ -37,8 +37,6 @@ class EditTask extends Component
             'members' => 'required',
             'description' => 'nullable|string'
         ])->validate();
-
-        $validateData['updated_by'] = auth()->user()->id;
 
         try {
             $this->task->update([
@@ -50,6 +48,12 @@ class EditTask extends Component
                 'description' => $this->state['description'],
                 'updated_by' => auth()->user()->id
             ]);
+
+            if (!empty($this->state['members'])) {
+                $this->task->users()->sync($this->state['members']);
+            } else {
+                $this->task->users()->sync(array());
+            }
             $this->dispatchBrowserEvent('success', ['message' => 'Task updated successfully.']);
             return redirect()->back();
         } catch (\Exception $e) {

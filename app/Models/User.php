@@ -85,27 +85,27 @@ class User extends Authenticatable
         return true;
     }
 
-    public function countryInfo()
+    public function country()
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
 
-    public function clientInfo()
+    public function client()
     {
         return $this->hasOne(Client::class, 'user_id');
     }
 
-    public function createdByInfo()
+    public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedByInfo()
+    public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function tasksInfo()
+    public function tasks()
     {
         return $this->belongsToMany(User::class, 'task_user',  'user_id', 'task_id');
     }

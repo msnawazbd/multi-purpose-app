@@ -11,7 +11,7 @@ class Country extends Model
 
     protected $guarded = [];
 
-    public function ClientsInfo()
+    public function clients()
     {
         return $this->hasMany(Client::class, 'client_id');
     }

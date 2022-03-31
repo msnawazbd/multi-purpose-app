@@ -41,17 +41,17 @@ class Task extends Model
         return $badges[$this->status];
     }
 
-    public function usersInfo()
+    public function users()
     {
         return $this->belongsToMany(User::class, 'task_user', 'task_id', 'user_id');
     }
 
-    public function createdByInfo()
+    public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedByInfo()
+    public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
     }

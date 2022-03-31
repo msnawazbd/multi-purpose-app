@@ -13,7 +13,7 @@ class CreateTask extends Component
 
     public function create()
     {
-        $validateData = Validator::make($this->state, [
+        Validator::make($this->state, [
             'subject' => 'required|string|min:3|max:255',
             'start_date' => 'required|date',
             'deadline' => 'required|date',
@@ -23,10 +23,8 @@ class CreateTask extends Component
             'description' => 'nullable|string'
         ])->validate();
 
-        $validateData['created_by'] = auth()->user()->id;
-
         try {
-            Task::query()
+            $task = Task::query()
                 ->create([
                     'subject' => $this->state['subject'],
                     'start_date' => $this->state['start_date'],
@@ -37,7 +35,11 @@ class CreateTask extends Component
                     'created_by' => auth()->user()->id
                 ]);
 
-            $this->dispatchBrowserEvent('hide-modal', ['message' => 'Task created successfully!']);
+            if (!empty($this->state['members'])) {
+                $task->users()->attach($this->state['members']);
+            }
+
+            $this->dispatchBrowserEvent('task-success', ['message' => 'Task created successfully!']);
             return redirect()->route('admin.tasks');
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
@@ -48,7 +50,7 @@ class CreateTask extends Component
     public function render()
     {
         $users = User::query()
-            ->whereIn('role', ['admin'])
+            //->whereIn('role', ['admin'])
             ->orderBy('name')
             ->get(['id', 'name', 'mobile']);
         return view('livewire.admin.tasks.create-task', [

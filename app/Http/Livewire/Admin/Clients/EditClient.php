@@ -19,7 +19,7 @@ class EditClient extends Component
         try {
             $user = User::query()
                 ->with([
-                    'clientInfo'
+                    'client'
                 ])
                 ->where('id', $id)
                 ->where('role', 'client')
@@ -27,8 +27,8 @@ class EditClient extends Component
 
             $this->user = $user;
 
-            $this->first_name = $user->clientInfo->first_name;
-            $this->last_name = $user->clientInfo->last_name;
+            $this->first_name = $user->client->first_name;
+            $this->last_name = $user->client->last_name;
             $this->email = $user->email;
             $this->mobile = $user->mobile;
             $this->alternate_no = $user->alternate_no;
@@ -38,10 +38,10 @@ class EditClient extends Component
             $this->city = $user->city;
             $this->state = $user->state;
             $this->zip_code = $user->zip_code;
-            $this->reference_name = $user->clientInfo->reference_name;
-            $this->reference_mobile = $user->clientInfo->reference_mobile;
-            $this->details = $user->clientInfo->details;
-            $this->status = $user->clientInfo->status;
+            $this->reference_name = $user->client->reference_name;
+            $this->reference_mobile = $user->client->reference_mobile;
+            $this->details = $user->client->details;
+            $this->status = $user->client->status;
         } catch (\Exception $e) {
             return redirect()->route('admin.clients');
         }
@@ -84,7 +84,7 @@ class EditClient extends Component
                 'updated_by' => auth()->user()->id,
             ]);
 
-            $this->user->clientInfo->update([
+            $this->user->client->update([
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'reference_name' => $this->reference_name,
