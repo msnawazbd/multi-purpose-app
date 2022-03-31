@@ -55,4 +55,15 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function getStartDateAttribute($value)
+    {
+        return Carbon::parse($value)->toFormattedDate();
+    }
+
+    public function getDeadlineAttribute($value)
+    {
+        return Carbon::parse($value)->toFormattedDate();
+    }
+
 }

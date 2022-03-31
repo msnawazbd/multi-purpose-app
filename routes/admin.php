@@ -25,7 +25,7 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::get('users', ListUsers::class)->name('users');
 Route::get('tasks', ListTasks::class)->name('tasks');
 Route::get('tasks/create', CreateTask::class)->name('tasks.create');
-Route::get('tasks/{id}/edit', EditTask::class)->name('tasks.edit');
+Route::get('tasks/{task}/edit', EditTask::class)->name('tasks.edit');
 Route::get('clients', ListClients::class)->name('clients');
 Route::get('clients/create', CreateClient::class)->name('clients.create');
 Route::get('clients/{id}/edit', EditClient::class)->name('clients.edit');

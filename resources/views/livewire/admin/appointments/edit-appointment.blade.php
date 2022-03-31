@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="appointmentTime">Appointment Time</label>
+                                            <label for="appointment_time">Appointment Time</label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-clock"></i></span>
@@ -102,7 +102,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="appointmentDate">Appointment Date</label>
+                                            <label for="appointment_date">Appointment Date</label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i

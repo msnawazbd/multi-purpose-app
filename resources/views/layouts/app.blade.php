@@ -49,6 +49,8 @@
 <!-- Individual Page Script -->
 @stack('js')
 
+@stack('before-livewire-scripts')
+
 <!-- Livewire Script -->
 @livewireScripts
 

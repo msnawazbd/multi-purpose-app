@@ -35,16 +35,6 @@ class EditAppointment extends Component
             ->validate();
 
         try {
-            Appointment::query()->create([
-                'client_id' => $this->state['client_id'],
-                'date' => $this->state['date'],
-                'time' => $this->state['time'],
-                'note' => $this->state['note'],
-                'status' => $this->state['status'],
-                'members' => $this->state['members'],
-                'color' => $this->state['color'],
-            ]);
-
             $this->appointment->update($this->state);
             $this->dispatchBrowserEvent('success', ['message' => 'Appointment updated successfully.']);
             return redirect()->route('admin.appointments');

@@ -85,7 +85,7 @@
                                                             class="fas fa-eye mr-2"></i> View
                                                     </button>
                                                     <a class="dropdown-item"
-                                                       href="{{ route('admin.tasks.edit', $task->id) }}"><i
+                                                       href="{{ route('admin.tasks.edit', $task) }}"><i
                                                             class="fas fa-edit mr-2"></i> Edit</a>
                                                     <div class="dropdown-divider"></div>
                                                     <button class="dropdown-item"

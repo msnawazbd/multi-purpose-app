@@ -34,14 +34,14 @@
                             </div>
                         </div>
                         <!-- /.card-header -->
-                        <form wire:submit.prevent="create" autocomplete="off">
+                        <form wire:submit.prevent="update" autocomplete="off">
                             <div class="card-body table-responsive">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="subject">Subject <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" wire:model.defer="subject"
+                                            <input type="text" wire:model.defer="state.subject"
                                                    class="form-control @error('subject') is-invalid @enderror"
                                                    id="subject">
                                             @error('subject')
@@ -51,18 +51,18 @@
                                             @enderror
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="deadlineDate">Appointment Date</label>
+                                            <label for="appointmentDate">Start Date<span
+                                                    class="text-danger">*</span></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i
                                                             class="fas fa-calendar"></i></span>
                                                 </div>
-                                                <x-datepicker wire:model.defer="deadline" id="deadline_date"
-                                                              :error="'deadline'"/>
-                                                @error('deadline')
+                                                <x-datepicker wire:model.defer="state.start_date" id="start_date"
+                                                              :error="'start_date'"/>
+                                                @error('start_date')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -73,9 +73,28 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
+                                            <label for="appointmentDate">Deadline<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="fas fa-calendar"></i></span>
+                                                </div>
+                                                <x-datepicker wire:model.defer="state.deadline" id="deadline"
+                                                              :error="'deadline'"/>
+                                                @error('deadline')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
                                             <label for="priority">Priority<span
                                                     class="text-danger">*</span></label>
-                                            <select id="priority" wire:model.defer="priority"
+                                            <select id="priority" wire:model.defer="state.priority"
                                                     class="form-control @error('priority') is-invalid @enderror">
                                                 <option value="" selected>Select one</option>
                                                 <option value="LOW">LOW</option>
@@ -94,7 +113,7 @@
                                         <div class="form-group">
                                             <label for="status">Status<span
                                                     class="text-danger">*</span></label>
-                                            <select id="status" wire:model.defer="status"
+                                            <select id="status" wire:model.defer="state.status"
                                                     class="form-control @error('status') is-invalid @enderror">
                                                 <option value="" selected>Select one</option>
                                                 <option value="NOT STARTED">NOT STARTED</option>
@@ -115,7 +134,7 @@
                                                     class="text-danger">*</span></label>
                                             <div
                                                 class="@error('members') is-invalid border border-danger rounded custom-error @enderror">
-                                                <x-inputs.select2 wire:model="members" id="members"
+                                                <x-inputs.select2 wire:model="state.members" id="members"
                                                                   placeholder="Select Members">
                                                     @foreach($users as $key => $user)
                                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -132,8 +151,8 @@
                                     <div class="col-md-12">
                                         <div wire:ignore class="form-group">
                                             <label for="description">Description</label>
-                                            <textarea id="description" data-description="@this" wire:model.defer="description"
-                                                      class="form-control @error('description') is-invalid @enderror">{!! $description !!}</textarea>
+                                            <textarea id="description" data-description="@this" wire:model.defer="state.description"
+                                                      class="form-control @error('description') is-invalid @enderror">{!! $state['description'] !!}</textarea>
                                             @error('description')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -145,7 +164,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <x-inputs.button id="create-appointment" class="text-white">Create task
+                                <x-inputs.button id="create-appointment" class="text-white">Save Change
                                 </x-inputs.button>
                             </div>
                         </form>
@@ -172,19 +191,13 @@
 @push('js')
     <script type="text/javascript" src="https://unpkg.com/moment"></script>
     <script type="text/javascript" src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-    <!-- bootstrap color picker -->
-    <script src="{{ asset('backend/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-    <script>
-        $('#colorPicker').colorpicker().on('change', function(event) {
-            $('#colorPicker .fa-square').css('color', event.color.toString());
-        });
-    </script>
+
     <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
     <script>
-        ClassicEditor.create(document.querySelector('#note'));
+        ClassicEditor.create(document.querySelector('#description'));
         $('form').submit(function() {
-            @this.set('members', $('#members').val());
-            @this.set('description', $('#description').val());
+            @this.set('state.members', $('#members').val());
+            @this.set('state.description', $('#description').val());
         })
     </script>
 @endpush
