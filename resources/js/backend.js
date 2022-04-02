@@ -10,6 +10,10 @@ $(document).ready(function () {
     })
 });
 
+window.addEventListener('show-view-modal', event => {
+    $('#viewModal').modal('show');
+})
+
 window.addEventListener('show-modal', event => {
     $('#myModal').modal('show');
 })

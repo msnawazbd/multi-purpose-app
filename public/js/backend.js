@@ -13,6 +13,9 @@ $(document).ready(function () {
     toastr.success(event.detail.message, 'Success!');
   });
 });
+window.addEventListener('show-view-modal', function (event) {
+  $('#viewModal').modal('show');
+});
 window.addEventListener('show-modal', function (event) {
   $('#myModal').modal('show');
 });

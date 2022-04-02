@@ -79,20 +79,35 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.settings') }}" class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>
-                            Settings
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ route('admin.profile') }}" class="nav-link {{ request()->is('admin/profile') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
                             Profile
                         </p>
                     </a>
+                </li>
+                <li class="nav-item {{ request()->is('admin/settings', 'admin/settings/*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('admin/settings', 'admin/settings/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>
+                            Settings
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.settings.taxes') }}" class="nav-link {{ request()->is('admin/settings/taxes', 'admin/settings/taxes') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tax</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.settings.generals') }}" class="nav-link {{ request()->is('admin/settings/generals', 'admin/settings/generals') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>General Setting</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST">

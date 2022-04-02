@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             AppointmentTableSeeder::class,
             TaskTableSeeder::class,
             TaskUserTableSeeder::class,
+            TaxTableSeeder::class,
         ]);
     }
 }

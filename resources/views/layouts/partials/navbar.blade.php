@@ -143,7 +143,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ route('admin.profile') }}" x-ref="profileLink">Profile</a>
                 <a class="dropdown-item" href="{{ route('admin.profile') }}" x-ref="changePasswordLink">Change Password</a>
-                <a class="dropdown-item" href="{{ route('admin.settings') }}">Settings</a>
+                <a class="dropdown-item" href="{{ route('admin.settings.generals') }}">Settings</a>
                 <div class="dropdown-divider"></div>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
