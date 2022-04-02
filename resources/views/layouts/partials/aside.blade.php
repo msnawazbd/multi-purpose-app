@@ -109,6 +109,29 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item {{ request()->is('admin/income', 'admin/income/*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('admin/income', 'admin/income/*') ? 'active' : '' }}">
+                        <i class="nav-icon 	fas fa-dollar-sign"></i>
+                        <p>
+                            Income
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.income.services') }}" class="nav-link {{ request()->is('admin/income/services', 'admin/income/services') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Services</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.income.invoices') }}" class="nav-link {{ request()->is('admin/income/invoices', 'admin/income/invoices') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Invoices</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf

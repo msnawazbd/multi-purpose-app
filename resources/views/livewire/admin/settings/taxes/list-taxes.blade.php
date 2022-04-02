@@ -97,7 +97,7 @@
                                                         {{ $tax->status == 1 ? 'Unpublished' : 'Published' }}
                                                     </button>
                                                     <div class="dropdown-divider"></div>
-                                                    <button class="dropdown-item" wire:click.prevent="show({{ $tax }})">
+                                                    <button class="dropdown-item" wire:click.prevent="show({{ $tax->id }})">
                                                         <i class="fas fa-eye mr-2"></i> View
                                                     </button>
                                                     <button class="dropdown-item" wire:click.prevent="edit({{ $tax }})">
@@ -193,9 +193,9 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <input type="text" wire:model.defer="state.description"
+                            <textarea wire:model.defer="state.description"
                                    class="form-control @error('description') is-invalid @enderror" id="description"
-                                   placeholder="Enter description">
+                                      placeholder="Enter description"></textarea>
                             @error('nodescriptionte')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -221,7 +221,7 @@
         </div>
     </div>
 
-    <!-- My Modal -->
+    <!-- View Modal -->
     <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="cu-form-label" aria-hidden="true"
          wire:ignore.self>
         <div class="modal-dialog modal-lg">

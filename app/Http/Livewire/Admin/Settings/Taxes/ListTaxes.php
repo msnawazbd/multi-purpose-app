@@ -93,7 +93,7 @@ class ListTaxes extends AdminComponent
         }
     }
 
-    public function show(Tax $tax)
+    public function show($taxId)
     {
         try {
             $tax = Tax::query()
@@ -101,7 +101,7 @@ class ListTaxes extends AdminComponent
                     'createdBy:id,name',
                     'updatedBy:id,name',
                 ])
-                ->where('id', $tax->id)
+                ->where('id', $taxId)
                 ->first();
 
             $this->name = $tax->name;
@@ -179,6 +179,7 @@ class ListTaxes extends AdminComponent
                     ->orWhere('description', 'like', '%' . $this->searchKeywords . '%');
             })
             ->orderBy($this->sortColumnName, $this->sortDirection)
+            ->select(['id', 'name', 'rate', 'status', 'created_at'])
             ->paginate(5);
 
         return view('livewire.admin.settings.taxes.list-taxes', [
