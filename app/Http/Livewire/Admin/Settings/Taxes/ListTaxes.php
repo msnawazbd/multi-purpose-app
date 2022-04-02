@@ -115,7 +115,6 @@ class ListTaxes extends AdminComponent
 
             $this->dispatchBrowserEvent('show-view-modal');
         } catch (\Exception $e) {
-            dd($e);
             $this->dispatchBrowserEvent('error', ['message' => 'Operation failed!']);
             return redirect()->route('admin.tasks');
         }

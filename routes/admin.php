@@ -7,7 +7,9 @@ use App\Http\Livewire\Admin\Appointments\ListAppointments;
 use App\Http\Livewire\Admin\Clients\CreateClient;
 use App\Http\Livewire\Admin\Clients\EditClient;
 use App\Http\Livewire\Admin\Clients\ListClients;
+use App\Http\Livewire\Admin\Invoices\ListInvoices;
 use App\Http\Livewire\Admin\Profile\UpdateProfile;
+use App\Http\Livewire\Admin\Services\ListServices;
 use App\Http\Livewire\Admin\Settings\Taxes\ListTaxes;
 use App\Http\Livewire\Admin\Settings\UpdateSetting;
 use App\Http\Livewire\Admin\Tasks\CreateTask;
@@ -24,15 +26,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::get('users', ListUsers::class)->name('users');
+
 Route::get('tasks', ListTasks::class)->name('tasks');
 Route::get('tasks/create', CreateTask::class)->name('tasks.create');
 Route::get('tasks/{task}/edit', EditTask::class)->name('tasks.edit');
+
 Route::get('clients', ListClients::class)->name('clients');
 Route::get('clients/create', CreateClient::class)->name('clients.create');
 Route::get('clients/{id}/edit', EditClient::class)->name('clients.edit');
+
 Route::get('appointments', ListAppointments::class)->name('appointments');
 Route::get('appointments/create', CreateAppointment::class)->name('appointments.create');
 Route::get('appointments/{appointment}/edit', EditAppointment::class)->name('appointments.edit');
+
 Route::get('profile', UpdateProfile::class)->name('profile');
+
 Route::get('settings/generals', UpdateSetting::class)->name('settings.generals');
 Route::get('settings/taxes', ListTaxes::class)->name('settings.taxes');
+
+Route::get('income/services', ListServices::class)->name('income.services');
+Route::get('income/invoices', ListInvoices::class)->name('income.invoices');
