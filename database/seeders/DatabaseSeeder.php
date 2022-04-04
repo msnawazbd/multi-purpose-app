@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             TaskUserTableSeeder::class,
             TaxTableSeeder::class,
             ServiceTableSeeder::class,
+            InvoiceTableSeeder::class,
+            InvoiceDetailTableSeeder::class,
         ]);
     }
 }

@@ -73,7 +73,7 @@
                                     <tr>
                                         <td>{{ $services->firstItem() + $key }}</td>
                                         <td>{{ $service->name }}</td>
-                                        <td>{{ $service->amount }}%</td>
+                                        <td>{{ $service->amount }}</td>
                                         <td>
                                             {{ $service->created_at ? $service->created_at->toFormattedDate() : 'N/A' }}
                                         </td>

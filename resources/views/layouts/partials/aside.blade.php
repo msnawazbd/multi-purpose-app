@@ -125,7 +125,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.income.invoices') }}" class="nav-link {{ request()->is('admin/income/invoices', 'admin/income/invoices') ? 'active' : '' }}">
+                            <a href="{{ route('admin.income.invoices') }}" class="nav-link {{ request()->is('admin/income/invoices', 'admin/income/invoices/*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Invoices</p>
                             </a>

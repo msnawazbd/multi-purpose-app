@@ -8,6 +8,7 @@ use App\Http\Livewire\Admin\Clients\CreateClient;
 use App\Http\Livewire\Admin\Clients\EditClient;
 use App\Http\Livewire\Admin\Clients\ListClients;
 use App\Http\Livewire\Admin\Invoices\ListInvoices;
+use App\Http\Livewire\Admin\Invoices\ViewInvoice;
 use App\Http\Livewire\Admin\Profile\UpdateProfile;
 use App\Http\Livewire\Admin\Services\ListServices;
 use App\Http\Livewire\Admin\Settings\Taxes\ListTaxes;
@@ -46,3 +47,4 @@ Route::get('settings/taxes', ListTaxes::class)->name('settings.taxes');
 
 Route::get('income/services', ListServices::class)->name('income.services');
 Route::get('income/invoices', ListInvoices::class)->name('income.invoices');
+Route::get('income/invoices/{id}/view', ViewInvoice::class)->name('income.invoices.view');
