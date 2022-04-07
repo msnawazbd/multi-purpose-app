@@ -30,6 +30,33 @@
                                         class="fas fa-plus"></i>
                                     &nbsp; Add New Invoice
                                 </a>
+
+                                <div class="btn-group">
+                                    <button wire:click="filterByStatus" type="button"
+                                            class="btn {{ is_null($status) ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                        <span class="mr-1">All</span>
+                                        <span class="badge badge-pill badge-info">{{ $invoicesCount }}</span>
+                                    </button>
+
+                                    <button wire:click="filterByStatus('scheduled')" type="button"
+                                            class="btn {{ ($status === 'scheduled') ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                        <span class="mr-1">Paid</span>
+                                        <span class="badge badge-pill badge-success">{{ $paidInvoicesCount }}</span>
+                                    </button>
+
+                                    <button wire:click="filterByStatus('closed')" type="button"
+                                            class="btn {{ ($status === 'closed') ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                        <span class="mr-1">Partial Paid</span>
+                                        <span class="badge badge-pill badge-primary">{{ $partialPaidInvoicesCount }}</span>
+                                    </button>
+
+                                    <button wire:click="filterByStatus('closed')" type="button"
+                                            class="btn {{ ($status === 'closed') ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                        <span class="mr-1">Due</span>
+                                        <span class="badge badge-pill badge-warning">{{ $dueInvoicesCount }}</span>
+                                    </button>
+                                </div>
+
                                 <x-search-input wire:model="searchKeywords"/>
                             </div>
                         </div>
