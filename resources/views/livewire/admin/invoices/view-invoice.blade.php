@@ -4,12 +4,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Appointments</h1>
+                    <h1 class="m-0">Invoices</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Appointments</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.income.invoices') }}">Invoices</a></li>
+                        <li class="breadcrumb-item active">View</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -72,42 +73,23 @@
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
+                                        <th>#</th>
+                                        <th>Service</th>
                                         <th>Qty</th>
-                                        <th>Product</th>
-                                        <th>Serial #</th>
-                                        <th>Description</th>
-                                        <th>Subtotal</th>
+                                        <th>Rate</th>
+                                        <th>Amount</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($invoice->invoiceDetails as $key => $details)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Call of Duty</td>
-                                        <td>455-981-221</td>
-                                        <td>El snort testosterone trophy driving gloves handsome</td>
-                                        <td>$64.50</td>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $details->service->name }}</td>
+                                        <td>{{ $details->quantity }}</td>
+                                        <td>{{ $details->amount }}</td>
+                                        <td>{{ $details->amount * $details->quantity }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Need for Speed IV</td>
-                                        <td>247-925-726</td>
-                                        <td>Wes Anderson umami biodiesel</td>
-                                        <td>$50.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Monsters DVD</td>
-                                        <td>735-845-642</td>
-                                        <td>Terry Richardson helvetica tousled street art master</td>
-                                        <td>$10.70</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Grown Ups Blue Ray</td>
-                                        <td>422-568-642</td>
-                                        <td>Tousled lomo letterpress</td>
-                                        <td>$25.99</td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -117,16 +99,8 @@
                         <div class="row">
 
                             <div class="col-6">
-                                <p class="lead">Payment Methods:</p>
-                                <img src="../../dist/img/credit/visa.png" alt="Visa">
-                                <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                                <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                                <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-                                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                                    plugg
-                                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                                </p>
+                                <p class="lead">Note:</p>
+                                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">{{ $invoice->description }}</p>
                             </div>
 
                             <div class="col-6">
