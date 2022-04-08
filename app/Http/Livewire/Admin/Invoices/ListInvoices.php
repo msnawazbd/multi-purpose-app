@@ -7,6 +7,7 @@ use App\Models\Invoice;
 
 class ListInvoices extends AdminComponent
 {
+    public $invoiceId;
     public $status = null;
     public $searchKeywords = null;
 
@@ -15,10 +16,32 @@ class ListInvoices extends AdminComponent
         'searchKeywords' => ['except' => '']
     ];
 
+    protected $listeners = [
+        'confirmDestroy' => 'confirmDestroy'
+    ];
+
     public function filterByStatus($status = null)
     {
         $this->resetPage();
         $this->status = $status;
+    }
+
+    public function destroy($invoiceId)
+    {
+        $this->invoiceId = $invoiceId;
+        $this->dispatchBrowserEvent('show-delete-confirmation');
+    }
+
+    public function confirmDestroy()
+    {
+        try {
+            $data = Invoice::query()->findOrFail($this->invoiceId);
+            $data->delete();
+            $this->dispatchBrowserEvent('deleted', ['message' => 'Invoice deleted successfully.']);
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
     }
 
     public function getInvoicesProperty()

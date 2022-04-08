@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('alternate_no', 20)->nullable()->default(null);
             $table->string('address');
             $table->string('gender', 6);
-            $table->foreignId('country_id')->constrained('countries');
+            $table->foreignId('country_id')->constrained('countries')->onUpdate('cascade')->onDelete('cascade');
             $table->string('state', 50)->nullable()->default(null);
             $table->string('city', 50);
             $table->string('zip_code', 10)->nullable()->default(null);

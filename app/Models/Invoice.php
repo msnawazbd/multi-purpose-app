@@ -9,6 +9,11 @@ class Invoice extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'invoice_date' => 'date',
+        'invoice_due_date' => 'date'
+    ];
+
     protected $guarded = [];
 
     public function client()

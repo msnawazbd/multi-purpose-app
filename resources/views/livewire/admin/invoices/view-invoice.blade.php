@@ -27,8 +27,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <h4>
-                                    <i class="fas fa-globe"></i> AdminLTE, Inc.
-                                    <small class="float-right">Date: 2/10/2014</small>
+                                    <i class="fas fa-globe"></i> {{ setting('site_name') }}
+                                    <small class="float-right">Date: {{ now()->toFormattedDate() }}</small>
                                 </h4>
                             </div>
 
@@ -38,31 +38,31 @@
                             <div class="col-sm-4 invoice-col">
                                 From
                                 <address>
-                                    <strong>Admin, Inc.</strong><br>
-                                    795 Folsom Ave, Suite 600<br>
-                                    San Francisco, CA 94107<br>
-                                    Phone: (804) 123-5432<br>
-                                    Email: info@almasaeedstudio.com
+                                    <strong>{{ setting('site_name') }}</strong><br>
+                                    {{ setting('address') }}, {{ setting('state') }}<br>
+                                    {{ setting('city') }}, {{ setting('zip_code') }}, {{ setting('country') }}<br>
+                                    Phone: {{ setting('site_phone') }}<br>
+                                    Email: {{ setting('site_email') }}
                                 </address>
                             </div>
 
                             <div class="col-sm-4 invoice-col">
                                 To
                                 <address>
-                                    <strong>John Doe</strong><br>
-                                    795 Folsom Ave, Suite 600<br>
-                                    San Francisco, CA 94107<br>
-                                    Phone: (555) 539-1037<br>
-                                    Email: john.doe@example.com
+                                    <strong>{{ $invoice->client->user->name }}</strong><br>
+                                    {{ $invoice->client->user->address }}, {{ $invoice->client->user->state }}<br>
+                                    {{ $invoice->client->user->city }}, {{ $invoice->client->user->zip_code }}, {{ ucwords($invoice->client->user->country->name) }}<br>
+                                    Phone: {{ $invoice->client->user->mobile }}<br>
+                                    Email: {{ $invoice->client->user->email }}
                                 </address>
                             </div>
 
                             <div class="col-sm-4 invoice-col">
-                                <b>Invoice #007612</b><br>
+                                <b>Invoice No #{{ $invoice->invoice_no }}</b><br>
                                 <br>
-                                <b>Order ID:</b> 4F3S8J<br>
-                                <b>Payment Due:</b> 2/22/2014<br>
-                                <b>Account:</b> 968-34567
+                                <b>Invoice Date:</b> {{ $invoice->invoice_date->toFormattedDate() }}<br>
+                                <b>Invoice Due Date:</b> {{ $invoice->invoice_due_date->toFormattedDate() }}<br>
+                                <b>Invoice Due:</b> {{ toFormattedNumber($invoice->due, 2) }}<br>
                             </div>
 
                         </div>
@@ -75,9 +75,9 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Service</th>
-                                        <th>Qty</th>
-                                        <th>Rate</th>
-                                        <th>Amount</th>
+                                        <th class="text-right">Qty</th>
+                                        <th class="text-right">Rate</th>
+                                        <th class="text-right">Amount</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -85,9 +85,9 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $details->service->name }}</td>
-                                        <td>{{ $details->quantity }}</td>
-                                        <td>{{ $details->amount }}</td>
-                                        <td>{{ $details->amount * $details->quantity }}</td>
+                                        <td class="text-right">{{ $details->quantity }}</td>
+                                        <td class="text-right">{{ $details->amount }}</td>
+                                        <td class="text-right">{{ $details->amount * $details->quantity }}</td>
                                     </tr>
                                     @endforeach
                                     </tbody>
@@ -98,30 +98,43 @@
 
                         <div class="row">
 
-                            <div class="col-6">
+                            <div class="col-8">
                                 <p class="lead">Note:</p>
                                 <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">{{ $invoice->description }}</p>
                             </div>
 
-                            <div class="col-6">
-                                <p class="lead">Amount Due 2/22/2014</p>
+                            <div class="col-4">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody><tr>
-                                            <th style="width:50%">Subtotal:</th>
-                                            <td>$250.30</td>
+                                            <th class="text-left" style="width:50%">Subtotal:</th>
+                                            <td class="text-right">{{ toFormattedNumber($invoice->sub_total, 2) }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Tax (9.3%)</th>
-                                            <td>$10.34</td>
+                                            <th class="text-left">Tax ({{ $invoice->tax ? $invoice->tax->rate : 0 }}%):</th>
+                                            <td class="text-right">{{ toFormattedNumber($invoice->tax_amount, 2) }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Shipping:</th>
-                                            <td>$5.80</td>
+                                            <th class="text-left">Total:</th>
+                                            <td class="text-right">{{ toFormattedNumber($invoice->total, 2) }}</td>
+                                        </tr>
+                                        @if($invoice->discount_amount)
+                                        <tr>
+                                            <th class="text-left">Discount:</th>
+                                            <td class="text-right">{{ toFormattedNumber($invoice->discount_amount, 2) }}</td>
+                                        </tr>
+                                        @endif
+                                        <tr>
+                                            <th class="text-left">Net Total:</th>
+                                            <td class="text-right">{{ toFormattedNumber($invoice->net_total, 2) }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Total:</th>
-                                            <td>$265.24</td>
+                                            <th class="text-left">Paid Amount:</th>
+                                            <td class="text-right">{{ toFormattedNumber($invoice->paid, 2) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-left">Due Amount:</th>
+                                            <td class="text-right">{{ toFormattedNumber($invoice->due, 2) }}</td>
                                         </tr>
                                         </tbody></table>
                                 </div>

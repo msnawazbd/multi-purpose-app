@@ -14,3 +14,10 @@ function setting($key)
         return  $setting->{$key};
     }
 }
+
+function toFormattedNumber($number, $accept_decimal = null) {
+    if ($accept_decimal) {
+        return number_format((float)$number, $accept_decimal, '.', '');
+    }
+    return round($number);
+}

@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('admin.clients.create') }}" class="btn btn-primary btn-sm"><i
+                                <a href="{{ route('admin.income.invoices.create') }}" class="btn btn-primary btn-sm"><i
                                         class="fas fa-plus"></i>
                                     &nbsp; Add New Invoice
                                 </a>
@@ -101,7 +101,7 @@
                                                 </button>
                                                 <div class="dropdown-menu" role="menu" style="">
                                                     <a class="dropdown-item" href="{{ route('admin.income.invoices.view', $invoice->id) }}"><i class="fas fa-eye mr-2"></i> View</a>
-                                                    <a class="dropdown-item" href="{{ route('admin.clients.edit', $invoice->id) }}"><i class="fas fa-edit mr-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="{{ route('admin.income.invoices.edit', $invoice) }}"><i class="fas fa-edit mr-2"></i> Edit</a>
                                                     <div class="dropdown-divider"></div>
                                                     <button class="dropdown-item" wire:click.prevent="destroy({{ $invoice->id }})"><i class="fas fa-trash mr-2"></i> Delete</button>
                                                 </div>
