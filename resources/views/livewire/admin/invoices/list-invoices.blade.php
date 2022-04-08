@@ -38,20 +38,20 @@
                                         <span class="badge badge-pill badge-info">{{ $invoicesCount }}</span>
                                     </button>
 
-                                    <button wire:click="filterByStatus('scheduled')" type="button"
-                                            class="btn {{ ($status === 'scheduled') ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                    <button wire:click="filterByStatus(1)" type="button"
+                                            class="btn {{ ($status === 1) ? 'btn-secondary' : 'btn-default' }} btn-sm">
                                         <span class="mr-1">Paid</span>
                                         <span class="badge badge-pill badge-success">{{ $paidInvoicesCount }}</span>
                                     </button>
 
-                                    <button wire:click="filterByStatus('closed')" type="button"
-                                            class="btn {{ ($status === 'closed') ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                    <button wire:click="filterByStatus(2)" type="button"
+                                            class="btn {{ ($status === 2) ? 'btn-secondary' : 'btn-default' }} btn-sm">
                                         <span class="mr-1">Partial Paid</span>
                                         <span class="badge badge-pill badge-primary">{{ $partialPaidInvoicesCount }}</span>
                                     </button>
 
-                                    <button wire:click="filterByStatus('closed')" type="button"
-                                            class="btn {{ ($status === 'closed') ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                    <button wire:click="filterByStatus(3)" type="button"
+                                            class="btn {{ ($status === 3) ? 'btn-secondary' : 'btn-default' }} btn-sm">
                                         <span class="mr-1">Due</span>
                                         <span class="badge badge-pill badge-warning">{{ $dueInvoicesCount }}</span>
                                     </button>

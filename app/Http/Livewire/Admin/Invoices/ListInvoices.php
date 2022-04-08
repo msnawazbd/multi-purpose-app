@@ -2,12 +2,41 @@
 
 namespace App\Http\Livewire\Admin\Invoices;
 
+use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\Invoice;
-use Livewire\Component;
 
-class ListInvoices extends Component
+class ListInvoices extends AdminComponent
 {
     public $status = null;
+    public $searchKeywords = null;
+
+    protected $queryString = [
+        'status',
+        'searchKeywords' => ['except' => '']
+    ];
+
+    public function filterByStatus($status = null)
+    {
+        $this->resetPage();
+        $this->status = $status;
+    }
+
+    public function getInvoicesProperty()
+    {
+        return Invoice::query()
+            ->with([
+                'client'
+            ])
+            ->when($this->status, function ($query, $status) {
+                return $query->where('status', $status);
+            })
+            ->where(function ($query) {
+                $query->where('invoice_no', 'like', '%' . $this->searchKeywords . '%')
+                    ->orWhere('description', 'like', '%' . $this->searchKeywords . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+    }
 
     public function render()
     {
@@ -16,19 +45,12 @@ class ListInvoices extends Component
         $partialPaidInvoicesCount = Invoice::query()->where('status', 2)->count();
         $dueInvoicesCount = Invoice::query()->where('status', 3)->count();
 
-        $invoices = Invoice::query()
-            ->with([
-                'client'
-            ])
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
-
         return view('livewire.admin.invoices.list-invoices', [
             'invoicesCount' => $invoicesCount,
             'paidInvoicesCount' => $paidInvoicesCount,
             'partialPaidInvoicesCount' => $partialPaidInvoicesCount,
             'dueInvoicesCount' => $dueInvoicesCount,
-            'invoices' => $invoices,
+            'invoices' => $this->invoices,
         ]);
     }
 }
