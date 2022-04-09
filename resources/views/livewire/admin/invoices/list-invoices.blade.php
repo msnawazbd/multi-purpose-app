@@ -103,6 +103,12 @@
                                                     <a class="dropdown-item" href="{{ route('admin.income.invoices.view', $invoice->id) }}"><i class="fas fa-eye mr-2"></i> View</a>
                                                     <a class="dropdown-item" href="{{ route('admin.income.invoices.edit', $invoice) }}"><i class="fas fa-edit mr-2"></i> Edit</a>
                                                     <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="{{ route('admin.income.invoices.print', $invoice->id) }}" target="_blank"><i class="fas fa-print mr-2"></i> Print</a>
+                                                    <a class="dropdown-item" href="{{ route('admin.income.invoices.pdf', $invoice->id) }}"><i class="fas fa-file-pdf mr-2"></i> PDF</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#"><i class="fas fa-dollar-sign mr-2"></i> Payment Receive</a>
+                                                    <a class="dropdown-item" href="#"><i class="fas fa-history mr-2"></i> Payment History</a>
+                                                    <div class="dropdown-divider"></div>
                                                     <button class="dropdown-item" wire:click.prevent="destroy({{ $invoice->id }})"><i class="fas fa-trash mr-2"></i> Delete</button>
                                                 </div>
                                             </div>

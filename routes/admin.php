@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Livewire\Admin\Appointments\CreateAppointment;
 use App\Http\Livewire\Admin\Appointments\EditAppointment;
 use App\Http\Livewire\Admin\Appointments\ListAppointments;
@@ -50,5 +51,7 @@ Route::get('settings/taxes', ListTaxes::class)->name('settings.taxes');
 Route::get('income/services', ListServices::class)->name('income.services');
 Route::get('income/invoices', ListInvoices::class)->name('income.invoices');
 Route::get('income/invoices/{id}/view', ViewInvoice::class)->name('income.invoices.view');
+Route::get('income/invoices/{id}/print', [InvoiceController::class, 'print'])->name('income.invoices.print');
+Route::get('income/invoices/{id}/pdf', [InvoiceController::class, 'pdf'])->name('income.invoices.pdf');
 Route::get('income/invoices/create', CreateInvoice::class)->name('income.invoices.create');
 Route::get('income/invoices/{invoice}/edit', EditInvoice::class)->name('income.invoices.edit');
