@@ -91,7 +91,7 @@
                                                     <span class="input-group-text"><i class="fas fa-clock"></i></span>
                                                 </div>
                                                 <x-timepicker wire:model.defer="state.time" id="appointment_time"
-                                                              :error="'time'"/>
+                                                              :error="'time'" :placeholder="''"/>
                                                 @error('time')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -109,7 +109,7 @@
                                                             class="fas fa-calendar"></i></span>
                                                 </div>
                                                 <x-datepicker wire:model.defer="state.date" id="appointment_date"
-                                                              :error="'date'"/>
+                                                              :error="'date'" :placeholder="''"/>
                                                 @error('date')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
