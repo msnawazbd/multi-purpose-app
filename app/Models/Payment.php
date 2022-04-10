@@ -12,6 +12,11 @@ class Payment extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'receiving_date' => 'date'
+        'receiving_date' => 'datetime'
     ];
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class, 'invoice_id');
+    }
 }
