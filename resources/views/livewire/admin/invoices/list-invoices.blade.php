@@ -117,10 +117,12 @@
                                                        href="{{ route('admin.income.invoices.pdf', $invoice->id) }}"><i
                                                             class="fas fa-file-pdf mr-2"></i> PDF</a>
                                                     <div class="dropdown-divider"></div>
+                                                    @if($invoice->due > 0)
                                                     <button class="dropdown-item"
                                                             wire:click="paymentReceive({{ $invoice->id }})"><i
                                                             class="fas fa-dollar-sign mr-2"></i> Payment Receive
                                                     </button>
+                                                    @endif
                                                     <button class="dropdown-item"
                                                             wire:click="paymentHistory({{ $invoice->id }})"><i
                                                             class="fas fa-history mr-2"></i> Payment History
@@ -157,7 +159,7 @@
     </div>
     <!-- /.content -->
 
-    <!-- Service Modal -->
+    <!-- Payment Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="cu-form-label" aria-hidden="true"
          wire:ignore.self>
         <div class="modal-dialog">
@@ -282,7 +284,7 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $payment['invoice']['invoice_no'] }}</td>
                             <td>{{ $payment['amount'] }}</td>
-                            <td>{{ gettype($payment['receiving_date']) }}</td>
+                            <td>{{ $payment['receiving_date'] }}</td>
                             <td>{{ $payment['created_at'] }}</td>
                             <td>{{ $payment['reference_number'] }}</td>
                         </tr>

@@ -56,10 +56,15 @@ class ListInvoices extends AdminComponent
             $invoice = Invoice::query()->where('id', $this->invoiceId)->first();
             $invoice->paid += $this->state['amount'];
             $invoice->due -= $this->state['amount'];
+            if ($invoice->due <= 0) {
+                $invoice->status = 1;
+            } else {
+                $invoice->status = 2;
+            }
             $invoice->update();
 
             $this->dispatchBrowserEvent('hide-modal', ['message' => 'Payment received successfully!']);
-            return redirect()->back();
+            return redirect()->route('admin.income.invoices');
         } catch (\Exception $e) {
             dd($e);
             $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
@@ -74,6 +79,7 @@ class ListInvoices extends AdminComponent
                 'invoice'
             ])
             ->where('invoice_id', $id)
+            ->orderBy('created_at', 'desc')
             ->get()->toArray();
 
         $this->dispatchBrowserEvent('show-view-modal');
