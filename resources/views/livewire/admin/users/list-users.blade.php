@@ -41,14 +41,16 @@
                                     <th>SN</th>
                                     <th>
                                         Name
-                                        <span wire:click="sortBy('name')" class="float-right text-sm" style="cursor: pointer;">
+                                        <span wire:click="sortBy('name')" class="float-right text-sm"
+                                              style="cursor: pointer;">
                                             <i class="fa fa-arrow-up {{ $sortColumnName === 'name' && $sortDirection === 'asc' ? '' : 'text-muted' }}"></i>
                                             <i class="fa fa-arrow-down {{ $sortColumnName === 'name' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
                                         </span>
                                     </th>
                                     <th>
                                         Email
-                                        <span wire:click="sortBy('email')" class="float-right text-sm" style="cursor: pointer;">
+                                        <span wire:click="sortBy('email')" class="float-right text-sm"
+                                              style="cursor: pointer;">
                                             <i class="fa fa-arrow-up {{ $sortColumnName === 'email' && $sortDirection === 'asc' ? '' : 'text-muted' }}"></i>
                                             <i class="fa fa-arrow-down {{ $sortColumnName === 'email' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
                                         </span>
@@ -63,30 +65,40 @@
                                 <tbody wire:loading.class="text-muted">
                                 @forelse($users as $key => $user)
                                     <tr>
-                                        <td>{{ $users->firstItem() + $key }}</td>
-                                        <td>
+                                        <td class="align-middle">{{ $users->firstItem() + $key }}</td>
+                                        <td class="align-middle">
                                             <img src="{{ $user->avatar_url  }}" class="img img-circle mr-1"
-                                                 style="width: 50px; height: 50px" alt="">
+                                                 width="30" alt="{{ $user->name }}">
                                             {{ $user->name }}
                                         </td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->mobile }}</td>
-                                        <td>
+                                        <td class="align-middle">{{ $user->email }}</td>
+                                        <td class="align-middle">{{ $user->mobile }}</td>
+                                        <td class="align-middle">
                                             <div>
-                                                <select class="form-control" wire:change="changeRole({{ $user }}, $event.target.value)">
-                                                    <option value="admin" {{ ($user->role === 'admin') ? 'selected' : '' }}>Admin</option>
-                                                    <option value="client" {{ ($user->role === 'client') ? 'selected' : '' }}>Client</option>
-                                                    <option value="user" {{ ($user->role === 'user') ? 'selected' : '' }}>User</option>
+                                                <select class="form-control form-control-sm"
+                                                        wire:change="changeRole({{ $user }}, $event.target.value)">
+                                                    <option
+                                                        value="admin" {{ ($user->role === 'admin') ? 'selected' : '' }}>
+                                                        Admin
+                                                    </option>
+                                                    <option
+                                                        value="client" {{ ($user->role === 'client') ? 'selected' : '' }}>
+                                                        Client
+                                                    </option>
+                                                    <option
+                                                        value="user" {{ ($user->role === 'user') ? 'selected' : '' }}>
+                                                        User
+                                                    </option>
                                                 </select>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <!-- for php 8 -->
                                             {{--{{ $user->created_at?->toFormattedDate() ?? 'N/A' }}--}}
                                             {{ $user->created_at ? $user->created_at->toFormattedDate() : 'N/A' }}
                                         </td>
-                                        <td>{{ $user->updated_at->toFormattedDate() }}</td>
-                                        <td class="text-right">
+                                        <td class="align-middle">{{ $user->updated_at->toFormattedDate() }}</td>
+                                        <td class="text-right align-middle">
                                             <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>
                                             </button>
                                             <button type="button" wire:click.prevent="edit({{ $user }})"
@@ -174,7 +186,8 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" wire:model.defer="state.password"
-                                   class="form-control @error('password') is-invalid @enderror" id="password" autocomplete="on"
+                                   class="form-control @error('password') is-invalid @enderror" id="password"
+                                   autocomplete="on"
                                    placeholder="Password">
                             @error('password')
                             <div class="invalid-feedback">
@@ -184,7 +197,8 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Confirm Password</label>
-                            <input type="password" wire:model.defer="state.password_confirmation" class="form-control" autocomplete="on"
+                            <input type="password" wire:model.defer="state.password_confirmation" class="form-control"
+                                   autocomplete="on"
                                    id="passwordConfirmation" placeholder="Confirm Password">
                         </div>
                         <div class="form-group">

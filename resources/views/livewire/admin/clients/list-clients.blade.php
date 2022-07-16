@@ -67,17 +67,17 @@
                                 <tbody wire:loading.class="text-muted">
                                 @forelse($users as $key => $user)
                                     <tr>
-                                        <td>{{ $users->firstItem() + $key }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->mobile }}</td>
-                                        <td>
+                                        <td class="align-middle">{{ $users->firstItem() + $key }}</td>
+                                        <td class="align-middle">{{ $user->name }}</td>
+                                        <td class="align-middle">{{ $user->email }}</td>
+                                        <td class="align-middle">{{ $user->mobile }}</td>
+                                        <td class="align-middle">
                                             {{ $user->created_at ? $user->created_at->toFormattedDate() : 'N/A' }}
                                         </td>
-                                        <td class="text-right">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default btn-sm">Options</button>
-                                                <button type="button" class="btn btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                        <td class="text-right align-middle">
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-default">Options</button>
+                                                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu" role="menu" style="">

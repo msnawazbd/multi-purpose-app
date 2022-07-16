@@ -124,16 +124,16 @@
                                     </thead>
                                     <tbody>
                                     @foreach($items as $key => $item)
-                                        <tr>
+                                        <tr id="row-{{ $key + 1 }}">
                                             <td>{{ $key + 1 }}</td>
                                             <td>
-                                                <select id="status" wire:model.defer="items.{{ $key }}.service_id"
-                                                        class="form-control @error('status') is-invalid @enderror">
+                                                <select id="service_id" wire:model.defer="items.{{ $key }}.service_id"
+                                                        class="form-control @error('service_id') is-invalid @enderror">
                                                     <option value="" selected>Select one</option>
                                                     <option value="1">Published</option>
                                                     <option value="0">Unpublished</option>
                                                 </select>
-                                                @error('status')
+                                                @error('service_id')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -141,9 +141,9 @@
                                             </td>
                                             <td class="text-right">
                                                 <input type="text" wire:model.defer="items.{{ $key }}.description"
-                                                       class="form-control @error('reference_mobile') is-invalid @enderror"
-                                                       id="reference_mobile">
-                                                @error('reference_mobile')
+                                                       class="form-control @error('description') is-invalid @enderror"
+                                                       id="description">
+                                                @error('description')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -151,9 +151,9 @@
                                             </td>
                                             <td class="text-right">
                                                 <input type="text" wire:model.defer="items.{{ $key }}.qty"
-                                                       class="form-control @error('reference_mobile') is-invalid @enderror"
-                                                       id="reference_mobile">
-                                                @error('reference_mobile')
+                                                       class="form-control @error('qty') is-invalid @enderror"
+                                                       id="qty">
+                                                @error('qty')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -161,9 +161,9 @@
                                             </td>
                                             <td class="text-right">
                                                 <input type="text" wire:model.defer="items.{{ $key }}.rate"
-                                                       class="form-control @error('reference_mobile') is-invalid @enderror"
-                                                       id="reference_mobile">
-                                                @error('reference_mobile')
+                                                       class="form-control @error('rate') is-invalid @enderror"
+                                                       id="rate">
+                                                @error('rate')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -171,17 +171,16 @@
                                             </td>
                                             <td class="text-right">
                                                 <input type="text" value="{{ $items[$key]['qty'] * $items[$key]['rate'] }}"
-                                                       class="form-control @error('reference_mobile') is-invalid @enderror"
-                                                       id="reference_mobile" disabled>
-                                                @error('reference_mobile')
+                                                       class="form-control @error('amount') is-invalid @enderror"
+                                                       id="amount" disabled>
+                                                @error('amount')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
                                                 @enderror
                                             </td>
                                             <td class="text-right">
-                                                    <button class="btn btn-danger btn-sm" wire:click.prevent="removeItem({{ $key }})"><span class="fa fa-trash"></span>
-                                                    </button>
+                                                <button class="btn btn-danger btn-sm" wire:click.prevent="removeItem({{ $key }})"><span class="fa fa-trash"></span></button>
                                             </td>
                                         </tr>
                                     @endforeach

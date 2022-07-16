@@ -94,31 +94,31 @@
                                         <tbody wire:loading.class="text-muted">
                                         @forelse($tasks as $key => $task)
                                             <tr>
-                                                <td>{{ $tasks->firstItem() + $key }}</td>
-                                                <td>{{ $task->subject }}</td>
-                                                <td>{{ $task->start_date }}</td>
-                                                <td>{{ $task->deadline }}</td>
-                                                <td>
+                                                <td class="align-middle">{{ $tasks->firstItem() + $key }}</td>
+                                                <td class="align-middle">{{ $task->subject }}</td>
+                                                <td class="align-middle">{{ $task->start_date }}</td>
+                                                <td class="align-middle">{{ $task->deadline }}</td>
+                                                <td class="align-middle">
                                                     @foreach($task->users as $index => $user)
-                                                        <img src="{{ $user->avatar_url }}" class="img-circle mr-1" width="32"
+                                                        <img src="{{ $user->avatar_url }}" class="img-circle mr-1" width="30"
                                                              alt="{{ $user->name }}" title="{{ $user->name }}">
                                                     @endforeach
                                                 </td>
-                                                <td>
+                                                <td class="align-middle">
                                             <span class="badge badge-{{ $task->priority_badge }}">
                                                 {{ $task->priority }}
                                             </span>
                                                 </td>
-                                                <td>
+                                                <td class="align-middle">
                                             <span class="badge badge-{{ $task->status_badge }}">
                                                 {{ $task->status }}
                                             </span>
                                                 </td>
-                                                <td class="text-right">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-default btn-sm">Options</button>
+                                                <td class="text-right align-middle">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" class="btn btn-default">Options</button>
                                                         <button type="button"
-                                                                class="btn btn-default btn-sm dropdown-toggle dropdown-icon"
+                                                                class="btn btn-default dropdown-toggle dropdown-icon"
                                                                 data-toggle="dropdown" aria-expanded="false">
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
