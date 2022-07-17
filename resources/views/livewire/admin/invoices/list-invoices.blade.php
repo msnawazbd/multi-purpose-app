@@ -31,28 +31,28 @@
                                     &nbsp; Add New Invoice
                                 </a>
 
-                                <div class="btn-group">
+                                <div class="btn-group btn-group-sm">
                                     <button wire:click="filterByStatus" type="button"
-                                            class="btn {{ is_null($status) ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                            class="btn {{ is_null($status) ? 'btn-secondary' : 'btn-default' }}">
                                         <span class="mr-1">All</span>
                                         <span class="badge badge-pill badge-info">{{ $invoicesCount }}</span>
                                     </button>
 
                                     <button wire:click="filterByStatus(1)" type="button"
-                                            class="btn {{ ($status === 1) ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                            class="btn {{ ($status === 1) ? 'btn-secondary' : 'btn-default' }}">
                                         <span class="mr-1">Paid</span>
                                         <span class="badge badge-pill badge-success">{{ $paidInvoicesCount }}</span>
                                     </button>
 
                                     <button wire:click="filterByStatus(2)" type="button"
-                                            class="btn {{ ($status === 2) ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                            class="btn {{ ($status === 2) ? 'btn-secondary' : 'btn-default' }}">
                                         <span class="mr-1">Partial Paid</span>
                                         <span
                                             class="badge badge-pill badge-primary">{{ $partialPaidInvoicesCount }}</span>
                                     </button>
 
                                     <button wire:click="filterByStatus(3)" type="button"
-                                            class="btn {{ ($status === 3) ? 'btn-secondary' : 'btn-default' }} btn-sm">
+                                            class="btn {{ ($status === 3) ? 'btn-secondary' : 'btn-default' }}">
                                         <span class="mr-1">Due</span>
                                         <span class="badge badge-pill badge-warning">{{ $dueInvoicesCount }}</span>
                                     </button>
@@ -80,25 +80,25 @@
                                 <tbody wire:loading.class="text-muted">
                                 @forelse($invoices as $key => $invoice)
                                     <tr>
-                                        <td>{{ $invoices->firstItem() + $key }}</td>
-                                        <td>{{ $invoice->invoice_no }}</td>
-                                        <td>{{ $invoice->client->user->name }}</td>
-                                        <td>{{ $invoice->total }}</td>
-                                        <td>{{ $invoice->paid }}</td>
-                                        <td>{{ $invoice->due }}</td>
-                                        <td>
+                                        <td class="align-middle">{{ $invoices->firstItem() + $key }}</td>
+                                        <td class="align-middle">{{ $invoice->invoice_no }}</td>
+                                        <td class="align-middle">{{ $invoice->client->user->name }}</td>
+                                        <td class="align-middle">{{ $invoice->total }}</td>
+                                        <td class="align-middle">{{ $invoice->paid }}</td>
+                                        <td class="align-middle">{{ $invoice->due }}</td>
+                                        <td class="align-middle">
                                             {{ $invoice->created_at ? $invoice->created_at->toFormattedDate() : 'N/A' }}
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <span class="badge badge-{{ $invoice->status_badge }}">
                                                 {{ $invoice->status_name }}
                                             </span>
                                         </td>
-                                        <td class="text-right">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default btn-sm">Options</button>
+                                        <td class="text-right align-middle">
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-default">Options</button>
                                                 <button type="button"
-                                                        class="btn btn-default btn-sm dropdown-toggle dropdown-icon"
+                                                        class="btn btn-default dropdown-toggle dropdown-icon"
                                                         data-toggle="dropdown" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>

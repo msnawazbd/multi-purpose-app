@@ -71,22 +71,22 @@
                                 <tbody wire:loading.class="text-muted">
                                 @forelse($services as $key => $service)
                                     <tr>
-                                        <td>{{ $services->firstItem() + $key }}</td>
-                                        <td>{{ $service->name }}</td>
-                                        <td>{{ $service->amount }}</td>
-                                        <td>
+                                        <td class="align-middle">{{ $services->firstItem() + $key }}</td>
+                                        <td class="align-middle">{{ $service->name }}</td>
+                                        <td class="align-middle">{{ $service->amount }}</td>
+                                        <td class="align-middle">
                                             {{ $service->created_at ? $service->created_at->toFormattedDate() : 'N/A' }}
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <span class="badge badge-{{ $service->status == 1 ? 'success' : 'warning' }}">
                                                 {{ $service->status == 1 ? 'PUBLISHED' : 'UNPUBLISHED' }}
                                             </span>
                                         </td>
-                                        <td class="text-right">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default btn-sm">Options</button>
+                                        <td class="text-right align-middle">
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-default">Options</button>
                                                 <button type="button"
-                                                        class="btn btn-default btn-sm dropdown-toggle dropdown-icon"
+                                                        class="btn btn-default dropdown-toggle dropdown-icon"
                                                         data-toggle="dropdown" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>

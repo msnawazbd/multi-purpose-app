@@ -54,7 +54,7 @@
                                             class="ml-2">Selected {{ count($selectedRows) }} {{ Str::plural('appointment', count($selectedRows)) }}</span>
                                     @endif
                                 </div>
-                                <div class="btn-group">
+                                <div class="btn-group btn-group-sm">
                                     <button wire:click="filterByStatus" type="button"
                                             class="btn {{ is_null($status) ? 'btn-secondary' : 'btn-default' }}">
                                         <span class="mr-1">All</span>
@@ -100,8 +100,8 @@
                                 <tbody wire:sortable="updateAppointmentOrder">
                                 @foreach($appointments as $key => $appointment)
                                     <tr wire:sortable.item="{{ $appointment->id }}" wire:key="appointment-{{ $appointment->id }}">
-                                        <td wire:sortable.handle style="width: 10px; cursor: move"><i class="fa fa-arrows-alt text-muted"></i></td>
-                                        <td>
+                                        <td class="align-middle" wire:sortable.handle style="width: 10px; cursor: move"><i class="fa fa-arrows-alt text-muted"></i></td>
+                                        <td class="align-middle">
                                             <div class="icheck-primary d-inline ml-2">
                                                 <input wire:model="selectedRows" type="checkbox"
                                                        value="{{ $appointment->id }}" name="todo2"
@@ -109,25 +109,25 @@
                                                 <label for="{{ $appointment->id }}"></label>
                                             </div>
                                         </td>
-                                        <td>{{ $appointments->firstItem() + $key }}</td>
-                                        <td>{{ $appointment->client->full_name }}</td>
-                                        <td>{{ $appointment->date }}</td>
-                                        <td>{{ $appointment->time }}</td>
-                                        <td>
+                                        <td class="align-middle">{{ $appointments->firstItem() + $key }}</td>
+                                        <td class="align-middle">{{ $appointment->client->full_name }}</td>
+                                        <td class="align-middle">{{ $appointment->date }}</td>
+                                        <td class="align-middle">{{ $appointment->time }}</td>
+                                        <td class="align-middle">
                                             <span class="px-2" style="background-color: {{ $appointment->color }}"></span>
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <span class="badge badge-{{ $appointment->status_badge }}">
                                                 {{ $appointment->status }}
                                             </span>
                                         </td>
                                         <td class="text-right">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default btn-sm">Options</button>
-                                                <button type="button" class="btn btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-default">Options</button>
+                                                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
-                                                <div class="dropdown-menu" role="menu" style="">
+                                                <div class="dropdown-menu" role="menu">
                                                     <button class="dropdown-item" wire:click.prevent="changeStatus({{ $appointment->id }})"><i class="fas fa-eye{{ $appointment->status == 'CLOSED' ? '-slash' : '' }} mr-2"></i> View</button>
                                                     <a class="dropdown-item" href="{{ route('admin.appointments.edit', $appointment) }}"><i class="fas fa-edit mr-2"></i> Edit</a>
                                                     <div class="dropdown-divider"></div>

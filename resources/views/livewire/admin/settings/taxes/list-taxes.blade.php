@@ -71,22 +71,22 @@
                                 <tbody wire:loading.class="text-muted">
                                 @forelse($taxes as $key => $tax)
                                     <tr>
-                                        <td>{{ $taxes->firstItem() + $key }}</td>
-                                        <td>{{ $tax->name }}</td>
-                                        <td>{{ $tax->rate }}%</td>
-                                        <td>
+                                        <td class="align-middle">{{ $taxes->firstItem() + $key }}</td>
+                                        <td class="align-middle">{{ $tax->name }}</td>
+                                        <td class="align-middle">{{ $tax->rate }}%</td>
+                                        <td class="align-middle">
                                             {{ $tax->created_at ? $tax->created_at->toFormattedDate() : 'N/A' }}
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <span class="badge badge-{{ $tax->status == 1 ? 'success' : 'warning' }}">
                                                 {{ $tax->status == 1 ? 'PUBLISHED' : 'UNPUBLISHED' }}
                                             </span>
                                         </td>
-                                        <td class="text-right">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default btn-sm">Options</button>
+                                        <td class="text-right align-middle">
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-default">Options</button>
                                                 <button type="button"
-                                                        class="btn btn-default btn-sm dropdown-toggle dropdown-icon"
+                                                        class="btn btn-default dropdown-toggle dropdown-icon"
                                                         data-toggle="dropdown" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>

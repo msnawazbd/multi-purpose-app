@@ -11,7 +11,7 @@
     <!-- Livewire Style -->
     @livewireStyles
 </head>
-<body class="hold-transition sidebar-mini {{ setting('sidebar_collapse') ? 'sidebar-collapse' : '' }}">
+<body class="hold-transition sidebar-mini text-sm {{ setting('sidebar_collapse') ? 'sidebar-collapse' : '' }}">
 <div class="wrapper">
 
     <!-- Navbar -->

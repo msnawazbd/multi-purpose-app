@@ -97,13 +97,13 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('admin.settings.taxes') }}" class="nav-link {{ request()->is('admin/settings/taxes', 'admin/settings/taxes') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-arrow-right nav-icon"></i>
                                 <p>Tax</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.settings.generals') }}" class="nav-link {{ request()->is('admin/settings/generals', 'admin/settings/generals') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-arrow-right nav-icon"></i>
                                 <p>General Setting</p>
                             </a>
                         </li>
@@ -120,13 +120,13 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('admin.income.services') }}" class="nav-link {{ request()->is('admin/income/services', 'admin/income/services') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-arrow-right nav-icon"></i>
                                 <p>Services</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.income.invoices') }}" class="nav-link {{ request()->is('admin/income/invoices', 'admin/income/invoices/*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-arrow-right nav-icon"></i>
                                 <p>Invoices</p>
                             </a>
                         </li>
