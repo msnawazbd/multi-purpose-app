@@ -127,11 +127,12 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>
-                                                <select id="status" wire:model.defer="items.{{ $key }}.service_id"
+                                                <select id="status" wire:model.defer="items.{{ $key }}.service_id" wire:change.prevent="selectService({{ $key }})"
                                                         class="form-control @error('status') is-invalid @enderror">
                                                     <option value="" selected>Select one</option>
-                                                    <option value="1">Published</option>
-                                                    <option value="0">Unpublished</option>
+                                                    @foreach($services as $service)
+                                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('status')
                                                 <div class="invalid-feedback">

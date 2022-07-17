@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Invoices;
 
 use App\Models\Invoice;
+use App\Models\Service;
 use Livewire\Component;
 
 class CreateInvoice extends Component
@@ -41,8 +42,20 @@ class CreateInvoice extends Component
         dd($this->items);
     }
 
+    public function selectService($key)
+    {
+        $service = Service::query()
+            ->where('id', $this->items[$key]['service_id'])
+            ->first(['id', 'name', 'amount']);
+        $this->items[$key]['rate'] = $service->amount;
+    }
+
     public function render()
     {
+        $services = Service::query()
+            ->where('status', 1)
+            ->get(['id', 'name']);
+
         $invoice = Invoice::query()
             ->with([
                 'client',
@@ -54,7 +67,8 @@ class CreateInvoice extends Component
             ->first();
 
         return view('livewire.admin.invoices.create-invoice', [
-            'invoice' => $invoice
+            'invoice' => $invoice,
+            'services' => $services
         ]);
     }
 }
