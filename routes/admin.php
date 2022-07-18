@@ -14,6 +14,8 @@ use App\Http\Livewire\Admin\Invoices\ListInvoices;
 use App\Http\Livewire\Admin\Invoices\ViewInvoice;
 use App\Http\Livewire\Admin\Profile\UpdateProfile;
 use App\Http\Livewire\Admin\Services\ListServices;
+use App\Http\Livewire\Admin\Settings\Permissions\ListPermissions;
+use App\Http\Livewire\Admin\Settings\Roles\ListRoles;
 use App\Http\Livewire\Admin\Settings\Taxes\ListTaxes;
 use App\Http\Livewire\Admin\Settings\UpdateSetting;
 use App\Http\Livewire\Admin\Tasks\CreateTask;
@@ -47,6 +49,8 @@ Route::get('profile', UpdateProfile::class)->name('profile');
 
 Route::get('settings/generals', UpdateSetting::class)->name('settings.generals');
 Route::get('settings/taxes', ListTaxes::class)->name('settings.taxes');
+Route::get('settings/roles', ListRoles::class)->name('settings.roles');
+Route::get('settings/permissions', ListPermissions::class)->name('settings.permissions');
 
 Route::get('income/services', ListServices::class)->name('income.services');
 Route::get('income/invoices', ListInvoices::class)->name('income.invoices');

@@ -169,6 +169,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...

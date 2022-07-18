@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             ServiceTableSeeder::class,
             InvoiceTableSeeder::class,
             InvoiceDetailTableSeeder::class,
+            RoleTableSeeder::class,
+            PermissionTableSeeder::class,
         ]);
     }
 }

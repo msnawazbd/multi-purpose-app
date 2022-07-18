@@ -127,7 +127,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>
-                                                <select id="service_id_{{ $key }}" wire:model.defer="items.{{ $key }}.service_id" wire:change.prevent="selectService({{ $key }})"
+                                                <select id="service-id-{{ $key }}" wire:model.defer="items.{{ $key }}.service_id" wire:change.prevent="selectService({{ $key }})"
                                                         class="form-control">
                                                     <option value="" selected>Select one</option>
                                                     @foreach($services as $service)
@@ -138,22 +138,22 @@
                                             <td class="text-right">
                                                 <input type="text" wire:model.defer="items.{{ $key }}.description"
                                                        class="form-control"
-                                                       id="description_{{ $key }}">
+                                                       id="description-{{ $key }}">
                                             </td>
                                             <td class="text-right">
                                                 <input type="text" wire:model.defer="items.{{ $key }}.qty"
                                                        class="form-control"
-                                                       id="qty_{{ $key + 1 }}">
+                                                       id="qty-{{ $key + 1 }}">
                                             </td>
                                             <td class="text-right">
                                                 <input type="text" wire:model.defer="items.{{ $key }}.rate"
                                                        class="form-control"
-                                                       id="rate_{{ $key }}">
+                                                       id="rate-{{ $key }}">
                                             </td>
                                             <td class="text-right">
                                                 <input type="text" value="{{ $items[$key]['qty'] * $items[$key]['rate'] }}"
                                                        class="form-control"
-                                                       id="amount_{{ $key }}" disabled>
+                                                       id="amount-{{ $key }}" disabled>
                                             </td>
                                             <td class="text-right">
                                                 <button class="btn btn-danger btn-sm" wire:click.prevent="removeItem({{ $key }})"><span class="fa fa-trash"></span></button>

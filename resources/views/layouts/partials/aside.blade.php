@@ -96,9 +96,21 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="{{ route('admin.settings.roles') }}" class="nav-link {{ request()->is('admin/settings/roles', 'admin/settings/roles') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Roles</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.settings.permissions') }}" class="nav-link {{ request()->is('admin/settings/permissions', 'admin/settings/permissions') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Permissions</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('admin.settings.taxes') }}" class="nav-link {{ request()->is('admin/settings/taxes', 'admin/settings/taxes') ? 'active' : '' }}">
                                 <i class="fas fa-arrow-right nav-icon"></i>
-                                <p>Tax</p>
+                                <p>Taxes</p>
                             </a>
                         </li>
                         <li class="nav-item">
