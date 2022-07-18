@@ -308,14 +308,14 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="status">Permissions <span class="text-danger">*</span></label>
-                                <select wire:model.defer="permission"
-                                        class="form-control @error('permission') is-invalid @enderror" id="permission">
+                                <select wire:model.defer="permission_state.name"
+                                        class="form-control @error('name') is-invalid @enderror" id="name">
                                     <option value="">Select One</option>
                                     @foreach($permissions as $permission)
                                         <option value="{{ $permission->name }}">{{ $permission->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('status')
+                                @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

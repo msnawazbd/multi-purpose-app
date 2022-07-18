@@ -12,7 +12,7 @@ class ListRoles extends AdminComponent
     public $name, $guard_name, $status, $description, $created_at, $updated_at, $created_by, $updated_by;
 
     public $state = [];
-    public $permission;
+    public $permission_state = [];
     public $role;
     public $roleId;
     public $showEditModal = false;
@@ -46,17 +46,6 @@ class ListRoles extends AdminComponent
             'status' => 'required|numeric',
             'description' => 'nullable|string',
         ])->validate();
-
-        Role::query()
-            ->create([
-                'name' => $this->state['name'],
-                'status' => $this->state['status'],
-                'description' => $this->state['description'],
-                'created_by' => auth()->user()->id
-            ]);
-
-        $this->dispatchBrowserEvent('hide-modal', ['message' => 'Role created successfully!']);
-        return redirect()->back();
 
         try {
             Role::query()
@@ -142,10 +131,17 @@ class ListRoles extends AdminComponent
 
     public function assignPermission()
     {
-        if ($this->role->hasPermissionTo($this->permission)) {
+        Validator::make($this->permission_state, [
+            'name' => 'required|string',
+        ], [
+            'name.required' => 'The permission name field is required.',
+        ])->validate();
+
+        if ($this->role->hasPermissionTo($this->permission_state['name'])) {
             $this->dispatchBrowserEvent('warning', ['message' => 'Permission already assigned!']);
         } else {
-            $this->role->givePermissionTo($this->permission);
+            $this->role->givePermissionTo($this->permission_state['name']);
+            $this->permission_state['name'] = '';
             $this->dispatchBrowserEvent('success', ['message' => 'Permission assign successfully!']);
         }
     }
