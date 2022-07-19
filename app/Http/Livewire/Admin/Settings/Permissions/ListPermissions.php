@@ -5,18 +5,21 @@ namespace App\Http\Livewire\Admin\Settings\Permissions;
 use App\Http\Livewire\Admin\AdminComponent;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class ListPermissions extends AdminComponent
 {
     public $name, $guard_name, $status, $description, $created_at, $updated_at, $created_by, $updated_by;
 
     public $state = [];
+    public $role_state = [];
     public $permission;
     public $permissionId;
     public $showEditModal = false;
     public $searchKeywords = null;
     public $sortColumnName = 'created_at';
     public $sortDirection = 'desc';
+    public $roles = [];
 
     protected $queryString = ['searchKeywords' => ['except' => '']];
 
@@ -116,6 +119,40 @@ class ListPermissions extends AdminComponent
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('error', ['message' => 'Operation failed!']);
             return redirect()->route('admin.tasks');
+        }
+    }
+
+    public function giveRole(Permission $permission)
+    {
+        $this->permission = $permission;
+        $this->roles = Role::all();
+        $this->dispatchBrowserEvent('show-role-modal');
+    }
+
+    public function assignRole()
+    {
+        Validator::make($this->role_state, [
+            'name' => 'required|string',
+        ], [
+            'name.required' => 'The role name field is required.',
+        ])->validate();
+
+        if ($this->permission->hasRole($this->role_state['name'])) {
+            $this->dispatchBrowserEvent('warning', ['message' => 'Role already assigned!']);
+        } else {
+            $this->permission->assignRole($this->role_state['name']);
+            $this->role_state['name'] = '';
+            $this->dispatchBrowserEvent('success', ['message' => 'Role assign successfully!']);
+        }
+    }
+
+    public function revokeRole(Permission $permission, $role_name)
+    {
+        if ($permission->hasRole($role_name)) {
+            $permission->removeRole($role_name);
+            $this->dispatchBrowserEvent('success', ['message' => 'Permission revoke successfully!']);
+        } else {
+            $this->dispatchBrowserEvent('error', ['message' => 'Operation failed!']);
         }
     }
 

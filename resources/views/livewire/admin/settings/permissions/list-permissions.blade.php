@@ -56,6 +56,7 @@
                                             <i class="fa fa-arrow-down {{ $sortColumnName === 'guard_name' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
                                         </span>
                                     </th>
+                                    <th>Roles</th>
                                     <th>Created At</th>
                                     <th>
                                         Status
@@ -69,17 +70,28 @@
                                 </tr>
                                 </thead>
                                 <tbody wire:loading.class="text-muted">
-                                @forelse($permissions as $key => $permission)
+                                @forelse($permissions as $key => $v_permission)
                                     <tr>
                                         <td class="align-middle">{{ $permissions->firstItem() + $key }}</td>
-                                        <td class="align-middle">{{ $permission->name }}</td>
-                                        <td class="align-middle">{{ $permission->guard_name }}</td>
+                                        <td class="align-middle">{{ $v_permission->name }}</td>
+                                        <td class="align-middle">{{ $v_permission->guard_name }}</td>
                                         <td class="align-middle">
-                                            {{ $permission->created_at ? $permission->created_at->toFormattedDate() : 'N/A' }}
+                                            @foreach($v_permission->roles as $role)
+                                                <a style="cursor: pointer;"
+                                                   wire:click.prevent="revokeRole({{ $v_permission }}, '{{ $role->name }}')">
+                                                    <span class="badge badge-info text-uppercase">
+                                                {{ $role->name }}
+                                                    <i class="fas fa-times pl-1 ml-1 text-dark border-left"></i>
+                                                </span>
+                                                </a>
+                                            @endforeach
                                         </td>
                                         <td class="align-middle">
-                                            <span class="badge badge-{{ $permission->status == 1 ? 'success' : 'warning' }}">
-                                                {{ $permission->status == 1 ? 'PUBLISHED' : 'UNPUBLISHED' }}
+                                            {{ $v_permission->created_at ? $v_permission->created_at->toFormattedDate() : 'N/A' }}
+                                        </td>
+                                        <td class="align-middle">
+                                            <span class="badge badge-{{ $v_permission->status == 1 ? 'success' : 'warning' }}">
+                                                {{ $v_permission->status == 1 ? 'PUBLISHED' : 'UNPUBLISHED' }}
                                             </span>
                                         </td>
                                         <td class="text-right align-middle">
@@ -92,22 +104,26 @@
                                                 </button>
                                                 <div class="dropdown-menu" permission="menu" style="">
                                                     <button class="dropdown-item"
-                                                            wire:click.prevent="changeStatus({{ $permission->id }})">
-                                                        <i class="fas fa-{{ $permission->status == 1 ? 'arrow-down' : 'arrow-up' }} mr-2"></i>
-                                                        {{ $permission->status == 1 ? 'Unpublished' : 'Published' }}
+                                                            wire:click.prevent="changeStatus({{ $v_permission->id }})">
+                                                        <i class="fas fa-{{ $v_permission->status == 1 ? 'arrow-down' : 'arrow-up' }} mr-2"></i>
+                                                        {{ $v_permission->status == 1 ? 'Unpublished' : 'Published' }}
                                                     </button>
                                                     <div class="dropdown-divider"></div>
                                                     <button class="dropdown-item"
-                                                            wire:click.prevent="show({{ $permission->id }})">
+                                                            wire:click.prevent="show({{ $v_permission->id }})">
                                                         <i class="fas fa-eye mr-2"></i> View
                                                     </button>
                                                     <button class="dropdown-item"
-                                                            wire:click.prevent="edit({{ $permission }})">
+                                                            wire:click.prevent="edit({{ $v_permission }})">
                                                         <i class="fas fa-edit mr-2"></i> Edit
+                                                    </button>
+                                                    <button class="dropdown-item"
+                                                            wire:click.prevent="giveRole({{ $v_permission->id }})">
+                                                        <i class="fas fa-unlock mr-2"></i> Assign Roles
                                                     </button>
                                                     <div class="dropdown-divider"></div>
                                                     <button class="dropdown-item"
-                                                            wire:click.prevent="destroy({{ $permission->id }})"><i
+                                                            wire:click.prevent="destroy({{ $v_permission->id }})"><i
                                                             class="fas fa-trash mr-2"></i> Delete
                                                     </button>
                                                 </div>
@@ -272,7 +288,72 @@
         </div>
     </div>
 
+    @if($permission)
+        <!-- Permission Modal -->
+        <div class="modal fade" id="roleModal" tabindex="-1" aria-labelledby="cu-form-label" aria-hidden="true"
+             wire:ignore.self>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <span class="text-capitalize">Give Role To {{ $permission->name }}</span>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <form autocomplete="off" wire:submit.prevent="assignRole">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="name">Roles <span class="text-danger">*</span></label>
+                                <select wire:model.defer="role_state.name"
+                                        class="form-control @error('name') is-invalid @enderror" id="name">
+                                    <option value="">Select One</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="pb-2 mb-2">
+                                @foreach($permission->roles as $role)
+                                    <a style="cursor: pointer"
+                                       wire:click.prevent="revokePermission({{ $permission }}, '{{ $role->name }}')">
+                                        <span class="badge badge-info text-uppercase">{{ $role->name }}<i class="fas fa-times pl-1 ml-1 text-dark border-left"></i></span>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                    class="fas fa-times"></i> Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                <span> Save</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <!-- confirmation-alert components -->
     <x-confirmation-alert/>
 
 </div>
+
+@push('js')
+    <script>
+        window.addEventListener('show-role-modal', event => {
+            $('#roleModal').modal('show');
+        })
+    </script>
+@endpush

@@ -307,7 +307,7 @@
                     <form autocomplete="off" wire:submit.prevent="assignPermission">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="status">Permissions <span class="text-danger">*</span></label>
+                                <label for="name">Permissions <span class="text-danger">*</span></label>
                                 <select wire:model.defer="permission_state.name"
                                         class="form-control @error('name') is-invalid @enderror" id="name">
                                     <option value="">Select One</option>
