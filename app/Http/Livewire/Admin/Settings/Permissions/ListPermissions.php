@@ -150,7 +150,7 @@ class ListPermissions extends AdminComponent
     {
         if ($permission->hasRole($role_name)) {
             $permission->removeRole($role_name);
-            $this->dispatchBrowserEvent('success', ['message' => 'Permission revoke successfully!']);
+            $this->dispatchBrowserEvent('success', ['message' => 'Role revoke successfully!']);
         } else {
             $this->dispatchBrowserEvent('error', ['message' => 'Operation failed!']);
         }

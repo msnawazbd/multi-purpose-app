@@ -118,7 +118,7 @@
                                                         <i class="fas fa-edit mr-2"></i> Edit
                                                     </button>
                                                     <button class="dropdown-item"
-                                                            wire:click.prevent="giveRole({{ $v_permission->id }})">
+                                                            wire:click.prevent="giveRole({{ $v_permission }})">
                                                         <i class="fas fa-unlock mr-2"></i> Assign Roles
                                                     </button>
                                                     <div class="dropdown-divider"></div>
@@ -324,7 +324,7 @@
                             <div class="pb-2 mb-2">
                                 @foreach($permission->roles as $role)
                                     <a style="cursor: pointer"
-                                       wire:click.prevent="revokePermission({{ $permission }}, '{{ $role->name }}')">
+                                       wire:click.prevent="revokeRole({{ $permission }}, '{{ $role->name }}')">
                                         <span class="badge badge-info text-uppercase">{{ $role->name }}<i class="fas fa-times pl-1 ml-1 text-dark border-left"></i></span>
                                     </a>
                                 @endforeach

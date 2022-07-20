@@ -78,6 +78,7 @@
                         </p>
                     </a>
                 </li>
+                @can('create posts')
                 <li class="nav-item">
                     <a href="{{ route('admin.profile') }}" class="nav-link {{ request()->is('admin/profile') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user"></i>
@@ -86,6 +87,7 @@
                         </p>
                     </a>
                 </li>
+                @endcan
                 <li class="nav-item {{ request()->is('admin/settings', 'admin/settings/*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->is('admin/settings', 'admin/settings/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cog"></i>
@@ -105,6 +107,12 @@
                             <a href="{{ route('admin.settings.permissions') }}" class="nav-link {{ request()->is('admin/settings/permissions', 'admin/settings/permissions') ? 'active' : '' }}">
                                 <i class="fas fa-arrow-right nav-icon"></i>
                                 <p>Permissions</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.settings.users') }}" class="nav-link {{ request()->is('admin/settings/users', 'admin/settings/users') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Users</p>
                             </a>
                         </li>
                         <li class="nav-item">

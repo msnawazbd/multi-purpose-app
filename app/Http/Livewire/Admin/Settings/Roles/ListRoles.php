@@ -150,7 +150,6 @@ class ListRoles extends AdminComponent
     {
         $role->revokePermissionTo($permission_name);
         $this->dispatchBrowserEvent('success', ['message' => 'Permission revoke successfully!']);
-
     }
 
     public function sortBy($columnName)
