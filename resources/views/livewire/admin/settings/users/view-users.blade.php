@@ -104,9 +104,12 @@
                                             <button type="button" wire:click.prevent="edit({{ $v_user }})"
                                                     class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
                                             <button type="button" wire:click.prevent="giveRole({{ $v_user }})"
-                                                    class="btn btn-info btn-sm"><i class="fas fa-unlock"></i> Roles</button>
+                                                    class="btn btn-info btn-sm"><i class="fas fa-unlock"></i> Roles
+                                            </button>
                                             <button type="button" wire:click.prevent="givePermission({{ $v_user }})"
-                                                    class="btn btn-info btn-sm"><i class="fas fa-unlock"></i> Permissions</button>
+                                                    class="btn btn-info btn-sm"><i class="fas fa-unlock"></i>
+                                                Permissions
+                                            </button>
                                             <button type="button" wire:click.prevent="destroy({{ $v_user->id }})"
                                                     class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                         </td>
@@ -294,7 +297,8 @@
                                 @foreach($user->roles as $role)
                                     <a style="cursor: pointer"
                                        wire:click.prevent="revokeRole({{ $user }}, '{{ $role->name }}')">
-                                        <span class="badge badge-info text-uppercase">{{ $role->name }}<i class="fas fa-times pl-1 ml-1 text-dark border-left"></i></span>
+                                        <span class="badge badge-info text-uppercase">{{ $role->name }}<i
+                                                class="fas fa-times pl-1 ml-1 text-dark border-left"></i></span>
                                     </a>
                                 @endforeach
                             </div>
@@ -349,7 +353,8 @@
                                 @foreach($user->permissions as $permission)
                                     <a style="cursor: pointer"
                                        wire:click.prevent="revokePermission({{ $user }}, '{{ $permission->name }}')">
-                                        <span class="badge badge-info text-uppercase">{{ $permission->name }}<i class="fas fa-times pl-1 ml-1 text-dark border-left"></i></span>
+                                        <span class="badge badge-info text-uppercase">{{ $permission->name }}<i
+                                                class="fas fa-times pl-1 ml-1 text-dark border-left"></i></span>
                                     </a>
                                 @endforeach
                             </div>

@@ -78,6 +78,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.messages') }}" class="nav-link {{ request()->is('admin/messages', 'admin/messages/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>
+                            Messages
+                        </p>
+                    </a>
+                </li>
                 @can('create posts')
                 <li class="nav-item">
                     <a href="{{ route('admin.profile') }}" class="nav-link {{ request()->is('admin/profile') ? 'active' : '' }}">
