@@ -12,7 +12,7 @@ use App\Http\Livewire\Admin\Invoices\CreateInvoice;
 use App\Http\Livewire\Admin\Invoices\EditInvoice;
 use App\Http\Livewire\Admin\Invoices\ListInvoices;
 use App\Http\Livewire\Admin\Invoices\ViewInvoice;
-use App\Http\Livewire\Admin\Messages\ListMessages;
+use App\Http\Livewire\Admin\Prices\ListPrices;
 use App\Http\Livewire\Admin\Profile\UpdateProfile;
 use App\Http\Livewire\Admin\Services\ListServices;
 use App\Http\Livewire\Admin\Settings\Permissions\ListPermissions;
@@ -47,7 +47,7 @@ Route::get('appointments', ListAppointments::class)->name('appointments');
 Route::get('appointments/create', CreateAppointment::class)->name('appointments.create');
 Route::get('appointments/{appointment}/edit', EditAppointment::class)->name('appointments.edit');
 
-Route::get('messages', ListMessages::class)->name('messages');
+Route::get('prices', ListPrices::class)->name('prices');
 
 Route::get('profile', UpdateProfile::class)->name('profile');
 

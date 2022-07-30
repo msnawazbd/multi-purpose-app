@@ -79,10 +79,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.messages') }}" class="nav-link {{ request()->is('admin/messages', 'admin/messages/*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-envelope"></i>
+                    <a href="{{ route('admin.prices') }}" class="nav-link {{ request()->is('admin/prices', 'admin/prices/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-dollar-sign"></i>
                         <p>
-                            Messages
+                            Pricing
                         </p>
                     </a>
                 </li>
