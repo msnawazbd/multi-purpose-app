@@ -79,10 +79,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.prices') }}" class="nav-link {{ request()->is('admin/prices', 'admin/prices/*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.plans') }}" class="nav-link {{ request()->is('admin/plans', 'admin/plans/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-dollar-sign"></i>
                         <p>
-                            Pricing
+                            Plans
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.faqs') }}" class="nav-link {{ request()->is('admin/faqs', 'admin/faqs/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-question"></i>
+                        <p>
+                            FAQs
                         </p>
                     </a>
                 </li>

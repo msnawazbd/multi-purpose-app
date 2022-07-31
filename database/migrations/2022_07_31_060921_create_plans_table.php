@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePricesTable extends Migration
+class CreatePlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreatePricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('prices', function (Blueprint $table) {
+        Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50);
             $table->double('original_price',8,2)->default(0)->unsigned();
             $table->double('discounted_price',8,2)->default(0)->unsigned();
-            $table->tinyInteger('validity')->comment("VALIDITY IN DAYS & NEGATIVE VALUES FOR INFINITY");
+            $table->smallInteger('validity')->comment("VALIDITY IN DAYS & NEGATIVE VALUES FOR INFINITY");
             $table->tinyInteger('listings')->default(0)->comment("NEGATIVE VALUES FOR INFINITY");
             $table->tinyInteger('categories')->default(0)->comment("NEGATIVE VALUES FOR INFINITY");
             $table->tinyInteger('photos')->default(0)->comment("NEGATIVE VALUES FOR INFINITY");
@@ -45,6 +45,6 @@ class CreatePricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prices');
+        Schema::dropIfExists('plans');
     }
 }

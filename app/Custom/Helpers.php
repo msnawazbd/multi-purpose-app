@@ -21,3 +21,10 @@ function toFormattedNumber($number, $accept_decimal = null) {
     }
     return round($number);
 }
+
+function checkInfinity($value) {
+    if ($value >= 0) {
+        return $value;
+    }
+    return '<small><i class="fas fa-infinity"></i></small>';
+}

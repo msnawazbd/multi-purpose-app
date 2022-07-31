@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             InvoiceDetailTableSeeder::class,
             RoleTableSeeder::class,
             PermissionTableSeeder::class,
+            PlanTableSeeder::class,
+            FaqTableSeeder::class,
         ]);
     }
 }

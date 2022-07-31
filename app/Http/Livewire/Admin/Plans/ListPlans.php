@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Prices;
+namespace App\Http\Livewire\Admin\Plans;
 
 use App\Http\Livewire\Admin\AdminComponent;
-use App\Models\Directory\Price;
+use App\Models\Directory\Plan;
 
-class ListPrices extends AdminComponent
+class ListPlans extends AdminComponent
 {
     public $searchKeywords = null;
-    public $priceId;
+    public $planId;
 
     protected $queryString = ['searchKeywords' => ['except' => '']];
 
@@ -21,18 +21,31 @@ class ListPrices extends AdminComponent
         $this->resetPage();
     }
 
-    public function destroy($priceId)
+    public function changeStatus($planId)
     {
-        $this->priceId = $priceId;
+        try {
+            $plan = Plan::query()->findOrFail($planId);
+            $plan->status = $plan->status == 1 ? 0 : 1;
+            $plan->save();
+            $this->dispatchBrowserEvent('success', ['message' => 'Plan status changed.']);
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
+            return redirect()->back();
+        }
+    }
+
+    public function destroy($planId)
+    {
+        $this->planId = $planId;
         $this->dispatchBrowserEvent('show-delete-confirmation');
     }
 
     public function confirmDestroy()
     {
         try {
-            $data = Price::query()->findOrFail($this->priceId);
+            $data = Plan::query()->findOrFail($this->planId);
             $data->delete();
-            $this->dispatchBrowserEvent('success', ['message' => 'Pricing deleted successfully.']);
+            $this->dispatchBrowserEvent('success', ['message' => 'Plan deleted successfully.']);
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('error', ['message' => 'Operation failed!']);
         }
@@ -40,7 +53,7 @@ class ListPrices extends AdminComponent
 
     public function render()
     {
-        $prices = Price::query()
+        $plans = Plan::query()
             ->with([
                 'createdBy:id,name'
             ])
@@ -51,8 +64,8 @@ class ListPrices extends AdminComponent
             })
             ->orderBy('discounted_price')
             ->get();
-        return view('livewire.admin.prices.list-prices', [
-            'prices' => $prices
+        return view('livewire.admin.plans.list-plans', [
+            'plans' => $plans
         ]);
     }
 }

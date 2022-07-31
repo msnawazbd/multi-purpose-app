@@ -8,10 +8,14 @@ use App\Http\Livewire\Admin\Appointments\ListAppointments;
 use App\Http\Livewire\Admin\Clients\CreateClient;
 use App\Http\Livewire\Admin\Clients\EditClient;
 use App\Http\Livewire\Admin\Clients\ListClients;
+use App\Http\Livewire\Admin\Faqs\ListFaqs;
 use App\Http\Livewire\Admin\Invoices\CreateInvoice;
 use App\Http\Livewire\Admin\Invoices\EditInvoice;
 use App\Http\Livewire\Admin\Invoices\ListInvoices;
 use App\Http\Livewire\Admin\Invoices\ViewInvoice;
+use App\Http\Livewire\Admin\Plans\CreatePlan;
+use App\Http\Livewire\Admin\Plans\EditPlan;
+use App\Http\Livewire\Admin\Plans\ListPlans;
 use App\Http\Livewire\Admin\Prices\ListPrices;
 use App\Http\Livewire\Admin\Profile\UpdateProfile;
 use App\Http\Livewire\Admin\Services\ListServices;
@@ -47,7 +51,11 @@ Route::get('appointments', ListAppointments::class)->name('appointments');
 Route::get('appointments/create', CreateAppointment::class)->name('appointments.create');
 Route::get('appointments/{appointment}/edit', EditAppointment::class)->name('appointments.edit');
 
-Route::get('prices', ListPrices::class)->name('prices');
+Route::get('plans', ListPlans::class)->name('plans');
+Route::get('plans/create', CreatePlan::class)->name('plans.create');
+Route::get('plans/{plan}/edit', EditPlan::class)->name('plans.edit');
+
+Route::get('faqs', ListFaqs::class)->name('faqs');
 
 Route::get('profile', UpdateProfile::class)->name('profile');
 
