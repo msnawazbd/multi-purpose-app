@@ -94,7 +94,6 @@
                         </p>
                     </a>
                 </li>
-                @can('create posts')
                 <li class="nav-item">
                     <a href="{{ route('admin.profile') }}" class="nav-link {{ request()->is('admin/profile') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user"></i>
@@ -103,7 +102,6 @@
                         </p>
                     </a>
                 </li>
-                @endcan
                 <li class="nav-item {{ request()->is('admin/settings', 'admin/settings/*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->is('admin/settings', 'admin/settings/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cog"></i>
@@ -138,6 +136,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('admin.settings.taxes') }}" class="nav-link {{ request()->is('admin/settings/taxes', 'admin/settings/taxes') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Languages</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.settings.taxes') }}" class="nav-link {{ request()->is('admin/settings/taxes', 'admin/settings/taxes') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Appearance</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('admin.settings.generals') }}" class="nav-link {{ request()->is('admin/settings/generals', 'admin/settings/generals') ? 'active' : '' }}">
                                 <i class="fas fa-arrow-right nav-icon"></i>
                                 <p>General Setting</p>
@@ -167,6 +177,45 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item {{ request()->is('admin/blog', 'admin/blog/*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('admin/blog', 'admin/blog/*') ? 'active' : '' }}">
+                        <i class="nav-icon 	fas fa-blog"></i>
+                        <p>
+                            Blog
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.blog.categories') }}" class="nav-link {{ request()->is('admin/blog/categories', 'admin/blog/categories') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Categories</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.blog.posts') }}" class="nav-link {{ request()->is('admin/blog/posts', 'admin/blog/posts/*') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Blog Posts</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.faqs') }}" class="nav-link {{ request()->is('admin/faqs', 'admin/faqs/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-sticky-note"></i>
+                        <p>
+                            Pages
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.faqs') }}" class="nav-link {{ request()->is('admin/faqs', 'admin/faqs/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>
+                            Messages
+                        </p>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST">
