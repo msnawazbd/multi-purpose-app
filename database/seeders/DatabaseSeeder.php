@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             PermissionTableSeeder::class,
             PlanTableSeeder::class,
             FaqTableSeeder::class,
+            BlogCategoryTableSeeder::class,
+            BlogPostTableSeeder::class,
         ]);
     }
 }
