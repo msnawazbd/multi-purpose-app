@@ -2,47 +2,48 @@
 
 namespace App\Http\Livewire\Admin\Blog\Posts;
 
-use App\Models\Appointment;
 use App\Models\BlogCategory;
-use App\Models\Client;
+use App\Models\BlogPost;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateBlogPost extends Component
 {
+    use WithFileUploads;
+
     public $state = [];
+    public $featured_image;
 
     public function create()
     {
-        Validator::make($this->state, [
-            'client_id' => 'required|numeric',
-            'members' => 'required',
-            'color' => 'required',
-            'date' => 'required|date',
-            'time' => 'required',
-            'status' => 'required',
-            'note' => 'required|string',
+        $validateData = Validator::make($this->state, [
+            'blog_category_id' => 'required|numeric',
+            'post_title' => 'required|string|max:250',
+            'status' => 'required|numeric',
+            'post_details' => 'required|string',
+            'meta_title' => 'nullable|string|max:250',
+            'meta_keywords' => 'nullable|string|max:250',
+            'meta_description' => 'nullable|string',
         ], [
-            'client_id.required' => 'The client field is required.'
-        ])
-            ->validate();
+            'blog_category_id.required' => 'The blog category field is required.'
+        ])->validate();
 
-        /*$this->state['status'] = 'CLOSED';
-       Appointment::create($this->state);*/
+        $validateData['created_by'] = Auth::user()->id;
+        $validateData['post_slug'] = toFormattedSlug($this->state['post_title']);
+
+        if ($this->featured_image) {
+            $validateData['featured_image'] = $this->featured_image->store('/', 'blog_featured_image');
+        } else {
+            $validateData['featured_image'] = '';
+        }
 
         try {
-            Appointment::query()->create([
-                'client_id' => $this->state['client_id'],
-                'date' => $this->state['date'],
-                'time' => $this->state['time'],
-                'note' => $this->state['note'],
-                'status' => $this->state['status'],
-                'members' => $this->state['members'],
-                'color' => $this->state['color'],
-            ]);
+            BlogPost::query()->create($validateData);
 
-            $this->dispatchBrowserEvent('success', ['message' => 'Appointment created successfully.']);
-            return redirect()->route('admin.appointments');
+            $this->dispatchBrowserEvent('success', ['message' => 'Post created successfully.']);
+            return redirect()->route('admin.blog.posts');
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
             return redirect()->back();

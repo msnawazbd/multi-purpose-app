@@ -4,10 +4,11 @@ namespace App\Http\Livewire\Admin\Blog\Posts;
 
 use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\BlogPost;
+use Illuminate\Support\Facades\Storage;
 
 class ListBlogPosts extends AdminComponent
 {
-    public $post_category, $post_title, $post_slug, $post_details, $featured_image, $view_count, $meta_title, $meta_keywords, $meta_description, $status, $created_at, $updated_at, $created_by, $updated_by;
+    public $post_category, $post_title, $post_slug, $post_details, $featured_image_url, $view_count, $meta_title, $meta_keywords, $meta_description, $status, $created_at, $updated_at, $created_by, $updated_by;
 
     public $postId;
     public $showEditModal = false;
@@ -42,7 +43,7 @@ class ListBlogPosts extends AdminComponent
             $this->post_title = $post->post_title;
             $this->post_slug = $post->post_slug;
             $this->post_details = $post->post_details;
-            $this->featured_image = $post->featured_image;
+            $this->featured_image_url = $post->featured_image_url;
             $this->view_count = $post->view_count;
             $this->meta_title = $post->meta_title;
             $this->meta_keywords = $post->meta_keywords;
@@ -99,6 +100,7 @@ class ListBlogPosts extends AdminComponent
     {
         try {
             $data = BlogPost::query()->findOrFail($this->postId);
+            Storage::disk('blog_featured_image')->delete($data->featured_image);
             $data->delete();
             $this->dispatchBrowserEvent('deleted', ['message' => 'Post deleted successfully.']);
         } catch (\Exception $e) {

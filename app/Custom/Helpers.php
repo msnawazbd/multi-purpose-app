@@ -3,6 +3,7 @@
 use App\Models\Setting;
 use App\NullSetting;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 function setting($key)
 {
@@ -27,4 +28,9 @@ function checkInfinity($value) {
         return $value;
     }
     return '<small><i class="fas fa-infinity"></i></small>';
+}
+
+function toFormattedSlug($value) {
+    $value = Str::replace(' ', '-', $value);
+    return preg_replace('/[^A-Za-z0-9\-]/', '', $value); // Removes special chars.
 }

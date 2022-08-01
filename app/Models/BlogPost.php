@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class BlogPost extends Model
 {
@@ -24,5 +25,14 @@ class BlogPost extends Model
     public function blogCategory()
     {
         return $this->belongsTo(BlogCategory::class, 'blog_category_id');
+    }
+
+    public function getFeaturedImageUrlAttribute()
+    {
+        if ($this->featured_image && Storage::disk('blog_featured_image')->exists($this->featured_image)) {
+            return Storage::disk('blog_featured_image')->url($this->featured_image);
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . $this->post_title;
     }
 }

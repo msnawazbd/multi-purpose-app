@@ -67,9 +67,8 @@
                                     <tr>
                                         <td class="align-middle">{{ $posts->firstItem() + $key }}</td>
                                         <td class="align-middle">
-                                            <img src="{{ asset('img/blog/' . $post->featured_image )  }}"
-                                                 class="img img-circle mr-1"
-                                                 width="30" height="30" alt="{{ $post->post_title }}">
+                                            <img src="{{ $post->featured_image_url  }}" class="img img-circle mr-1"
+                                                 width="35" height="35" alt="{{ $post->post_title }}">
                                             {{ $post->post_title }}
                                         </td>
                                         <td class="align-middle">{{ $post->blogCategory->name }}</td>
@@ -101,10 +100,9 @@
                                                             wire:click.prevent="show({{ $post->id }})">
                                                         <i class="fas fa-eye mr-2"></i> View
                                                     </button>
-                                                    <button class="dropdown-item"
-                                                            wire:click.prevent="edit({{ $post }})">
+                                                    <a href="{{ route('admin.blog.posts.edit', $post) }}" class="dropdown-item">
                                                         <i class="fas fa-edit mr-2"></i> Edit
-                                                    </button>
+                                                    </a>
                                                     <div class="dropdown-divider"></div>
                                                     <button class="dropdown-item"
                                                             wire:click.prevent="destroy({{ $post->id }})"><i
@@ -144,7 +142,7 @@
             <div class="modal-content">
                 <div class="modal-header border-0">
                     <h5 class="modal-title">
-                        Post Details
+                        {{ $post_title }}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -154,8 +152,9 @@
                     <table class="table">
                         <tbody>
                         <tr>
-                            <td class="text-primary table-subject">Post Title</td>
-                            <td>{{ $post_title }}</td>
+                            <td colspan="2">
+                                <img src="{{ $featured_image_url  }}" class="img img-rounded" width="100%" alt="{{ $post_title }}">
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-primary table-subject">Post Category</td>
@@ -167,11 +166,7 @@
                         </tr>
                         <tr>
                             <td class="text-primary table-subject">Post Details</td>
-                            <td>{{ $post_details }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-primary table-subject">Featured Image</td>
-                            <td>{{ $featured_image }}</td>
+                            <td>{!! $post_details !!}</td>
                         </tr>
                         <tr>
                             <td class="text-primary table-subject">View Count</td>

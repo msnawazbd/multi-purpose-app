@@ -49,6 +49,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'blog_featured_image' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/blog_featured_image'),
+            'url' => env('APP_URL').'/storage/blog_featured_image',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
