@@ -210,7 +210,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.faqs') }}" class="nav-link {{ request()->is('admin/faqs', 'admin/faqs/*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.contact-messages') }}" class="nav-link {{ request()->is('admin/contact-messages', 'admin/contact-messages/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-envelope"></i>
                         <p>
                             Messages

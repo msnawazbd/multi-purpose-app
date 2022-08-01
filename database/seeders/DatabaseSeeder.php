@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             FaqTableSeeder::class,
             BlogCategoryTableSeeder::class,
             BlogPostTableSeeder::class,
+            ContactMessageTableSeeder::class,
         ]);
     }
 }

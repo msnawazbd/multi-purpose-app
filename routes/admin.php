@@ -17,6 +17,7 @@ use App\Http\Livewire\Admin\Invoices\CreateInvoice;
 use App\Http\Livewire\Admin\Invoices\EditInvoice;
 use App\Http\Livewire\Admin\Invoices\ListInvoices;
 use App\Http\Livewire\Admin\Invoices\ViewInvoice;
+use App\Http\Livewire\Admin\Messages\ListContactMessages;
 use App\Http\Livewire\Admin\Plans\CreatePlan;
 use App\Http\Livewire\Admin\Plans\EditPlan;
 use App\Http\Livewire\Admin\Plans\ListPlans;
@@ -59,6 +60,7 @@ Route::get('plans/create', CreatePlan::class)->name('plans.create');
 Route::get('plans/{plan}/edit', EditPlan::class)->name('plans.edit');
 
 Route::get('faqs', ListFaqs::class)->name('faqs');
+Route::get('contact-messages', ListContactMessages::class)->name('contact-messages');
 
 Route::get('blog/categories', ListBlogCategories::class)->name('blog.categories');
 Route::get('blog/posts', ListBlogPosts::class)->name('blog.posts');
