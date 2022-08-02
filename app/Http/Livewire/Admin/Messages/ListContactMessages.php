@@ -7,10 +7,9 @@ use App\Models\ContactMessage;
 
 class ListContactMessages extends AdminComponent
 {
-    public $full_name, $email, $mobile, $subject, $message, $status, $created_at, $updated_at;
+    public $full_name, $email, $mobile, $subject, $contact_message, $status, $created_at, $updated_at;
 
-    public $faq;
-    public $faqId;
+    public $messageId;
     public $searchKeywords = null;
     public $sortColumnName = 'created_at';
     public $sortDirection = 'desc';
@@ -26,24 +25,21 @@ class ListContactMessages extends AdminComponent
         $this->resetPage();
     }
 
-    public function show($faqId)
+    public function show($contactMessageId)
     {
         try {
-            $faq = ContactMessage::query()
-                ->with([
-                    'createdBy:id,name',
-                    'updatedBy:id,name',
-                ])
-                ->where('id', $faqId)
+            $contact_message = ContactMessage::query()
+                ->where('id', $contactMessageId)
                 ->first();
 
-            $this->title = $faq->title;
-            $this->status = $faq->status == 1 ? 'PUBLISHED' : 'UNPUBLISHED';
-            $this->description = $faq->description;
-            $this->created_at = $faq->created_at ? $faq->created_at->toFormattedDate() : 'N/A';
-            $this->updated_at = $faq->updated_at ? $faq->updated_at->toFormattedDate() : 'N/A';
-            $this->created_by = $faq->createdBy->name;
-            $this->updated_by = $faq->updatedBy ? $faq->updatedBy->name : 'N/A';
+            $this->full_name = $contact_message->full_name;
+            $this->email = $contact_message->email;
+            $this->mobile = $contact_message->mobile;
+            $this->subject = $contact_message->subject;
+            $this->contact_message = $contact_message->message;
+            $this->status = $contact_message->status == 1 ? 'ANSWERED' : 'PENDING';
+            $this->created_at = $contact_message->created_at ? $contact_message->created_at->toFormattedDate() : 'N/A';
+            $this->updated_at = $contact_message->updated_at ? $contact_message->updated_at->toFormattedDate() : 'N/A';
 
             $this->dispatchBrowserEvent('show-view-modal');
         } catch (\Exception $e) {
@@ -74,25 +70,25 @@ class ListContactMessages extends AdminComponent
             $faq = ContactMessage::query()->findOrFail($faqId);
             $faq->status = $faq->status == 1 ? 0 : 1;
             $faq->save();
-            $this->dispatchBrowserEvent('success', ['message' => 'FAQ status changed.']);
+            $this->dispatchBrowserEvent('success', ['message' => 'Message status changed.']);
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
             return redirect()->back();
         }
     }
 
-    public function destroy($faqId)
+    public function destroy($messageId)
     {
-        $this->faqId = $faqId;
+        $this->messageId = $messageId;
         $this->dispatchBrowserEvent('show-delete-confirmation');
     }
 
     public function confirmDestroy()
     {
         try {
-            $data = ContactMessage::query()->findOrFail($this->faqId);
+            $data = ContactMessage::query()->findOrFail($this->messageId);
             $data->delete();
-            $this->dispatchBrowserEvent('deleted', ['message' => 'FAQ deleted successfully.']);
+            $this->dispatchBrowserEvent('deleted', ['message' => 'Message deleted successfully.']);
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('error', ['message' => "Operation failed!"]);
             return redirect()->back();

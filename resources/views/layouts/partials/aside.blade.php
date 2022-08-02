@@ -78,6 +78,29 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->is('admin/income', 'admin/income/*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('admin/income', 'admin/income/*') ? 'active' : '' }}">
+                        <i class="nav-icon 	fas fa-dollar-sign"></i>
+                        <p>
+                            Income
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.income.services') }}" class="nav-link {{ request()->is('admin/income/services', 'admin/income/services') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Services</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.income.invoices') }}" class="nav-link {{ request()->is('admin/income/invoices', 'admin/income/invoices/*') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Invoices</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.plans') }}" class="nav-link {{ request()->is('admin/plans', 'admin/plans/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-dollar-sign"></i>
@@ -86,21 +109,28 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.faqs') }}" class="nav-link {{ request()->is('admin/faqs', 'admin/faqs/*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-question"></i>
+                <li class="nav-item {{ request()->is('admin/blog', 'admin/blog/*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('admin/blog', 'admin/blog/*') ? 'active' : '' }}">
+                        <i class="nav-icon 	fas fa-blog"></i>
                         <p>
-                            FAQs
+                            Blog
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.profile') }}" class="nav-link {{ request()->is('admin/profile') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>
-                            Profile
-                        </p>
-                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.blog.categories') }}" class="nav-link {{ request()->is('admin/blog/categories', 'admin/blog/categories') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Categories</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.blog.posts') }}" class="nav-link {{ request()->is('admin/blog/posts', 'admin/blog/posts/*') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Blog Posts</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item {{ request()->is('admin/settings', 'admin/settings/*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->is('admin/settings', 'admin/settings/*') ? 'active' : '' }}">
@@ -155,54 +185,16 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item {{ request()->is('admin/income', 'admin/income/*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->is('admin/income', 'admin/income/*') ? 'active' : '' }}">
-                        <i class="nav-icon 	fas fa-dollar-sign"></i>
+                <li class="nav-item">
+                    <a href="{{ route('admin.contact-messages') }}" class="nav-link {{ request()->is('admin/contact-messages', 'admin/contact-messages/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-envelope"></i>
                         <p>
-                            Income
-                            <i class="fas fa-angle-left right"></i>
+                            Messages
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.income.services') }}" class="nav-link {{ request()->is('admin/income/services', 'admin/income/services') ? 'active' : '' }}">
-                                <i class="fas fa-arrow-right nav-icon"></i>
-                                <p>Services</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.income.invoices') }}" class="nav-link {{ request()->is('admin/income/invoices', 'admin/income/invoices/*') ? 'active' : '' }}">
-                                <i class="fas fa-arrow-right nav-icon"></i>
-                                <p>Invoices</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item {{ request()->is('admin/blog', 'admin/blog/*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->is('admin/blog', 'admin/blog/*') ? 'active' : '' }}">
-                        <i class="nav-icon 	fas fa-blog"></i>
-                        <p>
-                            Blog
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.blog.categories') }}" class="nav-link {{ request()->is('admin/blog/categories', 'admin/blog/categories') ? 'active' : '' }}">
-                                <i class="fas fa-arrow-right nav-icon"></i>
-                                <p>Categories</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.blog.posts') }}" class="nav-link {{ request()->is('admin/blog/posts', 'admin/blog/posts/*') ? 'active' : '' }}">
-                                <i class="fas fa-arrow-right nav-icon"></i>
-                                <p>Blog Posts</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.faqs') }}" class="nav-link {{ request()->is('admin/faqs', 'admin/faqs/*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.pages') }}" class="nav-link {{ request()->is('admin/pages', 'admin/pages/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-sticky-note"></i>
                         <p>
                             Pages
@@ -210,10 +202,26 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.contact-messages') }}" class="nav-link {{ request()->is('admin/contact-messages', 'admin/contact-messages/*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-envelope"></i>
+                    <a href="{{ route('admin.subscribes') }}" class="nav-link {{ request()->is('admin/subscribes', 'admin/subscribes/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-bell"></i>
                         <p>
-                            Messages
+                            Subscribes
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.faqs') }}" class="nav-link {{ request()->is('admin/faqs', 'admin/faqs/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-question"></i>
+                        <p>
+                            FAQs
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.profile') }}" class="nav-link {{ request()->is('admin/profile') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Profile
                         </p>
                     </a>
                 </li>

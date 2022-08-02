@@ -11,7 +11,6 @@ class ListBlogPosts extends AdminComponent
     public $post_category, $post_title, $post_slug, $post_details, $featured_image_url, $view_count, $meta_title, $meta_keywords, $meta_description, $status, $created_at, $updated_at, $created_by, $updated_by;
 
     public $postId;
-    public $showEditModal = false;
     public $searchKeywords = null;
     public $sortColumnName = 'created_at';
     public $sortDirection = 'desc';

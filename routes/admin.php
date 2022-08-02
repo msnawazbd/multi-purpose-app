@@ -18,6 +18,9 @@ use App\Http\Livewire\Admin\Invoices\EditInvoice;
 use App\Http\Livewire\Admin\Invoices\ListInvoices;
 use App\Http\Livewire\Admin\Invoices\ViewInvoice;
 use App\Http\Livewire\Admin\Messages\ListContactMessages;
+use App\Http\Livewire\Admin\Pages\CreatePage;
+use App\Http\Livewire\Admin\Pages\EditPage;
+use App\Http\Livewire\Admin\Pages\ListPages;
 use App\Http\Livewire\Admin\Plans\CreatePlan;
 use App\Http\Livewire\Admin\Plans\EditPlan;
 use App\Http\Livewire\Admin\Plans\ListPlans;
@@ -28,6 +31,7 @@ use App\Http\Livewire\Admin\Settings\Roles\ListRoles;
 use App\Http\Livewire\Admin\Settings\Taxes\ListTaxes;
 use App\Http\Livewire\Admin\Settings\UpdateSetting;
 use App\Http\Livewire\Admin\Settings\Users\ViewUsers;
+use App\Http\Livewire\Admin\Subscribes\ListSubscribes;
 use App\Http\Livewire\Admin\Tasks\CreateTask;
 use App\Http\Livewire\Admin\Tasks\EditTask;
 use App\Http\Livewire\Admin\Tasks\ListTasks;
@@ -67,7 +71,13 @@ Route::get('blog/posts', ListBlogPosts::class)->name('blog.posts');
 Route::get('blog/posts/create', CreateBlogPost::class)->name('blog.posts.create');
 Route::get('blog/posts/{post}/edit', EditBlogPost::class)->name('blog.posts.edit');
 
+Route::get('pages', ListPages::class)->name('pages');
+Route::get('pages/create', CreatePage::class)->name('pages.create');
+Route::get('pages/{page}/edit', EditPage::class)->name('pages.edit');
+
 Route::get('profile', UpdateProfile::class)->name('profile');
+
+Route::get('subscribes', ListSubscribes::class)->name('subscribes');
 
 Route::get('settings/generals', UpdateSetting::class)->name('settings.generals');
 Route::get('settings/taxes', ListTaxes::class)->name('settings.taxes');
