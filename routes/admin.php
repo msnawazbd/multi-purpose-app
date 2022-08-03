@@ -35,6 +35,7 @@ use App\Http\Livewire\Admin\Subscribes\ListSubscribes;
 use App\Http\Livewire\Admin\Tasks\CreateTask;
 use App\Http\Livewire\Admin\Tasks\EditTask;
 use App\Http\Livewire\Admin\Tasks\ListTasks;
+use App\Http\Livewire\Admin\Testimonials\ListTestimonials;
 use App\Http\Livewire\Admin\Users\ListUsers;
 use Illuminate\Support\Facades\Route;
 
@@ -78,6 +79,7 @@ Route::get('pages/{page}/edit', EditPage::class)->name('pages.edit');
 Route::get('profile', UpdateProfile::class)->name('profile');
 
 Route::get('subscribes', ListSubscribes::class)->name('subscribes');
+Route::get('testimonials', ListTestimonials::class)->name('testimonials');
 
 Route::get('settings/generals', UpdateSetting::class)->name('settings.generals');
 Route::get('settings/taxes', ListTaxes::class)->name('settings.taxes');

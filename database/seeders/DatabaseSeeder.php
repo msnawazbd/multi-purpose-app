@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             ContactMessageTableSeeder::class,
             PageTableSeeder::class,
             SubscribeTableSeeder::class,
+            TestimonialTableSeeder::class,
         ]);
     }
 }

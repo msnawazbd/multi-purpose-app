@@ -20,7 +20,7 @@
         </div>
 
         <!-- SidebarSearch Form -->
-        <div class="form-inline">
+        {{--<div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
                 <input class="form-control form-control-sidebar" type="search" placeholder="Search"
                        aria-label="Search">
@@ -30,7 +30,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div>--}}
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -206,6 +206,14 @@
                         <i class="nav-icon fas fa-bell"></i>
                         <p>
                             Subscribes
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.testimonials') }}" class="nav-link {{ request()->is('admin/testimonials', 'admin/testimonials/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-comment-dots"></i>
+                        <p>
+                            Testimonials
                         </p>
                     </a>
                 </li>
