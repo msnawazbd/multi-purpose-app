@@ -49,10 +49,17 @@ return [
             'visibility' => 'public',
         ],
 
-        'blog_featured_image' => [
+        'blog_featured_images' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/blog_featured_image'),
-            'url' => env('APP_URL').'/storage/blog_featured_image',
+            'root' => storage_path('app/public/blog_featured_images'),
+            'url' => env('APP_URL').'/storage/blog_featured_images',
+            'visibility' => 'public',
+        ],
+
+        'city_featured_images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/city_featured_images'),
+            'url' => env('APP_URL').'/storage/city_featured_images',
             'visibility' => 'public',
         ],
 

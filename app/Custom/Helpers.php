@@ -31,6 +31,6 @@ function checkInfinity($value) {
 }
 
 function toFormattedSlug($value) {
-    $value = Str::replace(' ', '-', $value);
+    $value = Str::replace(' ', '-', Str::lower($value));
     return preg_replace('/[^A-Za-z0-9\-]/', '', $value); // Removes special chars.
 }

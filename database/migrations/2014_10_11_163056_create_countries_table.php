@@ -15,12 +15,10 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->char('iso', 2);
-            $table->string('name', 80);
-            $table->string('nicename', 80);
-            $table->char('iso3', 3)->nullable()->default(null);
-            $table->smallInteger('numcode')->unsigned()->nullable()->default(null);
-            $table->smallInteger('phonecode')->unsigned();
+            $table->string('country_name', 80);
+            $table->char('country_abbreviation', 80);
+            $table->string('country_slug', 100);
+            $table->tinyInteger('status')->default(1)->comment("1 FOR PUBLISHED & 0 FOR UNPUBLISHED");
             $table->timestamps();
         });
     }

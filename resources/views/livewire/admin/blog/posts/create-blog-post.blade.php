@@ -126,7 +126,7 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="customFile">Profile Photo</label>
+                                            <label for="customFile">Featured Image</label>
                                             <div class="form-group">
                                                 <div class="custom-file">
                                                     <div x-data="{ isUploading : false, progress: 5 }"

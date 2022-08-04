@@ -12,6 +12,10 @@ class BlogPost extends Model
 
     protected $guarded = [];
 
+    protected $appends = [
+        'featured_image_url'
+    ];
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
@@ -29,8 +33,8 @@ class BlogPost extends Model
 
     public function getFeaturedImageUrlAttribute()
     {
-        if ($this->featured_image && Storage::disk('blog_featured_image')->exists($this->featured_image)) {
-            return Storage::disk('blog_featured_image')->url($this->featured_image);
+        if ($this->featured_image && Storage::disk('blog_featured_images')->exists($this->featured_image)) {
+            return Storage::disk('blog_featured_images')->url($this->featured_image);
         }
 
         return 'https://ui-avatars.com/api/?name=' . $this->post_title;

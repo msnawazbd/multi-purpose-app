@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
             PageTableSeeder::class,
             SubscribeTableSeeder::class,
             TestimonialTableSeeder::class,
+            StateTableSeeder::class,
+            CityTableSeeder::class,
         ]);
     }
 }

@@ -34,7 +34,7 @@ class CreateBlogPost extends Component
         $validateData['post_slug'] = toFormattedSlug($this->state['post_title']);
 
         if ($this->featured_image) {
-            $validateData['featured_image'] = $this->featured_image->store('/', 'blog_featured_image');
+            $validateData['featured_image'] = $this->featured_image->store('/', 'blog_featured_images');
         } else {
             $validateData['featured_image'] = '';
         }

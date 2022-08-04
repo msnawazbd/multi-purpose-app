@@ -17,6 +17,9 @@ use App\Http\Livewire\Admin\Invoices\CreateInvoice;
 use App\Http\Livewire\Admin\Invoices\EditInvoice;
 use App\Http\Livewire\Admin\Invoices\ListInvoices;
 use App\Http\Livewire\Admin\Invoices\ViewInvoice;
+use App\Http\Livewire\Admin\Locations\Cities\ListCities;
+use App\Http\Livewire\Admin\Locations\Countries\ListCountries;
+use App\Http\Livewire\Admin\Locations\States\ListStates;
 use App\Http\Livewire\Admin\Messages\ListContactMessages;
 use App\Http\Livewire\Admin\Pages\CreatePage;
 use App\Http\Livewire\Admin\Pages\EditPage;
@@ -80,6 +83,10 @@ Route::get('profile', UpdateProfile::class)->name('profile');
 
 Route::get('subscribes', ListSubscribes::class)->name('subscribes');
 Route::get('testimonials', ListTestimonials::class)->name('testimonials');
+
+Route::get('locations/countries', ListCountries::class)->name('locations.countries');
+Route::get('locations/states', ListStates::class)->name('locations.states');
+Route::get('locations/cities', ListCities::class)->name('locations.cities');
 
 Route::get('settings/generals', UpdateSetting::class)->name('settings.generals');
 Route::get('settings/taxes', ListTaxes::class)->name('settings.taxes');

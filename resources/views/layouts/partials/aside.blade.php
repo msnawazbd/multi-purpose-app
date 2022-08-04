@@ -185,6 +185,35 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item {{ request()->is('admin/locations', 'admin/locations/*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('admin/locations', 'admin/locations/*') ? 'active' : '' }}">
+                        <i class="nav-icon 	fas fa-map-marker-alt"></i>
+                        <p>
+                            Locations
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.locations.countries') }}" class="nav-link {{ request()->is('admin/locations/countries', 'admin/locations/countries') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Countries</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.locations.states') }}" class="nav-link {{ request()->is('admin/locations/states', 'admin/locations/states') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>States</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.locations.cities') }}" class="nav-link {{ request()->is('admin/locations/cities', 'admin/locations/cities') ? 'active' : '' }}">
+                                <i class="fas fa-arrow-right nav-icon"></i>
+                                <p>Cities</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.contact-messages') }}" class="nav-link {{ request()->is('admin/contact-messages', 'admin/contact-messages/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-envelope"></i>
