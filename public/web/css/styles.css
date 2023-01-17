@@ -18,7 +18,7 @@
 # General Features Designs
 # GoodUp User Dashboard
 # Blog Designs
-# Footer Design Start   
+# Footer Design Start
 # Responsiveness Start
 # Bottom To top Button Design
 ------------- List Of Table ----------*/
@@ -109,7 +109,7 @@ a:focus {
 a.link {
   color:#34495e; }
 a.link:hover, a.link:focus, a:hover, a:focus {
-    color:#111111; 
+    color:#111111;
 }
 a.text-success:focus, a.text-success:hover {
     color:#27b737 !important;
@@ -124,7 +124,7 @@ a.text-danger:focus, a.text-danger:hover {
     color:#ea2b33 !important;
 }
 a.white-link {
-  color: #ffffff; 
+  color: #ffffff;
 }
 a.bg-light:focus, a.bg-light:hover {
     background-color: #f6f8f7!important;
@@ -159,11 +159,11 @@ section.middle.min{
 }
 p {
     line-height:1.8;
-}	
+}
 
 .tbl {
     display: table;
-} 
+}
 .full-height {
     height: 100%;
 }
@@ -202,7 +202,7 @@ p, ul, ol, dl, dt, dd, blockquote, address {
 	box-shadow:none;
 }
 
-/*------------ GLobal Settings: Heading-------------*/ 
+/*------------ GLobal Settings: Heading-------------*/
 h1,
 h2,
 h3,
@@ -683,7 +683,7 @@ div[data-overlay] p {
 .text-sky {
   color:#009688 !important;
 }
-  
+
 html body .text-blue {
   color: #02bec9; }
 
@@ -824,7 +824,7 @@ html body .text-themecolor {
 html body .bg-megna {
   background-color: #1dc8cd;
 }
-  
+
 html body .bg-sky {
     background-color:rgb(0 150 136) !important;
 }
@@ -848,7 +848,7 @@ html body .bg-light-success {
 html body .bg-light-info {
   background-color: #cfecfe;
 }
-  
+
 html body .bg-light-sky {
     background-color: rgba(0, 150, 136, 0.1) !important;
 }
@@ -868,11 +868,11 @@ html body .bg-light-danger {
 html body .bg-light-inverse {
   background-color: #f6f6f6;
 }
-  
+
 html body .bg-light-purple {
   background-color:#eeebff;
 }
-  
+
 html body .bg-light {
   background-color:#f6f7f8 !important;
 }
@@ -880,23 +880,23 @@ html body .bg-light {
 html body .bg-white {
   background-color: #ffffff;
 }
- 
+
 html body .bg-whites {
   background-color: #f4f5f7;
 }
-  
+
 html body .bg-red {
   background-color: #e21137;
 }
-  
+
 html body .bg-green {
   background-color: #4caf50;
 }
-  
+
 html body .bg-sky {
   background-color: #20b2c1;
 }
-  
+
 html body .bg-blue {
   background-color: #03a9f4;
 }
@@ -1137,7 +1137,7 @@ button.close {
     flex: 0 0 100%;
     background:#ffffff;
     padding:2rem 2rem;
-}	
+}
 /*----------- GLobal Settings: Pagination ------------------*/
 .pagination {
     display: table;
@@ -1175,7 +1175,7 @@ button.close {
     color:#F41b3b;
     cursor: pointer;
     background-color:transparent;
-    border-color#F41b3b;
+    border-color:#F41b3b;
 }
 
 .pagination li:first-child a {
@@ -1203,7 +1203,7 @@ button.close {
 /*----------- Global Settings: Custom Checkbox & Radio Button ----------------*/
 .checkbox-custom, .radio-custom {
 opacity: 0;
-position: absolute;   
+position: absolute;
 }
 
 .checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
@@ -1900,7 +1900,7 @@ nav a:hover {
 .nav-search>form {
     width: 100%;
     height: 100%;
-    padding: 0 auto;
+    padding: 0;
     display: none;
     position: absolute;
     left: 0;
@@ -2030,7 +2030,7 @@ nav a:hover {
 	background:#ffffff;
 	border-radius: 0.5rem;
     box-shadow: 0px 0px 42px 0px rgba(32, 32, 32, 0.15);
-	-webkit-box-shadow: 0px 0px 42px 0px rgba(32, 32, 32, 0.15);    
+	-webkit-box-shadow: 0px 0px 42px 0px rgba(32, 32, 32, 0.15);
 }
 .nav-menu>li>.nav-dropdown:before {
   background-color: #ffffff;
@@ -2047,7 +2047,7 @@ nav a:hover {
   -o-transition: all 0.2s ease 0s;
   transition: all 0.2s ease 0s;
   -webkit-transition: all 0.2s ease 0s;
-  -moz-transition: all 0.2s ease 0s; 
+  -moz-transition: all 0.2s ease 0s;
 }
 .nav-dropdown>li {
     width: 100%;
@@ -2840,7 +2840,7 @@ nav .menu > li.dropdown  li.dropdown > a:before{
 
 nav .menu li.dropdown.open > a{
     color: #e74c3c;
-	
+
 }
 .top-header {
     background:#232c3d;
@@ -2870,7 +2870,7 @@ nav .menu li.dropdown.open > a{
 .top-social li{
 	list-style:none;
 	display:inline-block;
-	margin-right:15px;	
+	margin-right:15px;
 }
 .top-social li:last-child{
 	margin-right:0;
@@ -3358,7 +3358,7 @@ span.search-tag i {
     overflow: hidden;
 }
 .small-map .fs-left-map-box .hm-map-container.fw-map{
-	width:25%;	
+	width:25%;
 }
 .half-map .fs-inner-container {
     position: relative;
@@ -5174,7 +5174,7 @@ ul.doc.ratting-view li i.filled {
 }
 .author-wrap-jhyu-ngh ul {
     padding: 0;
-    padding: 0;
+    padding: 0 auto;
     display: flex;
     flex-wrap: wrap;
 }
@@ -5270,7 +5270,7 @@ ul.doc.ratting-view li i.filled {
 }
 .author-wrap-footer-ngh .jhk-list-inf-caption p {
     font-size: 13px;
-    color#70737d;
+    color:#70737d;
 }
 .author-wrap-ngh .online {
     position: absolute;
@@ -7538,7 +7538,7 @@ h3.pa-name {
 }
 
 /*-------------------------------------------------
-  Footer Design Start   
+  Footer Design Start
 --------------------------------------------------*/
 /*---------- Call To Action -------------------*/
 .call_action_wrap-wrap {
@@ -7711,7 +7711,7 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 	Responsiveness Start
 ---------------------------------------------------*/
 @media all and (min-height: 600px) and (min-width: 767px) {
- 
+
 }
 @media all and (min-width: 993px) and (max-width: 1024px) {
 
@@ -7806,8 +7806,8 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 	.btn.apply-btn {
 		padding: 12px 20px;
 	}
-}	
-	
+}
+
 @media (max-width: 1023px) {
 	.goodup-dashboard-wrap {
 		min-height: 0;
@@ -7860,10 +7860,10 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 	.hide-1023{
 		display:none;
 	}
-	
+
 }
 
-@media (max-width: 992px) {	
+@media (max-width: 992px) {
 	#countdown ul li {
 		margin: 0 0.2rem;
 		padding: 0.5rem 0.6rem;
@@ -7956,7 +7956,7 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 	}
 }
 
-@media (max-width: 991px) {	
+@media (max-width: 991px) {
 	.Goodup-counter ul {
 		flex-direction: inherit;
 		margin: 1rem 0;
@@ -8166,8 +8166,8 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 	}
 }
 @media (max-width:360px) {
-	
-	
+
+
 }
 
 /*====================================

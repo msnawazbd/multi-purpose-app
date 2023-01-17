@@ -47,7 +47,6 @@
                                             <i class="fa fa-arrow-down {{ $sortColumnName === 'email' && $sortDirection === 'desc' ? '' : 'text-muted' }}"></i>
                                         </span>
                                     </th>
-                                    <th>Updated By</th>
                                     <th>Created At</th>
                                     <th>
                                         Status
@@ -65,9 +64,6 @@
                                     <tr>
                                         <td class="align-middle">{{ $subscribes->firstItem() + $key }}</td>
                                         <td class="align-middle">{{ $subscribe->email }}</td>
-                                        <td class="align-middle">
-                                            {{ $subscribe->updatedBy ? $subscribe->updatedBy->name : '' }}
-                                        </td>
                                         <td class="align-middle">
                                             {{ $subscribe->created_at ? $subscribe->created_at->toFormattedDate() : 'N/A' }}
                                         </td>

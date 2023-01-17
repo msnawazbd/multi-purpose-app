@@ -174,13 +174,13 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.settings.taxes') }}" class="nav-link {{ request()->is('admin/settings/taxes', 'admin/settings/taxes') ? 'active' : '' }}">
                                 <i class="fas fa-arrow-right nav-icon"></i>
-                                <p>Appearance</p>
+                                <p>Appearances</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.settings.generals') }}" class="nav-link {{ request()->is('admin/settings/generals', 'admin/settings/generals') ? 'active' : '' }}">
                                 <i class="fas fa-arrow-right nav-icon"></i>
-                                <p>General Setting</p>
+                                <p>Generals</p>
                             </a>
                         </li>
                     </ul>

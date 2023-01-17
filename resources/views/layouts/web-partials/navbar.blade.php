@@ -92,7 +92,7 @@
                         <ul class="nav-dropdown nav-submenu">
                             <li><a href="blog.html">Blog Style</a></li>
                             <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="{{ route('contact-us') }}">Contact</a></li>
                             <li><a href="checkout.html">Checkout</a></li>
                             <li><a href="pricing.html">Pricing</a></li>
                             <li><a href="signup.html">Sign Up</a></li>

@@ -248,10 +248,6 @@
                             <td class="text-primary">Updated By</td>
                             <td>{{ $updated_by }}</td>
                         </tr>
-                        <tr>
-                            <td class="text-primary">Description</td>
-                            <td>{!! $description !!}</td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
