@@ -103,7 +103,7 @@
                                         <td class="align-middle" wire:sortable.handle style="width: 10px; cursor: move"><i class="fa fa-arrows-alt text-muted"></i></td>
                                         <td class="align-middle">
                                             <div class="icheck-primary d-inline ml-2">
-                                                <input wire:model="selectedRows" type="checkbox"
+                                                <input wire:model.change="selectedRows" type="checkbox"
                                                        value="{{ $appointment->id }}" name="todo2"
                                                        id="{{ $appointment->id }}">
                                                 <label for="{{ $appointment->id }}"></label>
@@ -142,7 +142,6 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer d-flex justify-content-end">
-                            {{ $appointments->links() }}
                         </div>
                     </div>
                 </div>
@@ -170,5 +169,5 @@
 @endpush
 
 @push('after-livewire-scripts')
-    <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v1.x.x/dist/livewire-sortable.js"></script>
 @endpush

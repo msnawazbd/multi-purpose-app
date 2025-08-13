@@ -166,7 +166,6 @@ return [
          * Package Service Providers...
          */
         App\Providers\BladeComponentServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,

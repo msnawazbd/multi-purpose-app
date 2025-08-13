@@ -5,9 +5,11 @@ namespace App\Http\Livewire\Admin\Appointments;
 use App\Exports\AppointmentsExport;
 use App\Http\Livewire\Admin\AdminComponent;
 use App\Models\Appointment;
+use Livewire\WithPagination;
 
 class ListAppointments extends AdminComponent
 {
+    use WithPagination;
     public $appointmentId;
     public $status = null;
     public $selectedRows = [];
